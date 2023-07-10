@@ -1,0 +1,56 @@
+
+this <- system('hostname', TRUE)
+if (this == "LAPTOP-IVSPBGCA") {
+  setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
+} else {
+  setwd('/Users/gcn/Google Drive/My Drive/pwc')
+}
+path <- "data-raw/ISIMIP/pwc_agg3"
+
+dir.create("figures", F, F)
+
+library(terra)
+library(data.table)
+
+#Farm machinery is measured in units of 1000 horsepower. This is divided by cropland (1000 hectares) to give the average machinery use per hectare of agricultural land.
+## Source of the data is the first data set at https://www.ers.usda.gov/data-products/international-agricultural-productivity/. This has both machinery, land and agricultural labor individually. 
+temp <- as.data.table(read.csv("data-raw/machines/ERSmach_land_labor.csv")) # created in ERS_mach_land_labor.R, machinery, land and labor
+temp[, c("FAO", "Region", "Sub.Region") := NULL]
+setnames(temp, old = "Country.territory", new = "Name")
+temp <- temp[year >2017,]
+temp <- temp [, labor_3yr := mean(ERSvalue_labor), by = "ISO3"][
+  , land_3yr := mean(ERSvalue_land), by = "ISO3"][
+    , machinery_3yr := mean(ERSvalue_machinery), by = "ISO3"]
+temp <- unique(temp[, c("ISO3", "Name", "labor_3yr", "land_3yr", "machinery_3yr"  )])
+
+temp[, machinery_per_ag_land := machinery_3yr/land_3yr][, machinery_per_capita := machinery_3yr/labor_3yr]
+write.csv(temp, "tables/SM_tables
+library(stringr)
+set_flextable_defaults(font.family = "Times New Roman")
+
+# directions - https://stackoverflow.com/questions/71661066/is-there-a-function-in-flextable-to-group-a-few-rows-in-a-table-together-under-a
+set_flextable_defaults(font.color = "#333333", border.color = "#999999", padding = 4)
+d <- temp
+setnames(d, old = names(d), new = c("ISO3","Name", "Labor", "Land", "Machinery", "machinery per ag land", "machinery per capita"))
+
+# d$Variable =   str_replace_all(d$Variable, "_", " ")  |> 
+#   str_replace_all(" 3yr", "")  |> 
+#   str_replace_all("hot90 ", "")  |> 
+#   str_replace("season ", " ") |> 
+#   str_to_title()  |>
+#   str_replace("Ssp585", "SSP5-8.5") |>
+#   str_replace("Land", "Cropland")
+
+
+t_flex <- flextable(d) |>
+  colformat_double(i = (1:176), j = (3:5), digits=0) |> 
+  colformat_double(i = (1:176), j = (6:7), digits=2) |> 
+  
+  theme_vanilla() |> 
+  color(part = "footer", color = "#666666") |>
+  align(align = "center", part = "header") 
+
+t_flex
+outf <- "tables/SM_table_2_countries_other.docx"
+save_as_docx(t_flex, values = NULL, path = outf)
+
