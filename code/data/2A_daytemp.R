@@ -41,6 +41,7 @@ tasfun <- function(y, s, m) {
 	readStart(lat)
 	
 	out <- rast(rn)
+	print(paste0("out: ", outf))
 	b <- writeStart(out, outf, overwrite=TRUE)
 		
 	for (i in 1:b$n) {
@@ -66,7 +67,7 @@ models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")
 #test data
 ssps <- "ssp370"
 models = "ukesm"
-years <- c("2001_2010", "2041_2050", "2051_2060", "2081_2090", "2091_2100")
+years <- c( "2041_2050", "2051_2060", "2081_2090", "2091_2100")
 
 x <- expand.grid(years[1:2], ssps[1], models)
 x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
