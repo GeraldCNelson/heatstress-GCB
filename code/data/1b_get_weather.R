@@ -7,7 +7,7 @@
 # }
 
 #download the ISIMIP data used for the PWC paper
-variables <- c("tasmin", "tasmax", "tas", "hurs", "rsds", "sfcWind") # principal weather variables. pr left out because not used in the GCB PWC paper
+variables <- c("tasmin", "tasmax", "tas", "hurs", "rsds", "sfcwind") # principal weather variables. pr left out because not used in the GCB PWC paper
 yearChoices <- c("2041-2050", "2051-2060", "2081-2090", "2091-2100")
 yrChoices <- gsub("-","_", yearChoices)
 pats <- c("126", "585", "historical") 

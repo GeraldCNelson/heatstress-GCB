@@ -1,12 +1,12 @@
 # Compute average solar radiation during the day (removing Antarctica)
-
-this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-	setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc/data-raw/ISIMIP/")
-} else {
+# 
+# this <- system('hostname', TRUE)
+# if (this == "LAPTOP-IVSPBGCA") {
+# 	setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc/data-raw/ISIMIP/")
+# } else {
 #  setwd('/Users/gcn/Google Drive/My Drive/pwc/data-raw/ISIMIP/')
-setwd("/Volumes/ExtremeSSD2/ISIMIP/ISIMIPncfiles/")
-  }
+# setwd("/Volumes/ExtremeSSD2/ISIMIP/ISIMIPncfiles/")
+#   }
 
 library(terra)
 library(meteor)
@@ -17,7 +17,7 @@ e <- ext(-180, 180, -60, 90)
 
 
 radfun <- function(y, s, m) {
-  browser()
+ # browser()
 	print(paste(y, m, s)); flush.console()
 	if ((m == "") || (s=="")) {
 		ff <- list.files(pattern=paste0("_rsds_global_.*.", y, ".nc$"), recursive=TRUE, full=TRUE) 
@@ -45,6 +45,7 @@ radfun <- function(y, s, m) {
 		window(x) <- e
 		x <- (x * 24) / pp
 		writeRaster(x, outf)
+		tmpFiles(remove = TRUE)
 	}
 }
 
@@ -55,8 +56,8 @@ models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")
 
 #test data
 ssps <- "ssp370"
-models = "ukesm"
-years <- "2041_2050"
+#models = "ukesm"
+years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")
 i <- as.numeric(Sys.getenv("SLURM_ARRAY_TASK_ID"))
 if (is.na(i)) {
 	for (y in years) {
@@ -71,6 +72,4 @@ if (is.na(i)) {
 		i
 	}
 }
-
-#sbatch --array=1-50 -p bmh --time=30 --mem=32G --job-name=srad ~/farm/clusterR.sh ~/heatstress/v2/data/2b_fix_radiation.R
 

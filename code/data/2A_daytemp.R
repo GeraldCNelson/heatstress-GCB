@@ -66,18 +66,13 @@ models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")
 
 #test data
 ssps <- "ssp370"
-models = "ukesm"
+#models = "ukesm"
 years <- c( "2041_2050", "2051_2060", "2081_2090", "2091_2100")
 
-x <- expand.grid(years[1:2], ssps[1], models)
+x <- expand.grid(years[1:4], ssps[1], models)
 x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 
-i <- as.numeric(Sys.getenv("SLURM_ARRAY_TASK_ID"))
-if (i <= nrow(x)) {
+for (i in 1:nrow(x)) {
 	tasfun(x[i,1], x[i,2], x[i,3])	
-} else {
-	i
 }
-
-#sbatch --array=1-50 -p bmh --time=180 --mem=32G --job-name=srad ~/farm/clusterR.sh ~/heatstress/v2/data/2A_daytemp.R
 
