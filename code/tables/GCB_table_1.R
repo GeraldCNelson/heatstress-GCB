@@ -1,7 +1,7 @@
 library(terra)
 
 path <- "data/agg/pwc_agg3"
-dir.create("results/tables", F, F)
+dir.create("tables", F, F)
 
 regions <- c("global", "tropical", "S20N35")
 

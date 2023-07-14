@@ -1,11 +1,11 @@
 
 # machinery as adaptation
-this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-  setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-} else {oldwd <- getwd()
-setwd('/Users/gcn/Google Drive/My Drive/pwc')
-}
+# this <- system('hostname', TRUE)
+# if (this == "LAPTOP-IVSPBGCA") {
+#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
+# } else {oldwd <- getwd()
+# setwd('/Users/gcn/Google Drive/My Drive/pwc')
+# }
 
 library(terra)
 library(data.table)

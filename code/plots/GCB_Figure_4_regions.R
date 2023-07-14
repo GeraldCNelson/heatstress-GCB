@@ -1,10 +1,10 @@
 
-this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-  setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-} else {
-  setwd('/Users/gcn/Google Drive/My Drive/pwc')
-}
+# this <- system('hostname', TRUE)
+# if (this == "LAPTOP-IVSPBGCA") {
+#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
+# } else {
+#   setwd('/Users/gcn/Google Drive/My Drive/pwc')
+# }
 
 library(terra)
 library(geodata)

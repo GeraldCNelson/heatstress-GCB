@@ -1,19 +1,23 @@
-this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-  setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-} else {oldwd <- getwd()
-setwd('/Users/gcn/Google Drive/My Drive/pwc')
-}
+# this <- system('hostname', TRUE)
+# if (this == "LAPTOP-IVSPBGCA") {
+#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
+# } else {oldwd <- getwd()
+# setwd('/Users/gcn/Google Drive/My Drive/pwc')
+# }
 
 
-path <- "compute_pwc/output"
+path <- "data/agg/pwc_agg3"
+dir.create("results", FALSE, FALSE)
+
+#test data
+regionChoice <- "country_Brazil"
 
 library(terra)
 library(geodata)
 library(flextable)
 library(officer)
 library(data.table)
-set_flextable_defaults(font.family = "Times New Roman")
+set_flextable_defaults(font.family = "Times New Roman", font.color = "#333333", border.color = "#999999", padding = 4)
 
 wrld <- geodata::world(path = "data-raw")
 country_Brazil <- gadm(country = "BRA", level = 0, path = "data-raw/gadm/", resolution = 2) 
@@ -21,8 +25,7 @@ country_India <- gadm(country = "IND", level = 1, path = "data-raw/gadm/", resol
 country_Nigeria <- gadm(country = "NGA", level = 1, path = "data-raw/gadm/", resolution = 2)
 
 regionChoices <- c("country_Brazil", "country_India", "country_Nigeria")
-#test data
-regionChoice <- "country_Brazil"
+
 # pwc data 
 ff <- list.files(path, pattern = "ensemble_pwc_wbgt_out_season_mean.*.tif$", full=TRUE)
 

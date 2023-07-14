@@ -1,11 +1,11 @@
 
-this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-  setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-} else {
-  setwd('/Users/gcn/Google Drive/My Drive/pwc')
-}
-path <- "data-raw/ISIMIP/pwc_agg3"
+# this <- system('hostname', TRUE)
+# if (this == "LAPTOP-IVSPBGCA") {
+#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
+# } else {
+#   setwd('/Users/gcn/Google Drive/My Drive/pwc')
+# }
+ path <- "data/agg/pwc_agg3"
 
 library(terra)
 library(data.table)
@@ -22,7 +22,6 @@ w <- geodata::world(path="data-raw", version="3.6")
 ff <- list.files(path, pattern = ".*_mean.tif$", full=TRUE)
 s <- sds(ff[c(1,3,2)])
 z <- lapply(s, \(r) zonal(r, w, mean, w=crps, na.rm=TRUE))
-
 
 zz <- do.call(cbind, z)
 names(zz) <- gsub("mean_", "", gsub("pwc_", "", paste0(rep(names(s), each=5), "_", names(zz))))
