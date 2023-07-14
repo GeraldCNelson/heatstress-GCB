@@ -1,10 +1,10 @@
 
-this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-	setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-} else {
-	setwd('/Users/gcn/Google Drive/My Drive/pwc')
-}
+# this <- system('hostname', TRUE)
+# if (this == "LAPTOP-IVSPBGCA") {
+# 	setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
+# } else {
+# 	setwd('/Users/gcn/Google Drive/My Drive/pwc')
+# }
 
 
 library(terra)
@@ -23,7 +23,7 @@ crop_area <- function() {
 	writeRaster(x, outf)
 }
 
-#crops <- crop_area() -----
+if (!file.exists("data-raw/crops/total_crop_area.tif"))  crops <- crop_area() 
 
 sacks_calendars <- function(variable) {
 	path <- "data-raw/calendar-sacks"

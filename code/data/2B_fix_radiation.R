@@ -10,11 +10,18 @@
 
 library(terra)
 library(meteor)
-library(rslurm)
+#library(rslurm)
 dir.create("intermediate", FALSE, FALSE)
+regions <- c("global", "tropical", "S20N35")
 
+years <- c("1991_2000", "2001_2010", "2041_2050", "2051_2060", "2081_2090", "2091_2100")
+ssps <- c("historical", "ssp126", "ssp585")
+models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")
 e <- ext(-180, 180, -60, 90)
 
+#test data
+ssps <- "ssp370"
+years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")
 
 radfun <- function(y, s, m) {
  # browser()
@@ -50,26 +57,18 @@ radfun <- function(y, s, m) {
 }
 
 
-years <- c("1991_2000", "2001_2010", "2041_2050", "2051_2060", "2081_2090", "2091_2100")
-ssps <- c("historical", "ssp126", "ssp585")
-models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")
-
-#test data
-ssps <- "ssp370"
-#models = "ukesm"
-years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")
-i <- as.numeric(Sys.getenv("SLURM_ARRAY_TASK_ID"))
-if (is.na(i)) {
+#i <- as.numeric(Sys.getenv("SLURM_ARRAY_TASK_ID"))
+#if (is.na(i)) {
 	for (y in years) {
 		radfun(y, "", "")
 	}
-} else {
-	x <- expand.grid(years[1:2], ssps[1], models)
-	x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
-	if (i <= nrow(x)) {
-		radfun(x[i,1], x[i,2], x[i,3])	
-	} else {
-		i
-	}
-}
+# } else {
+# 	x <- expand.grid(years[1:2], ssps[1], models)
+# 	x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
+# 	if (i <= nrow(x)) {
+# 		radfun(x[i,1], x[i,2], x[i,3])	
+# 	} else {
+# 		i
+# 	}
+# }
 

@@ -1,14 +1,9 @@
-
-this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-  setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-} else {
-  setwd('/Users/gcn/Google Drive/My Drive/pwc')
-}
-
-path <- "data-raw/ISIMIP/pwc_agg3"
-dir.create("tables", F, F)
 library(terra)
+
+path <- "data/agg/pwc_agg3"
+dir.create("results/tables", F, F)
+
+regions <- c("global", "tropical", "S20N35")
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
   aggregate(6, sum, na.rm=TRUE) |> round()
@@ -72,10 +67,11 @@ make_tables <- function(regions) {
 	  # convert csv to nice table
 	  t <- as.data.table(tab1)
 	  names(t) = gsub("_.", "", names(t))
-	  
+	  s
 	  t[[1]] <- gsub("_", ", ", t[[1]])
 	  t[[1]] <- gsub("ssp", "SSP ", t[[1]])
 	  t[[1]] <- gsub("126", "1-2.6", t[[1]])
+	  t[[1]] <- gsub("370", "3-7.0", t[[1]])
 	  t[[1]] <- gsub("585", "5-8.5", t[[1]])
 	  cheadername <- names(t)
 	  cnewname <- c("Area percentile", "10", "50", "90", "10", "50", "90", "10", "50", "90")
@@ -96,7 +92,7 @@ make_tables <- function(regions) {
 	}
 }
 
-make_tables(regions=c("global", "tropical", "S20N35"))
+make_tables(regions)
 
 
 

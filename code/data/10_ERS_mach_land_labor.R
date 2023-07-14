@@ -1,21 +1,25 @@
-this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-  setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-} else {
-  setwd('/Users/gcn/Google Drive/My Drive/pwc')
-}
+# this <- system('hostname', TRUE)
+# if (this == "LAPTOP-IVSPBGCA") {
+#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
+# } else {
+#   setwd('/Users/gcn/Google Drive/My Drive/pwc')
+# }
+
 library(terra)
 library(readxl)
 library(data.table)
+dir.create("data-raw/machines/", FALSE, FALSE)
+
 path_machines <- "data-raw/machines/"
 cleanup <- function(sheetname) {
-  url <- "https://www.ers.usda.gov/webdocs/DataFiles/51270/AgTFPInternational2020_long.xlsx?v=8337"
+  url <- "https://www.ers.usda.gov/webdocs/DataFiles/51270/AgTFPInternational2020.xlsx"
   f = paste0("data-raw/machines/", basename(url))
   if (!file.exists(f)) {
     dir.create(dirname(f), FALSE, TRUE)
     download.file(url, f)
-    unzip(f, exdir = "data-raw/machines")
+    #   unzip(f, exdir = "data-raw/machines")
   }
+  
   temp <- as.data.table(read_xlsx(paste0(path_machines, "AgTFPInternational2020.xlsx"), sheet = sheetname, range = "B3:F182", na = "NA")) # names, etc
   temp <- cbind(temp, as.data.table(read_xlsx(paste0(path_machines, "AgTFPInternational2020.xlsx"), sheet = sheetname, range = "BT3:EA182", na = "NA"))) # quantity data
   oldNames <- as.character(1961:2020)
