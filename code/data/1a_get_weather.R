@@ -1,15 +1,14 @@
 # create lists of nc files to download from ISIMIP
-# this <- system('hostname', TRUE)
-# if (this == "LAPTOP-IVSPBGCA") {
-#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc/data-raw/ISIMIP/")
-# } else {
-#   setwd('/Users/gcn/Google Drive/My Drive/pwc')
-# }
+
 library(rvest)
 library(xml2)
 library(data.table)
-pats <- c("ssp126", "ssp585") 
-pats <- "ssp370"
+library(terra)
+terraOptions(verbose = TRUE)
+this <- system('hostname', TRUE)
+if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8) # for Macs with Mac silicon, speeds up process
+
+pats <- c("ssp126", "ssp370", "ssp585") # all ISIMIP scenarios
 pats_hist <- c("historical")
 models <- c("gfdl-esm4", "ipsl-cm6a-lr", "mpi-esm1-2-hr", "mri-esm2-0", "ukesm1-0-ll")
 yearChoices <- c("2041-2050", "2051-2060", "2081-2090", "2091-2100")
@@ -42,13 +41,16 @@ for (model in models) {
 }
 
 # historical
+pat <- pats_hist
 for (model in models) {
-  pat <- pats_hist
   createlinkfiles(model, pat)
 }
 
 # create GCB subset
 GCBSub <- function(model, pat, yrs) {
+  print(pat)
+  print(model)
+  print(yrs)
   infile = paste0(destpath, model, "_", pat, ".txt")
   hrefs <- as.data.table(readLines(infile)) # all years
   hrefs <- hrefs[grep(paste(yrs, collapse = "|"), V1),] # year choices for GCB PWC paper
@@ -60,13 +62,13 @@ GCBSub <- function(model, pat, yrs) {
 
 for (model in models) {
   for (pat in pats) {
-    GCBSub(model, pat = pats, yrs = yrChoices)
+     GCBSub(model, pat, yrs = yrChoices)
   }
 }
 
 # do historical GCB
+pat <- pats_hist
 for (model in models) {
-  pat <- pats_hist
   GCBSub(model, pat = pats_hist, yrs = yrChoices_hist)
 }
 

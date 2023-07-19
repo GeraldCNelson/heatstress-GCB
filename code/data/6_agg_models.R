@@ -16,11 +16,11 @@ library(terra)
 agg_gcm <- function(y, s, nosun=FALSE) {
 	if (nosun) {
 		dir.create("data/agg/pwc_agg2_ns", FALSE, FALSE)
-		ff <- list.files("data/agg/pwc_agg1_ns", pattern=paste0(s, ".*", y, ".*\\.tif$"), recursive=TRUE, full=TRUE)
+		ff <- list.files("data/agg/pwc_agg1_ns", pattern=paste0(s, ".*", y, ".*\\.tif$"), recursive = TRUE, full.names = TRUE)
 		fout <- paste0("data/agg/pwc_agg2_ns/pwc_ns_", s, "_", y, ".tif")		
 	} else {
 		dir.create("data/agg/pwc_agg2", FALSE, FALSE)
-		ff <- list.files("data/agg/pwc_agg1", pattern=paste0(s, ".*", y, ".*\\.tif$"), recursive=TRUE, full=TRUE)
+		ff <- list.files("data/agg/pwc_agg1", pattern=paste0(s, ".*", y, ".*\\.tif$"), recursive = TRUE, full.names = TRUE)
 		fout <- paste0("data/agg/pwc_agg2/pwc_", s, "_", y, ".tif")	
 	}
 	if (file.exists(fout)) return(fout)

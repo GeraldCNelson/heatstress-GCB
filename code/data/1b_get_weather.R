@@ -1,20 +1,22 @@
 # # downloads the .nc files from ISIMIP using the lists created in 1a_get_weather
-# this <- system('hostname', TRUE)
-# if (this == "LAPTOP-IVSPBGCA") {
-#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc/")
-# } else {
-#   setwd('/Users/gcn/Google Drive/My Drive/pwc')
-# }
+library(terra)
+terraOptions(verbose = TRUE)
+this <- system('hostname', TRUE)
+if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 
 #download the ISIMIP data used for the PWC paper
 variables <- c("tasmin", "tasmax", "tas", "hurs", "rsds", "sfcwind") # principal weather variables. pr left out because not used in the GCB PWC paper
-yearChoices <- c("2041-2050", "2051-2060", "2081-2090", "2091-2100")
-yrChoices <- gsub("-","_", yearChoices)
 pats <- c("126", "585", "historical") 
-pats <- c("370") 
+yearChoices <- c("2041-2050", "2051-2060", "2081-2090", "2091-2100")
+
+# test data
+pats <- c("585") 
+variables <- c("tasmin", "tasmax", "rsds", "hurs", "sfcwind")
+yearChoices <- c( "2081_2090", "2091_2100")
+yrChoices <- gsub("-","_", yearChoices)
+
 ncfiles <- "data-raw/ISIMIP/ISIMIPncfiles/"
 options(timeout = 3600)
-
 
 for (pat in pats) {
   destdir <- paste0(ncfiles, pat, "/")
