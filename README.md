@@ -47,7 +47,7 @@ The R code needs to be run in the following order
   - GCB_Figure_3_global.R - create Figure 3. Average PWCs during the crop growing season and the hottest period
   - GCB_Figure_4_regions.R - create Figure 4. Average PWCs during the growing season for three countries
   - GCB_Figure_5_global_delta_noSun.R
-  - GCB_Figure_5_global_noSun.R - create Figure 5. Impact of eliminating radiation effect in PWC values.
+  - GCB_Figure_5_global_noSun.R - _create Figure 5. Impact of eliminating radiation effect in PWC values._
   - GCB_Figure_6_mech_needs.R - create Figure 6. The additional HP per agricultural worker to make 60 HP available
   - GCB_Figure_S1_aggregation_methods.R
   - GCB_Figure_x_Brazil.R
