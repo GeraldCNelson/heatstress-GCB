@@ -13,8 +13,8 @@ dir.create("figures", F, F)
 library(terra)
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
-  aggregate(6, sum, na.rm=TRUE) |> round()
-#crps <- aggregate(crps, 6, sum, na.rm=TRUE)
+  aggregate(6, sum, na.rm = TRUE) |> round()
+#crps <- aggregate(crps, 6, sum, na.rm = TRUE)
 #crps <- crop(crps, c(-180, 180, -60, 67))
 
 cval <- 100
@@ -22,7 +22,7 @@ cval <- 100
 minx <- 0
 fig_cumul <- function(avar="annual", lgnd=TRUE) {
   
-  ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full=TRUE)
+  ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full = TRUE)
   
   r <- rast(ff) / cval # convert from % to ratio
   names(r) <- gsub("^pwc_", "", names(r))
@@ -38,7 +38,7 @@ fig_cumul <- function(avar="annual", lgnd=TRUE) {
   d <- as.data.frame(r)
   
   x <- lapply(1:n, \(i) {
-    a <- aggregate(d[,1,drop=FALSE], d[,i+1,drop=FALSE], sum) 
+    a <- aggregate(d[,1,drop = FALSE], d[,i+1,drop = FALSE], sum) 
     a[,2] <- cumsum(a[,2] / sum(a[,2]))
     a
   })

@@ -36,7 +36,7 @@ compute_wbgt <- function(y, s, m, nosun=FALSE) {
 	if (file.exists(fout)) return(fout)
 	print(fout); flush.console()
 	
-	ff <- list.files(ncfiles, pattern=paste0(m, ".*", s, ".*", y, ".*\\.nc$"), recursive = TRUE, full.names = TRUE)
+	ff <- list.files(ncfiles, pattern = paste0(m, ".*", s, ".*", y, ".*\\.nc$"), recursive = TRUE, full.names = TRUE)
 #	vars <- c("tas", "hurs", "sfcwind")	
 	vars <- c("hurs", "sfcwind")	
 	ff <- lapply(paste0(vars, "_"), \(v) grep(v, ff, value=TRUE)) |> unlist() |> as.vector()	# "\" here means a function
@@ -70,7 +70,7 @@ compute_wbgt <- function(y, s, m, nosun=FALSE) {
 	d <- sds(x)
 	names(d) <- c('rhum', 'wind', 'srad', 'temp')
 	
-	WBGT(d, kelvin=TRUE, mask=m, filename=fout, overwrite=TRUE, steps=16)
+	WBGT(d, kelvin=TRUE, mask=m, filename=fout, overwrite = TRUE, steps=16)
 	tmpFiles(remove = TRUE)
 }
 

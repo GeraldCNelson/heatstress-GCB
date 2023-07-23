@@ -6,7 +6,7 @@ dir.create("tables", F, F)
 regions <- c("global", "tropical", "S20N35")
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
-  aggregate(6, sum, na.rm=TRUE) |> round()
+  aggregate(6, sum, na.rm = TRUE) |> round()
 
 get_cumul <- function(avar="annual", legend=TRUE, region = "global") {
   if (region=="global") {
@@ -19,7 +19,7 @@ get_cumul <- function(avar="annual", legend=TRUE, region = "global") {
 	stop("unknown region")
   }
   
-  ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full=TRUE)
+  ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full = TRUE)
   r <- rast(ff) / 100 # convert from % to ratio
   names(r) <- gsub("^pwc_", "", names(r))
   names(r) <- gsub("; ", "", names(r))
@@ -31,7 +31,7 @@ get_cumul <- function(avar="annual", legend=TRUE, region = "global") {
   d <- as.data.frame(r)
   
   x <- lapply(1:n, \(i) {
-    a <- aggregate(d[,1,drop=FALSE], d[,i+1,drop=FALSE], sum) 
+    a <- aggregate(d[,1,drop = FALSE], d[,i+1,drop = FALSE], sum) 
     a[,2] <- cumsum(a[,2] / sum(a[,2]))
     a
   })
@@ -62,7 +62,7 @@ make_tables <- function(regions) {
 	  colnames(tab1) <- gsub("hot90", "Hottest period", colnames(tab1))
 	  tab1
 	  outf <- paste0("tables/table1_avePWC_3types_", region, ".csv")
-	  write.csv(tab1, outf, row.names=FALSE)
+	  write.csv(tab1, outf, row.names = FALSE)
 	  
 	  # convert csv to nice table
 	  t <- as.data.table(tab1)

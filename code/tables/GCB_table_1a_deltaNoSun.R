@@ -14,11 +14,11 @@ dir.create("figures", F, F)
 library(terra)
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
-  aggregate(6, sum, na.rm=TRUE) |> round()
+  aggregate(6, sum, na.rm = TRUE) |> round()
 
 fig_cumul <- function(avar="annual", legend=TRUE) {
   
-  ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full=TRUE)
+  ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full = TRUE)
   r <- rast(ff)
   names(r) <- gsub("^pwc_", "", names(r))
   names(r) <- gsub("; ", "", names(r))
@@ -29,7 +29,7 @@ fig_cumul <- function(avar="annual", legend=TRUE) {
   d <- as.data.frame(r)
   
   x <- lapply(1:n, \(i) {
-    a <- aggregate(d[,1,drop=FALSE], d[,i+1,drop=FALSE], sum) 
+    a <- aggregate(d[,1,drop = FALSE], d[,i+1,drop = FALSE], sum) 
     a[,2] <- cumsum(a[,2] / sum(a[,2]))
     a
   })
@@ -47,7 +47,7 @@ fig_cumul <- function(avar="annual", legend=TRUE) {
 
 fig_cumul_ns <- function(avar="annual", legend=TRUE) {
   
-  ff <- list.files(path_ns, pattern = paste0(avar, ".*_mean_ns.tif$"), full=TRUE)
+  ff <- list.files(path_ns, pattern = paste0(avar, ".*_mean_ns.tif$"), full = TRUE)
   r <- rast(ff)
   names(r) <- gsub("^pwc_", "", names(r))
   names(r) <- gsub("; ", "", names(r))
@@ -58,7 +58,7 @@ fig_cumul_ns <- function(avar="annual", legend=TRUE) {
   d <- as.data.frame(r)
   
   x <- lapply(1:n, \(i) {
-    a <- aggregate(d[,1,drop=FALSE], d[,i+1,drop=FALSE], sum) 
+    a <- aggregate(d[,1,drop = FALSE], d[,i+1,drop = FALSE], sum) 
     a[,2] <- cumsum(a[,2] / sum(a[,2]))
     a
   })
@@ -90,7 +90,7 @@ tab1 <- data.frame(ssp=rownames(ya), ya_delta, yb_delta, yc_delta)
 rownames(tab1) <- NULL
 colnames(tab1) <- gsub("hot90", "Hottest period", colnames(tab1))
 tab1
-write.csv(tab1, "tables/table5_avePWC_3types_NoSunDelta.csv", row.names=FALSE)
+write.csv(tab1, "tables/table5_avePWC_3types_NoSunDelta.csv", row.names = FALSE)
 
 # convert csv to nice table
 library(flextable)

@@ -15,13 +15,13 @@ library(stringr)
 set_flextable_defaults(font.family = "Times New Roman", font.color = "#333333", border.color = "#999999", padding = 4)
 
 crps <- rast("data-raw/crops/total_crop_area.tif") |> 
-  aggregate(6, sum, na.rm=TRUE) |> crop(c(-180, 180, -60, 67)) |>  round()
+  aggregate(6, sum, na.rm = TRUE) |> crop(c(-180, 180, -60, 67)) |>  round()
 
 w <- geodata::world(path="data-raw", version="3.6")
 
-ff <- list.files(path, pattern = ".*_mean.tif$", full=TRUE)
+ff <- list.files(path, pattern = ".*_mean.tif$", full = TRUE)
 s <- sds(ff[c(1,3,2)])
-z <- lapply(s, \(r) zonal(r, w, mean, w=crps, na.rm=TRUE))
+z <- lapply(s, \(r) zonal(r, w, mean, w=crps, na.rm = TRUE))
 
 zz <- do.call(cbind, z)
 names(zz) <- gsub("mean_", "", gsub("pwc_", "", paste0(rep(names(s), each=5), "_", names(zz))))
@@ -48,7 +48,7 @@ temp[, land_3yr := land_3yr] # 000 ha
 temp[, machinery_3yr := machinery_3yr] # 000 units (CV) horsepower
 
 x <- merge(zz, temp, by.x="GID_0", by.y="ISO3", all.x=TRUE)
-write.csv(x, "tables/big_table.csv", row.names=FALSE)
+write.csv(x, "tables/big_table.csv", row.names = FALSE)
 ctrs <- c("Brazil", "China", "France", "Nigeria", "Pakistan", "India", "United States")
 d <- x[x$Country.territory %in% ctrs,-1]
 d$Country.territory <- NULL
@@ -61,7 +61,7 @@ d <- d[-grep("ssp126", rownames(d)), ] # remove ssp126
 d <- d[-grep("annual", rownames(d)), ] # remove annual rows
 d <- data.frame(ssp=rownames(d), d)
 rownames(d) <- NULL
-write.csv(d, "tables/subset_big_table.csv", row.names=FALSE)
+write.csv(d, "tables/subset_big_table.csv", row.names = FALSE)
 
 
 # directions - https://stackoverflow.com/questions/71661066/is-there-a-function-in-flextable-to-group-a-few-rows-in-a-table-together-under-a

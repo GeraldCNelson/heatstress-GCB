@@ -14,11 +14,11 @@ set_flextable_defaults(font.family = "Times New Roman")
 path <- "compute_pwc/output"
 
 # pwc data 
-ff <- list.files(path, pattern = "ensemble_pwc_wbgt_out_season_mean.*.tif$", full=TRUE)
+ff <- list.files(path, pattern = "ensemble_pwc_wbgt_out_season_mean.*.tif$", full = TRUE)
 r <- rast(ff)
 names(r) <- gsub(".tif", "", substr(basename(ff), 35, nchar(ff)))
 
-aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm=TRUE) |> crop(r)
+aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm = TRUE) |> crop(r)
 cutoffVals <- c(50, 60, 70, 80, 90)
 
 # labor affected by r <= val

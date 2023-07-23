@@ -24,12 +24,12 @@ w <- geodata::world(path = "data-raw/gadm") |> crop(ext(-180, 180, -60, 90))
 w_m <- merge(w, m, by.x = "GID_0", by.y = "ISO3", all.x=TRUE)
 
 # pwc data by pixel
-ff <- list.files(path, pattern = "ensemble_pwc_wbgt_out_season_mean.*.tif$", full=TRUE)
+ff <- list.files(path, pattern = "ensemble_pwc_wbgt_out_season_mean.*.tif$", full = TRUE)
 r <- rast(ff)
 names(r) <- gsub(".tif", "", substr(basename(ff), 35, nchar(ff)))
 
 #labor_ERS.tif created in 10_FAO_ERS_employment.R
-aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm=TRUE) |> crop(r)
+aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm = TRUE) |> crop(r)
 cutoffVals <- c(50, 60, 70, 80, 90)
 
 # labor affected by r <= val

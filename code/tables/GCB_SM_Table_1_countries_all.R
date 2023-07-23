@@ -13,13 +13,13 @@ library(terra)
 library(data.table)
 cval <- 100 # used to convert from percent to ratio
 crps <- rast("data-raw/crops/total_crop_area.tif") |> 
-  aggregate(6, sum, na.rm=TRUE) |> crop(c(-180, 180, -60, 67)) |>  round()
+  aggregate(6, sum, na.rm = TRUE) |> crop(c(-180, 180, -60, 67)) |>  round()
 
 w <- geodata::world(path="data-raw", version="3.6")
 
-ff <- list.files(path, pattern = ".*_mean.tif$", full=TRUE)
+ff <- list.files(path, pattern = ".*_mean.tif$", full = TRUE)
 s <- sds(ff)
-z <- lapply(s, \(r) zonal(r, w, mean, na.rm=TRUE))
+z <- lapply(s, \(r) zonal(r, w, mean, na.rm = TRUE))
 zz <- do.call(cbind, z)
 names(zz) <- gsub("mean_", "", gsub("pwc_", "", paste0(rep(names(s), each=5), "_", names(zz))))
 zz <- cbind(values(w), zz) # annual, growing season and hot window for all countries
@@ -28,7 +28,7 @@ names(zz)[1:2] <- c("ISO3", "Name")
 x <- zz[complete.cases(zz), ] # remove rows with NAs
 x[,3:ncol(x)] <- x[,3:ncol(x)] / cval # convert percent to ratio
 x <- x[, -1]
-write.csv(x, "tables/SM_table_1_all_countries.csv", row.names=FALSE)
+write.csv(x, "tables/SM_table_1_all_countries.csv", row.names = FALSE)
 
 library(flextable)
 library(officer)

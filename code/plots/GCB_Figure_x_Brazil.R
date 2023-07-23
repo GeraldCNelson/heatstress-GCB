@@ -34,7 +34,7 @@ grat <- graticule(5, 5, crs=prj) |> crop(e)
 r <- wrld |>  crop(e)
 crps <- rast("data-raw/crops/total_crop_area.tif") |> project(prj) |> crop(get(regionChoice), mask = TRUE)
 crps1 <- rast("data-raw/crops/total_crop_area.tif", win = e) |> 
-  aggregate(6, sum, na.rm=TRUE) |> round()
+  aggregate(6, sum, na.rm = TRUE) |> round()
 
 for (qName in qNames) {
   f <- file.path(path, paste0("globe_", qName, "_rf_ensemble_pwc_wbgt_out_daily_mean_historical_mean_1991_2010.tif")) 

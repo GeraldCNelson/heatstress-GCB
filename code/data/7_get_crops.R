@@ -1,11 +1,7 @@
 
 # this <- system('hostname', TRUE)
 # if (this == "LAPTOP-IVSPBGCA") {
-# 	setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-# } else {
-# 	setwd('/Users/gcn/Google Drive/My Drive/pwc')
-# }
-
+# get crop areas from crop data set at https://www.earthstat.org
 
 library(terra)
 library(geodata)
@@ -59,13 +55,13 @@ sacks_aggregated <- function() {
 	pln <- sapply(strsplit(names(plant), " \\("), \(i)i[1])
 	names(harv) <- names(plant) <- pln
 
-	plant <- aggregate(plant, 6, fun=raster::modal, na.rm=TRUE)
+	plant <- aggregate(plant, 6, fun=raster::modal, na.rm = TRUE)
 	plant <- round(plant)
-	writeRaster(plant, "data-raw/calendar-sacks/plant_agg.tif", overwrite=TRUE)
+	writeRaster(plant, "data-raw/calendar-sacks/plant_agg.tif", overwrite = TRUE)
 	
-	harv <-  aggregate(harv, 6, fun=raster::modal, na.rm=TRUE)
+	harv <-  aggregate(harv, 6, fun=raster::modal, na.rm = TRUE)
 	harv <- round(harv)
-	writeRaster(harv, "data-raw/calendar-sacks/harv_agg.tif", overwrite=TRUE)
+	writeRaster(harv, "data-raw/calendar-sacks/harv_agg.tif", overwrite = TRUE)
 }
 
 s <- sacks_aggregated()
@@ -83,19 +79,19 @@ mean_calendar <- function() {
 	pln <- sapply(strsplit(names(plant), " \\("), \(i)i[1])
 	
 	# get the crops for which we have calendars
-	ff <- list.files("data-raw/crops/monfreda", pattern=".tif", full=TRUE)
+	ff <- list.files("data-raw/crops/monfreda", pattern=".tif", full = TRUE)
 	crn <- sapply(strsplit(basename(ff), "_"), \(i)i[1])
 	i <- which(crn %in% pln)
 	crops <- rast(ff[i])
 	names(crops) <- sapply(strsplit(names(crops), "_"), \(i)i[1])
 	cat(names(crops))
-#	crops <- crop(crops, c(-180,180,-60,90)) |> aggregate(6, sum, na.rm=TRUE) 
+#	crops <- crop(crops, c(-180,180,-60,90)) |> aggregate(6, sum, na.rm = TRUE) 
 	
 	crops <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
-	  aggregate(6, sum, na.rm=TRUE) |> round()
+	  aggregate(6, sum, na.rm = TRUE) |> round()
 	
 	## fraction of each crop in a cell
-	crops <- crops / sum(crops, na.rm=TRUE)
+	crops <- crops / sum(crops, na.rm = TRUE)
 
 	ss <- NULL
 	for (i in 1:nlyr(crops)) {
@@ -113,7 +109,7 @@ mean_calendar <- function() {
 	# normalize weights
 	season_weights <- ss / sum(ss)
 
-	writeRaster(season_weights, outf, overwrite=TRUE)
+	writeRaster(season_weights, outf, overwrite = TRUE)
 }
 
 m <- mean_calendar()

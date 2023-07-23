@@ -15,7 +15,7 @@ path <- "data-raw/ISIMIP/pwc_agg3"
 dir.create("figures", F, F)
 wrld <- geodata::world(path="data-raw")
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
-  aggregate(6, sum, na.rm=TRUE) |> round() 
+  aggregate(6, sum, na.rm = TRUE) |> round() 
 crps <- crps > 100
 
 capt <- c("1991-2010", "2041-2060", "2081-2100")

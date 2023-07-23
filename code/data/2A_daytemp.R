@@ -53,10 +53,10 @@ tasdayfun <- function(y, s, m) {
 	
 	out <- rast(rn) # create empty raster with rn dimensions
 	print(paste0("out: ", outf))
-	b <- writeStart(out, outf, overwrite=TRUE)
+	b <- writeStart(out, outf, overwrite = TRUE)
 	for (i in 1:b$n) {
-	  system.time(	vn <- readValues(rn, b$row[i], b$nrows[i], mat=TRUE)) # 9 sec
-		vx <- readValues(rx, b$row[i], b$nrows[i], mat=TRUE) # 9 sec
+	  system.time(	vn <- readValues(rn, b$row[i], b$nrows[i], mat = TRUE)) # 9 sec
+		vx <- readValues(rx, b$row[i], b$nrows[i], mat = TRUE) # 9 sec
 		vlat <- readValues(lat, b$row[i], b$nrows[i])
 		for (j in 1:nrow(vn)) {
 		  system.time(vn[j,] <- meteor::dayTemp(vn[j,], vx[j,], doy, vlat[j])) # conversion to dayTemp done in the meteor package

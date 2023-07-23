@@ -16,11 +16,11 @@ path <- "data/agg/pwc_agg3"
 dir.create("data/tables", FALSE, FALSE)
 
 # pwc data 
-ff <- list.files(path, pattern = "pwc_season_mean", full=TRUE)
+ff <- list.files(path, pattern = "pwc_season_mean", full = TRUE)
 r <- rast(ff)
 #names(r) <- gsub(".tif", "", substr(basename(ff), 35, nchar(ff)))
 
-aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm=TRUE) |> crop(r)
+aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm = TRUE) |> crop(r)
 cutoffVals <- c(50, 60, 70, 80, 90)
 
 # labor affected by r <= val

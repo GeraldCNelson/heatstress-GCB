@@ -12,7 +12,7 @@ pwc_reg_585_2081 <- rast(paste0(path_base, "pwc_ssp585_2081_2100.tif"))
 d_ratio <- 100*(pwc_ns_585_2081 - pwc_reg_585_2081)/pwc_reg_585_2081
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
-  aggregate(6, sum, na.rm=TRUE) |> round()
+  aggregate(6, sum, na.rm = TRUE) |> round()
 
 labor <- rast(paste0("data-raw/labor_", "ERS", ".tif"))
 wrld <- geodata::world(path="data-raw")

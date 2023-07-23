@@ -16,7 +16,7 @@ e <- ext(-12000000, 16038790, -6168256, 6942628)
 wrld <- geodata::world(path="data-raw")
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
-  aggregate(6, sum, na.rm=TRUE) |> round()
+  aggregate(6, sum, na.rm = TRUE) |> round()
 crops <- mask(crps >100, wrld)
 wrld <- project(wrld, prj) |> crop(e)
 

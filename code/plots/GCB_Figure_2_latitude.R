@@ -29,7 +29,7 @@ minx = 35/cval
 
 fig_lat <- function(avar="annual", lgnd=TRUE, region="global") {
   extRegion <- get(paste0("ext_", region))
-  ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full=TRUE)
+  ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full = TRUE)
   r <- rast(ff)/cval
   names(r) <- gsub("^pwc_", "", names(r))
   r <- r[[!names(r) %in% c("ssp126_2041-2060", "ssp126_2081-2100")]]
