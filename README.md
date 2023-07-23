@@ -42,27 +42,27 @@ The R code needs to be run in the following order
   - 10_c_FAO_ERS_employment.R
   - sun_nosun.R
 - the code/plots directory contains the fillowing files that produce the figures in the GCB paper
-  - GCB_Figure_1_cumul.R - create Figure 1. Cumulative distribution of early 21st century cropland Physical Work Capacity (PWC) for recent historical (1991-2010) and potential future thermal conditions 
-  - GCB_Figure_2_latitude.R- create Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent historical (1991-2010) and potential future thermal conditions 
-  - GCB_Figure_3_global.R - create Figure 3. Average PWCs during the crop growing season and the hottest period
-  - GCB_Figure_4_regions.R - create Figure 4. Average PWCs during the growing season for three countries
+  - GCB_Figure_1_cumul.R - _create Figure 1. Cumulative distribution of early 21st century cropland Physical Work Capacity (PWC) for recent historical (1991-2010) and potential future thermal conditions_
+  - GCB_Figure_2_latitude.R- _create Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent historical (1991-2010) and potential future thermal conditions_ 
+  - GCB_Figure_3_global.R - _create Figure 3. Average PWCs during the crop growing season and the hottest period_
+  - GCB_Figure_4_regions.R - _create Figure 4. Average PWCs during the growing season for three countries_
   - GCB_Figure_5_global_delta_noSun.R
   - GCB_Figure_5_global_noSun.R - _create Figure 5. Impact of eliminating radiation effect in PWC values._
-  - GCB_Figure_6_mech_needs.R - create Figure 6. The additional HP per agricultural worker to make 60 HP available
+  - GCB_Figure_6_mech_needs.R - _create Figure 6. The additional HP per agricultural worker to make 60 HP available_
   - GCB_Figure_S1_aggregation_methods.R
   - GCB_Figure_x_Brazil.R
   - GCB_figure1_cumPWC_3types.R
   
 - the code/tables directory contains the fillowing files that produce the figures in the GCB paper
 
-  - GCB_table_1.R - create Table 1. Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions
+  - GCB_table_1.R - _create Table 1. Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions_
   - GCB_table_1a_deltaNoSun.R
-  - GCB_Table_2_labor_global_share.R - create Table 2. Share of early century agricultural workers during the crop growing season with mean growing season PWC at or below a cutoff value of PWC by period and emission scenario.
+  - GCB_Table_2_labor_global_share.R - _create Table 2. Share of early century agricultural workers during the crop growing season with mean growing season PWC at or below a cutoff value of PWC by period and emission scenario._
   - GCB_Table_2_labor_global.R
   - GCB_Table_2a_labor_mechanized_global.R
-  - GCB_Table_3_countries.R - create Table 3. Summary of PWC results for selected countries 
-  - GCB_Table_4_labor_regions.R - create Table 4. Early century agricultural labor experiencing growing season thermal environments for selected countries 
-  - GCB_table_5_delta_NoSun.R - create Table 5. Change in the PWC ratio from elimination of the radiation effect
+  - GCB_Table_3_countries.R - _create Table 3. Summary of PWC results for selected countries_ 
+  - GCB_Table_4_labor_regions.R - _create Table 4. Early century agricultural labor experiencing growing season thermal environments for selected countries 
+  - GCB_table_5_delta_NoSun.R - _create Table 5. Change in the PWC ratio from elimination of the radiation effect_
   - GCB_mech_needs.R
   - GCB_SM_Table_1_countries_all.R
   - GCB_SM_Table_2_countries_all_other.R.old
