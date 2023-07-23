@@ -15,7 +15,7 @@ crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)
   aggregate(6, sum, na.rm = TRUE) |> round()
 
 labor <- rast(paste0("data-raw/labor_", "ERS", ".tif"))
-wrld <- geodata::world(path="data-raw")
+wrld <- geodata::world(path = "data-raw")
 crops <- mask(crps > 100, wrld)
 
 d_ratio_cropped <- mask(d_ratio, crops)
