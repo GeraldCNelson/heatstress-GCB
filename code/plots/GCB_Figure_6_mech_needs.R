@@ -1,9 +1,9 @@
+# create Figure 6. The additional HP per agricultural worker to make 60 HP available
+
+library(terra)
+terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-  setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-} else {
-  setwd('/Users/gcn/Google Drive/My Drive/pwc')
-}
+if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 
 library(data.table)
 library(terra)

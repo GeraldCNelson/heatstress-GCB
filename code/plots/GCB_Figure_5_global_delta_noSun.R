@@ -1,12 +1,8 @@
 
-# this <- system('hostname', TRUE)
-# if (this == "LAPTOP-IVSPBGCA") {
-# 	setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-# } else {
-# 	setwd('/Users/gcn/Google Drive/My Drive/pwc')
-# }
-
 library(terra)
+terraOptions(verbose = TRUE)
+this <- system('hostname', TRUE)
+if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 
 path <- "data-raw/ISIMIP/pwc_agg3"
 path_ns <- "data-raw/ISIMIP/pwc_agg3_ns"

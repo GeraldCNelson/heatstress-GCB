@@ -1,5 +1,10 @@
 # create Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent historical (1991-2010) and potential future thermal conditions 
 
+library(terra)
+terraOptions(verbose = TRUE)
+this <- system('hostname', TRUE)
+if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
+
 path <- "data-raw/ISIMIP/pwc_agg3"
 
 dir.create("figures", F, F)
