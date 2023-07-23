@@ -5,6 +5,7 @@ library(meteor)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
 if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8) # useful for Macs because they have better memory management
+
 path_intermediate <- "data-raw/ISIMIP/ISIMIPncfiles/intermediate/"
 ncfiles <- "data-raw/ISIMIP/ISIMIPncfiles/"
 
@@ -21,7 +22,7 @@ ssps <- "ssp585"
 years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")# -----
 x <- expand.grid(years[1:2], ssps[1], models)
 x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
-# -----
+# end test data -----
 
 compute_wbgt <- function(y, s, m, nosun=FALSE) {
 #browser()

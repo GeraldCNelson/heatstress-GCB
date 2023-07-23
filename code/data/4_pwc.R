@@ -19,11 +19,15 @@ years <- c("1991_2000", "2001_2010", "2041_2050", "2051_2060", "2081_2090", "209
 models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")
 ssps <- c("historical", "ssp126", "ssp585")
 nosun <- FALSE # variable to determine where solar radiation value is set to ISIMIP data (FALSE) or zero to simulate complete shade (TRUE)
+x <- expand.grid(years[1:4], ssps[1], models)
+x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 
-#test
-ssps <- c("ssp370")
-years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")
-#-------
+#test data
+ssps <- "ssp585"
+years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")# -----
+x <- expand.grid(years[1:2], ssps[1], models)
+x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
+# end test data -----
 
 compute_pwc <- function(y, s, m, nosun=FALSE) {
 # browser()
@@ -44,10 +48,6 @@ compute_pwc <- function(y, s, m, nosun=FALSE) {
 	pwc(r, filename=fout)
 }
 
-x <- expand.grid(years[1:4], ssps[1], models)
-x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
-
-nosun <- isTRUE(commandArgs(trailingOnly=TRUE)[1] == "nosun")
-for (i in 1: nrow(x)) {
+for (i in 1:nrow(x)) {
   compute_pwc(y = x[i,1], s = x[i,2], m = x[i,3], nosun)
 }

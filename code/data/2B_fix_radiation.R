@@ -1,6 +1,10 @@
 # Compute average solar radiation during the day (removing Antarctica)
 
 library(terra)
+terraOptions(verbose = TRUE)
+this <- system('hostname', TRUE)
+if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
+
 library(meteor)
 path_intermediate <- "data-raw/ISIMIP/ISIMIPncfiles/intermediate/"
 dir.create(path_intermediate, FALSE, FALSE)
@@ -11,10 +15,10 @@ ssps <- c("historical", "ssp126", "ssp585")
 models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")
 e <- ext(-180, 180, -60, 90)
 
-#test data
+# test data -----
 ssps <- "ssp585"
 years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")
-# -----
+# end test data-----
 
 radfun <- function(y, s, m) {
  # browser()
