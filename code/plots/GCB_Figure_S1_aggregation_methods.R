@@ -11,7 +11,7 @@ library(terra)
 path <- "data-raw/ISIMIP/pwc_agg3"
 dir.create("figures", F, F)
 prj <- "+proj=robin"
-wrld <- geodata::world(path="data-raw")
+wrld <- geodata::world(path = "data-raw")
 e <- ext(-12000000, 16038790, -6168256, 6942628)
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
@@ -28,11 +28,11 @@ back <- crop(project(crops, prj), e)
 supp_maps <- function(x, capt, main="", rng=c(15, 100), pngfile="") {
 
 	subs <- paste0("(", letters[1:3], ")")
-	x <- mask(x, crops, maskvalue=FALSE)
+	x <- mask(x, crops, maskvalue = FALSE)
 	x <- crop(project(x, prj), e)
 	x <- clamp(x, rng[1], rng[2], values=TRUE)
 	
-	grat <- graticule(30, crs=prj) |> crop(e)
+	grat <- graticule(30, crs = prj) |> crop(e)
 	cols <- rev(viridis::turbo(100)[15:100])
 
 #	rng <- range(minmax(x))
@@ -40,11 +40,11 @@ supp_maps <- function(x, capt, main="", rng=c(15, 100), pngfile="") {
 	lege <- ext(18000000, 19000000, -9000000, 9000000)
 
 	if (pngfile != "") {
-		png(pngfile, units="in", width=5, height=6, res=300)
+		png(pngfile, units="in", width = 5, height = 6, res = 300)
 	}
-	layout(matrix(c(1:4,4,4), 3, 2), width=c(1,.2))
+	layout(matrix(c(1:4,4,4), 3, 2), width = c(1,.2))
 	for (i in 1:3) {
-		plot(grat, col="gray", background="azure", lty=2, mar=c(0,0,0,0), labels=FALSE)
+		plot(grat, col="gray", background="azure", lty = 2, mar = c(0,0,0,0), labels = FALSE)
 		plot(back, add=TRUE, axes=FALSE, legend=FALSE, col="light gray")
 		plot(x[[i]], add=TRUE, axes=FALSE, col=cols, legend=i==2, xpd=TRUE, range=rng, 
 		plg=list(ext=lege, cex=1.5, title=main, title.cex=1.5))

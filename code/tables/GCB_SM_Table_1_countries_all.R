@@ -15,7 +15,7 @@ cval <- 100 # used to convert from percent to ratio
 crps <- rast("data-raw/crops/total_crop_area.tif") |> 
   aggregate(6, sum, na.rm = TRUE) |> crop(c(-180, 180, -60, 67)) |>  round()
 
-w <- geodata::world(path="data-raw", version="3.6")
+w <- geodata::world(path = "data-raw", version="3.6")
 
 ff <- list.files(path, pattern = ".*_mean.tif$", full = TRUE)
 s <- sds(ff)

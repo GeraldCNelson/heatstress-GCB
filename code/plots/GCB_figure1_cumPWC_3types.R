@@ -26,9 +26,9 @@ fig_cumul <- function(avar="annual", legend=TRUE) {
   # r <- r[[names(r) != "ssp126_2081-2100"]] # drop end century ssp126
   n <- nlyr(r)
   
-  r <- c(crps, r) |> round(1) |> mask(crps, maskvalue=0)
+  r <- c(crps, r) |> round(1) |> mask(crps, maskvalue = 0)
   #	r <- round(r,1)
-  #	r <- mask(r, crps, maskvalue=0)
+  #	r <- mask(r, crps, maskvalue = 0)
   
   d <- as.data.frame(r)
   
@@ -72,7 +72,7 @@ fig_cumul <- function(avar="annual", legend=TRUE) {
 }
 
 outf <- "figures/pwc_cum_3types.png"
-png(outf, units="in", width=12, height=4, res=300, pointsize=18)
+png(outf, units="in", width = 12, height = 4, res = 300, pointsize=18)
 
 par(mfrow=c(1,3))
 par(mar=c(4,4,1,0))

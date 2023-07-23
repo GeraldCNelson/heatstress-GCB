@@ -25,7 +25,7 @@ get_cumul <- function(avar="annual", legend=TRUE, region = "global") {
   names(r) <- gsub("; ", "", names(r))
   n <- nlyr(r)
   
-  r <- c(crps, r) |> round(2) |> mask(crps, maskvalue=0)
+  r <- c(crps, r) |> round(2) |> mask(crps, maskvalue = 0)
   r <- crop(r, extRegion)
   
   d <- as.data.frame(r)

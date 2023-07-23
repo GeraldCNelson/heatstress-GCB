@@ -1,16 +1,15 @@
+# create table 1 in the GCB paper - Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions
 
-# this <- system('hostname', TRUE)
-# if (this == "LAPTOP-IVSPBGCA") {
-#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-# } else {
-#   setwd('/Users/gcn/Google Drive/My Drive/pwc')
-# }
+library(terra)
+library(meteor)
+terraOptions(verbose = TRUE)
+this <- system('hostname', TRUE)
+if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
+
 
 path <- "data-raw/ISIMIP/pwc_agg3"
 
 dir.create("figures", F, F)
-
-library(terra)
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
   aggregate(6, sum, na.rm = TRUE) |> round()
@@ -31,9 +30,9 @@ fig_cumul <- function(avar="annual", lgnd=TRUE) {
   # r <- r[[names(r) != "ssp126_2081-2100"]] # drop end century ssp126
   n <- nlyr(r)
   
-  r <- c(crps, r) |> round(1) |> mask(crps, maskvalue=0)
+  r <- c(crps, r) |> round(1) |> mask(crps, maskvalue = 0)
   #	r <- round(r,1)
-  #	r <- mask(r, crps, maskvalue=0)
+  #	r <- mask(r, crps, maskvalue = 0)
   
   d <- as.data.frame(r)
   
@@ -80,7 +79,7 @@ fig_cumul <- function(avar="annual", lgnd=TRUE) {
 }
 
 outf <- "figures/pwc_figure1.png"
-png(outf, units="in", width=12, height=4, res=300, pointsize=18)
+png(outf, units="in", width = 12, height = 4, res = 300, pointsize=18)
 par(family = "Times New Roman")#, fg = mycol, col = mycol, col.axis = mycol, col.lab = mycol, col.main = mycol, col.sub = mycol)
 
 par(mfrow=c(1,3))

@@ -24,7 +24,7 @@ fig_cumul <- function(avar="annual", legend=TRUE) {
   names(r) <- gsub("; ", "", names(r))
  n <- nlyr(r)
   
-  r <- c(crps, r) |> round(2) |> mask(crps, maskvalue=0)
+  r <- c(crps, r) |> round(2) |> mask(crps, maskvalue = 0)
 
   d <- as.data.frame(r)
   
@@ -53,7 +53,7 @@ fig_cumul_ns <- function(avar="annual", legend=TRUE) {
   names(r) <- gsub("; ", "", names(r))
   n <- nlyr(r)
   
-  r <- c(crps, r) |> round(2) |> mask(crps, maskvalue=0)
+  r <- c(crps, r) |> round(2) |> mask(crps, maskvalue = 0)
   
   d <- as.data.frame(r)
   

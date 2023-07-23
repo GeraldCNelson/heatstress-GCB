@@ -13,7 +13,7 @@ library(extrafont)
 extrafont::loadfonts(quiet = TRUE)
 path <- "data-raw/ISIMIP/pwc_agg3"
 dir.create("figures", F, F)
-wrld <- geodata::world(path="data-raw")
+wrld <- geodata::world(path = "data-raw")
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
   aggregate(6, sum, na.rm = TRUE) |> round() 
 crps <- crps > 100
@@ -48,7 +48,7 @@ make_fig4 <- function(x, country, n, rng=c(.25, 1)) {
 	}
 	crops <- mask(crops, rc)
 	x <- crop(x, crops)
-	x <- mask(x, crops, maskvalue=FALSE) 
+	x <- mask(x, crops, maskvalue = FALSE) 
 	x <- mask(x, rc)
 	x <- clamp(x, rng[1], rng[2], values=TRUE)
 	
@@ -90,7 +90,7 @@ countries <- c("Brazil", "India", "Nigeria")
 pngfile <- paste0("figures/pwc_figure4.png")
 #pngfile=""
 if (pngfile != "") {
-	png(pngfile, units="in", width=5.5, height=6, res=300)
+	png(pngfile, units="in", width = 5.5, height = 6, res = 300)
 }	
 
 m = cbind(matrix(c(1:9), 3, 3), 10)

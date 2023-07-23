@@ -27,7 +27,7 @@ sacks_calendars <- function(variable) {
 	outf <- file.path(path, paste0(variable, ".tif"))
 	if (file.exists(outf)) return(rast(outf))		
 	crops <- sacksCrops()
-	x <- lapply(crops, \(i) crop_calendar_sacks(crop = i, path=path))
+	x <- lapply(crops, \(i) crop_calendar_sacks(crop = i, path = path))
 	nms <- names(x[[1]])
 	if (!(variable %in% nms)) stop("variable not good")
 	outff <- file.path(path, paste0(nms, ".tif"))

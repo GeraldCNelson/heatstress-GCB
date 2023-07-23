@@ -17,7 +17,7 @@ set_flextable_defaults(font.family = "Times New Roman", font.color = "#333333", 
 crps <- rast("data-raw/crops/total_crop_area.tif") |> 
   aggregate(6, sum, na.rm = TRUE) |> crop(c(-180, 180, -60, 67)) |>  round()
 
-w <- geodata::world(path="data-raw", version="3.6")
+w <- geodata::world(path = "data-raw", version="3.6")
 
 ff <- list.files(path, pattern = ".*_mean.tif$", full = TRUE)
 s <- sds(ff[c(1,3,2)])

@@ -1,10 +1,5 @@
+# create Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent historical (1991-2010) and potential future thermal conditions 
 
-# this <- system('hostname', TRUE)
-# if (this == "LAPTOP-IVSPBGCA") {
-#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-# } else {
-#   setwd('/Users/gcn/Google Drive/My Drive/pwc')
-# }
 path <- "data-raw/ISIMIP/pwc_agg3"
 
 dir.create("figures", F, F)
@@ -37,11 +32,11 @@ fig_lat <- function(avar="annual", lgnd=TRUE, region="global") {
   nms <- names(r)
   
   # r <- c(crps, r)
-  #  r <- mask(r, crps, maskvalue=0)
-  r <- c(crps, r) |> round(1) |> mask(crps, maskvalue=0)
+  #  r <- mask(r, crps, maskvalue = 0)
+  r <- c(crps, r) |> round(1) |> mask(crps, maskvalue = 0)
   
   an <- anyNA(r)
-  r <- mask(r, an, maskvalue=TRUE)
+  r <- mask(r, an, maskvalue = TRUE)
   
   s <- r[[1]] * r[[-1]] # multiply crop area [1] by pwc values for each period [-1]
   a <- aggregate(s, c(1, ncol(s)), sum, na.rm = TRUE)
@@ -87,8 +82,8 @@ fig_lat <- function(avar="annual", lgnd=TRUE, region="global") {
 
 for (region in latRangeChoices) {
   outf <- paste0("figures/pwc_figure2", region, ".png")
-  png(outf, units="in", width=12, height=4, res=300, pointsize=18)
-  par(family = "Times New Roman")#, fg = mycol, col = mycol, col.axis = mycol, col.lab = mycol, col.main = mycol, col.sub = mycol)
+  png(outf, units="in", width = 12, height = 4, res = 300, pointsize=18)
+  par(family = "Times New Roman")
   par(mfrow=c(1,3))
   par(mar=c(4,4,2,0))
   ya <- fig_lat("annual", T, region)

@@ -24,13 +24,13 @@ qNames <- c("q1", "q3")
 # countries_WestAfrica_3digit <- Africa_3digit[Africa_3digit$region %in% "WA" & !Africa_3digit$A3 == "CPV",] # leave out Cape Verde, CPV
 # countries_WestAfrica <- gadm(country = countries_WestAfrica_3digit$A3, level = 0, path = "data-raw/gadm/", resolution = 2) |>  project(prj)
 
-wrld <- geodata::world(path="data-raw/gadm") |> project(prj)
+wrld <- geodata::world(path = "data-raw/gadm") |> project(prj)
 
 regionChoice <- "country_Brazil"
 e <- ext(get(regionChoice)) 
 xm <- e[1]; xx <- e[2]; ym <- e[3]; yx <- e[4]
 e_ratio <- (yx-ym)/(xx- xm)
-grat <- graticule(5, 5, crs=prj) |> crop(e)
+grat <- graticule(5, 5, crs = prj) |> crop(e)
 r <- wrld |>  crop(e)
 crps <- rast("data-raw/crops/total_crop_area.tif") |> project(prj) |> crop(get(regionChoice), mask = TRUE)
 crps1 <- rast("data-raw/crops/total_crop_area.tif", win = e) |> 
