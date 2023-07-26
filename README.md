@@ -38,7 +38,7 @@ The R code needs to be run in the following order
   - 7a_SacksCropShare.R
   - 8_summarize.R
   - 10_a_ERS_mach_land_labor.R
-  - 10_b_FAO_cropland.R
+  - 10_b_FAO_cropland.R - _not used in the GCB heatstress paper but the code is included for comparison purposes
   - 10_c_FAO_ERS_employment.R
   - sun_nosun.R
 - the code/plots directory contains the fillowing files that produce the figures in the GCB paper
@@ -46,8 +46,8 @@ The R code needs to be run in the following order
   - GCB_Figure_2_latitude.R- _create Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent historical (1991-2010) and potential future thermal conditions_ 
   - GCB_Figure_3_global.R - _create Figure 3. Average PWCs during the crop growing season and the hottest period_
   - GCB_Figure_4_regions.R - _create Figure 4. Average PWCs during the growing season for three countries_
-  - GCB_Figure_5_global_delta_noSun.R
-  - GCB_Figure_5_global_noSun.R - _create Figure 5. Impact of eliminating radiation effect in PWC values._
+  - GCB_Figure_5_global_delta_noSun.R - _not used in the paper_
+  - GCB_Figure_5_a_global_noSun.R - _create Figure 5. Impact of eliminating radiation effect in PWC values._
   - GCB_Figure_6_mech_needs.R - _create Figure 6. The additional HP per agricultural worker to make 60 HP available_
   - GCB_Figure_S1_aggregation_methods.R
   - GCB_Figure_x_Brazil.R
@@ -61,7 +61,7 @@ The R code needs to be run in the following order
   - GCB_Table_2_labor_global.R
   - GCB_Table_2a_labor_mechanized_global.R
   - GCB_Table_3_countries.R - _create Table 3. Summary of PWC results for selected countries_ 
-  - GCB_Table_4_labor_regions.R - _create Table 4. Early century agricultural labor experiencing growing season thermal environments for selected countries 
+  - GCB_Table_4_labor_regions.R - _create Table 4. Early century agricultural labor experiencing growing season thermal environments for selected countries_ 
   - GCB_table_5_delta_NoSun.R - _create Table 5. Change in the PWC ratio from elimination of the radiation effect_
   - GCB_mech_needs.R
   - GCB_SM_Table_1_countries_all.R
