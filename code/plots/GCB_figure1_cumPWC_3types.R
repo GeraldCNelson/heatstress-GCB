@@ -14,7 +14,7 @@ library(terra)
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
   aggregate(6, sum, na.rm = TRUE) |> round()
 
-fig_cumul <- function(avar="annual", legend=TRUE) {
+fig_cumul <- function(avar="annual", legend = TRUE) {
   
   ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full = TRUE)
   
@@ -50,17 +50,17 @@ fig_cumul <- function(avar="annual", legend=TRUE) {
   
   cols <- RColorBrewer::brewer.pal(n, "Set1")
   
-  plot(x[[1]][,1], x[[1]][,2], col=cols[1], lwd=2, type="l", xlim=c(40,100), 
+  plot(x[[1]][,1], x[[1]][,2], col = cols[1], lwd=2, type="l", xlim=c(40,100), 
        las=1, xlab="PWC (%)", ylab="Fraction of global crop land", axes=FALSE,  
        yaxs="i",  xaxs="i")
   for (i in 2:n) {
-    lines(x[[i]][,1], x[[i]][,2], col=cols[i], lwd=2, lty=i)
+    lines(x[[i]][,1], x[[i]][,2], col = cols[i], lwd=2, lty=i)
   }
   
   grid(NULL, 4)
   
   if (legend) {
-    legend(42, .9, capt, lty=1:5, col=cols, cex=.8, lwd=3, bg="white")
+    legend(42, .9, capt, lty=1:5, col = cols, cex=.8, lwd=3, bg="white")
   } 
   axis(1, xlab="PWC (%)", cex.axis=.9)
   axis(2, at=seq(0,1,.25), las=1, cex.axis=.9, labels=legend)

@@ -40,11 +40,11 @@ supp_maps <- function(x, capt, main="", rng=c(15, 100), pngfile="") {
 	}
 	layout(matrix(c(1:4,4,4), 3, 2), width = c(1,.2))
 	for (i in 1:3) {
-		plot(grat, col="gray", background="azure", lty = 2, mar = c(0,0,0,0), labels = FALSE)
-		plot(back, add=TRUE, axes=FALSE, legend=FALSE, col="light gray")
-		plot(x[[i]], add=TRUE, axes=FALSE, col=cols, legend=i==2, xpd=TRUE, range=rng, 
+		plot(grat, col = "gray", background="azure", lty = 2, mar = c(0,0,0,0), labels = FALSE)
+		plot(back, add = TRUE, axes = FALSE, legend = FALSE, col = "light gray")
+		plot(x[[i]], add = TRUE, axes = FALSE, col = cols, legend = i==2, xpd=TRUE, range=rng, 
 		plg=list(ext=lege, cex=1.5, title=main, title.cex=1.5))
-		lines(wrld, col=gray(.4), lwd=.5)
+		lines(wrld, col = gray(.4), lwd=.5)
 		text(-11300000, -5200000, subs[i], font=2, cex=1.5)
 		text(vect(cbind(-2000000, -5463047)), capt[i], pos=4, halo=TRUE, cex=1.3)
 	}

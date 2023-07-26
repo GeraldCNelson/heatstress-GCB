@@ -59,17 +59,17 @@ make_fig4 <- function(x, country, n, rng=c(.25, 1)) {
 	par(family = "Times New Roman")#, fg = mycol, col = mycol, col.axis = mycol, col.lab = mycol, col.main = mycol, col.sub = mycol)
 	for (i in 1:3) {
 		mapext <- e + diff(e[1:2])/100
-		plot(wrld, col=gray(.92), ext=mapext, axes=FALSE, mar=c(.1, .1, 2, .1), backgroun="azure", border="gray", lwd=1.5, box=TRUE)
-		plot(x[[i]], col=cols, axes=FALSE, legend=(n==3) & (i==2), xpd=TRUE, range=rng, add=TRUE, 
+		plot(wrld, col = gray(.92), ext=mapext, axes=FALSE, mar=c(.1, .1, 2, .1), backgroun="azure", border="gray", lwd=1.5, box=TRUE)
+		plot(x[[i]], col = cols, axes=FALSE, legend = (n==3) & (i==2), xpd=TRUE, range=rng, add=TRUE, 
 			plg=list(ext=lege, cex=1.2, title.cex=1.2, title="   PWC\n"))
-		lines(rc, col=gray(0.4))
+		lines(rc, col = gray(0.4))
 		text(e[1], e[3]+.5*strheight("a"), subs[i], font=2, cex=1.0, adj = 0.0, xpd=TRUE)
 		if (country=="India") text(e[1] + diff(e[1:2])/2, e[4]+1.7*strheight("a"), capt[i], xpd=TRUE, cex=1.25)
 		if (i == 3) {
 			if (!is.null(covbx)) {
-				polys(covbx, col="azure", border="azure")
+				polys(covbx, col = "azure", border="azure")
 			}
-			sbar(sdist, xy="bottomright", type="line", divs=2, labels=paste(sdist, "km"), lwd=1, lonlat=TRUE, cex=.8, col=gray(0.3), halo=TRUE)	
+			sbar(sdist, xy="bottomright", type="line", divs=2, labels=paste(sdist, "km"), lwd=1, lonlat=TRUE, cex=.8, col = gray(0.3), halo=TRUE)	
 		}
 		if (i == 1) {
 			terra:::.halo(e[2], e[4] - .5*strheight("a"), country, font=3, cex=1.2, pos=2, xpd=TRUE)

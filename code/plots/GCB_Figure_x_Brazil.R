@@ -83,16 +83,16 @@ layout(
   widths=c(1,1,.2))#, heights = c(.5,.5,1))
 for (i in 1:4) {
   plot(grat, col = "gray", background = "azure", lty=2, mar = c(.1,.1,.1,.1),  lwd = .3, labels = FALSE)
-  polys(r, col=gray(.99), lwd = .1, alpha = 1)
-  # plot(x[[i]], add=TRUE, axes=FALSE, col=cols, legend=i==4, plg=list(ext=lege, cex=1.1), xpd=TRUE, range=rng)
-  plot(x[[i]], add=TRUE, axes=FALSE, col=cols, legend=F, xpd=TRUE, range=rng, buffer = "T")
+  polys(r, col = gray(.99), lwd = .1, alpha = 1)
+  # plot(x[[i]], add = TRUE, axes = FALSE, col = cols, legend = i==4, plg=list(ext=lege, cex=1.1), xpd=TRUE, range=rng)
+  plot(x[[i]], add = TRUE, axes = FALSE, col = cols, legend = F, xpd=TRUE, range=rng, buffer = "T")
   text(xm - xm*.3, ym +ym*.05 , cex = 1, (bquote(paste((bold(.(letters[i])))*'               ', .(capt[i])))))
 }
 # add legend
 
 plot(cbind(c(0,1), c(0,1)), type = "n", axes = F, xlab = "", ylab = "")
 text(.1, .79, pos=4, xpd = TRUE, paste0("PWC (%)"), cex=1) # legend caption
-plot(bad, legend.only=T, col=cols, plg=list(ext=ext(c(.2, .4, .25, 0.75)), cex = .8), range=rng, xpd = TRUE) # get legend from 'bad'
+plot(bad, legend.only=T, col = cols, plg=list(ext=ext(c(.2, .4, .25, 0.75)), cex = .8), range=rng, xpd = TRUE) # get legend from 'bad'
 
 dev.off()
  # tmp <- file.path("output", out_f_pdf)

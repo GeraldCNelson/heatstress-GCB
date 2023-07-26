@@ -8,7 +8,7 @@ regions <- c("global", "tropical", "S20N35")
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
   aggregate(6, sum, na.rm = TRUE) |> round()
 
-get_cumul <- function(avar="annual", legend=TRUE, region = "global") {
+get_cumul <- function(avar="annual", legend = TRUE, region = "global") {
   if (region=="global") {
     extRegion <- ext(-180, 180, -60, 67)
   } else if (region == "tropical") {

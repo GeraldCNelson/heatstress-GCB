@@ -33,8 +33,8 @@ print(paste0("2020 total ag HP (million HP(CV)): ", round(HP_sum_2020/1000, 0), 
 
 make_fig6 <- function() {
   par(family = "Times New Roman", fig = c(0, 0.9, 0, 1) )#, fg = mycol, col = mycol, col.axis = mycol, col.lab = mycol, col.main = mycol, col.sub = mycol)
-  plot(grat, col="gray", background="azure", lty = 2, mar = c(0,0,1.5,0), labels = FALSE)
-  plot(w, "HPgapPerCap", breaks = c(0, 20, 30, 40, 45, 50, 55, 60), add=TRUE, axes=FALSE)
+  plot(grat, col = "gray", background="azure", lty = 2, mar = c(0,0,1.5,0), labels = FALSE)
+  plot(w, "HPgapPerCap", breaks = c(0, 20, 30, 40, 45, 50, 55, 60), add = TRUE, axes = FALSE)
   plot(w, "HPgapPerCap", breaks = c(0, 20, 30, 40, 45, 50, 55, 60), axes=FALSE, legend.only = T, 
        plg=list(cex=0.8, title.cex=0.8, title="Additional\nHP")
   )

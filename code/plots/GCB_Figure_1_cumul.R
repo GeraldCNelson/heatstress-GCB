@@ -59,17 +59,17 @@ fig_cumul <- function(avar="annual", lgnd=TRUE) {
   
   cols <- RColorBrewer::brewer.pal(n, "Set1")
   
-  plot(x[[1]][,1], x[[1]][,2], col=cols[1], lwd=2, type="l", xlim=c(minx,100/cval), 
+  plot(x[[1]][,1], x[[1]][,2], col = cols[1], lwd=2, type="l", xlim=c(minx,100/cval), 
        las=1, xlab="PWC", ylab="Fraction of global crop land", axes=FALSE,  
        yaxs="i",  xaxs="i")
   for (i in 2:n) {
-    lines(x[[i]][,1], x[[i]][,2], col=cols[i], lwd=2, lty=i)
+    lines(x[[i]][,1], x[[i]][,2], col = cols[i], lwd=2, lty=i)
   }
   
   grid(NULL, 4)
   
   if (lgnd) {
-    legend(minx+2/cval, 1, capt, lty=1:5, col=cols, cex=.9, lwd=3, bg="white", box.col="white")
+    legend(minx+2/cval, 1, capt, lty=1:5, col = cols, cex=.9, lwd=3, bg="white", box.col = "white")
   } 
   axis(1,  xlab="PWC", cex.axis=.9) # removed at=seq(.20, 1.00, 1.0), when converted to ratio
   axis(2, at=seq(0,1,.25), las=1, cex.axis=.9, labels=lgnd)

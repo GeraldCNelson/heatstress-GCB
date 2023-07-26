@@ -67,17 +67,17 @@ fig_lat <- function(avar="annual", lgnd=TRUE, region="global") {
   if(region == "tropical")  ylim <- c(-25,30) #c(-25,30)
   if(region == "S20N35")  ylim <- c(-25,40) 
   
-  plot(d[,2], d[,1], col=cols[1], lwd=2, type="l", xlim=c(minx,100/cval), ylim=ylim,
+  plot(d[,2], d[,1], col = cols[1], lwd=2, type="l", xlim=c(minx,100/cval), ylim=ylim,
        las=1, xlab = "PWC", ylab = "Latitude", axes=FALSE,  
        yaxs = "i",  xaxs = "i") #, main=titleText
   
   for (i in 2:n) {
-    lines(d[,i+1], d[,1], col=cols[i], lwd=2, lty=i)
+    lines(d[,i+1], d[,1], col = cols[i], lwd=2, lty=i)
   }
   grid(NULL, 4, col = "gray")
   
   if (lgnd) {
-    legend(minx, ylim[2], capt, lty=1:5, col=cols, cex=.8, lwd=3, bg="white", box.col="white")
+    legend(minx, ylim[2], capt, lty=1:5, col = cols, cex=.8, lwd=3, bg="white", box.col = "white")
   } 
   i <- match(avar, c("annual", "season", "hot90"))
   text(55/cval, ylim[2], c("(a) Annual", "(b) Growing season", "(c) Hottest period")[i], pos=4, xpd=TRUE) 

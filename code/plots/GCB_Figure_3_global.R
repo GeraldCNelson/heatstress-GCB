@@ -42,17 +42,17 @@ make_fig3 <- function(pcol = 1) {
 	
 	par(family = "Times New Roman")#, fg = mycol, col = mycol, col.axis = mycol, col.lab = mycol, col.main = mycol, col.sub = mycol)
 	for (i in 1:3) {
-		plot(grat, col="light gray", background="azure", lty=3, mar=c(0,0,1.5,0), labels = FALSE)
-		plot(back, add=TRUE, axes=FALSE, legend=FALSE, col="light gray")
-		plot(x[[i]], add=TRUE, axes=FALSE, col=cols, legend=(i==2 & pcol==2), range=rng,
+		plot(grat, col = "light gray", background="azure", lty=3, mar=c(0,0,1.5,0), labels = FALSE)
+		plot(back, add = TRUE, axes = FALSE, legend = FALSE, col = "light gray")
+		plot(x[[i]], add = TRUE, axes = FALSE, col = cols, legend = (i==2 & pcol = =2), range=rng,
 			plg=list(ext=lege, cex=1.2, title.cex=1.2, title="PWC\n"))
-		lines(wrld, col=gray(.4), lwd=.5)
+		lines(wrld, col = gray(.4), lwd=.5)
 		terra:::.halo(-11300000, -5200000, subs[i], font=2, cex=1.1)
 		if (i==1) {
 			text(e[1] + diff(e[1:2])/2, e[4], agglab[pcol], cex=1.5, pos=3, xpd=NA, font=2) 
 		}
 		if (pcol == 1) {
-			text(e[2], e[4], capt[i], cex=1.2, pos=3, xpd=NA)
+			text(e[2], e[4], capt[i], cex = 1.2, pos = 3, xpd=NA)
 		}
 	}
 }

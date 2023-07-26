@@ -16,7 +16,7 @@ library(terra)
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
   aggregate(6, sum, na.rm = TRUE) |> round()
 
-fig_cumul <- function(avar="annual", legend=TRUE) {
+fig_cumul <- function(avar="annual", legend = TRUE) {
   
   ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full = TRUE)
   r <- rast(ff)/100 # divide by 100 to get to ratio rather than %
@@ -45,7 +45,7 @@ fig_cumul <- function(avar="annual", legend=TRUE) {
  y
 }
 
-fig_cumul_ns <- function(avar="annual", legend=TRUE) {
+fig_cumul_ns <- function(avar="annual", legend = TRUE) {
   
   ff <- list.files(path_ns, pattern = paste0(avar, ".*_mean_ns.tif$"), full = TRUE)
   r <- rast(ff)/100

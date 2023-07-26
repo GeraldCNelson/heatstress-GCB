@@ -22,7 +22,7 @@ x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 agg_time <- function(y, s, m, nosun=FALSE) {
   yrs <- matrix(c("1991_2000", "2001_2010", "1991_2010",
                   "2041_2050", "2051_2060", "2041_2060",
-                  "2081_2090", "2091_2100", "2081_2100"), ncol=3, byrow=TRUE)
+                  "2081_2090", "2091_2100", "2081_2100"), ncol = 3, byrow=TRUE)
   # test data
   yrs <- matrix(c("2041_2050", "2051_2060", "2041_2060", 
                   "2081_2090", "2091_2100", "2081_2100"), ncol = 3, byrow = TRUE)

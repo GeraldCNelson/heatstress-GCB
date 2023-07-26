@@ -1,9 +1,10 @@
+# produces Figure 5. Impact of eliminating radiation effect in PWC values. Data used calculated in 8_summarize.R
+
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
 if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 
-library(terra)
 dir.create("data/agg/pwc_agg3/", FALSE, FALSE)
 dir.create("data/agg/pwc_agg3_ns/", FALSE, FALSE)
 
@@ -48,7 +49,7 @@ hot90_mean <- function(nosun=FALSE) {
     outf2 <- "data/agg/pwc_agg3/pwc_hot90_change.tif"
   }
   if (!file.exists(outf1)) {
-    r <- rast(lapply(ff, \(i) min(roll(rast(i), 90, circular=TRUE)))) # this uses 'around' by default. Adding code to use type = 'from'
+    r <- rast(lapply(ff, \(i) min(roll(rast(i), 90, circular=TRUE)))) 
     r_first <- rast(lapply(ff, \(i) which.min(roll(rast(i), 90, type = "from", circular=TRUE))))
     r <- writeRaster(r, filename=outf1, names = get_names(ff))
     r_first <- writeRaster(r_first, filename=gsub("_mean", "_mean_first", outf1), names = get_names(ff))
