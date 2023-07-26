@@ -1,9 +1,9 @@
 
-# this <- system('hostname', TRUE)
-# if (this == "LAPTOP-IVSPBGCA") {
-# get crop areas from crop data set at https://www.earthstat.org
-
 library(terra)
+terraOptions(verbose = TRUE)
+this <- system('hostname', TRUE)
+if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8) # useful for Macs because they have better memory management
+
 library(geodata)
 
 crop_area <- function() {
@@ -55,11 +55,11 @@ sacks_aggregated <- function() {
 	pln <- sapply(strsplit(names(plant), " \\("), \(i)i[1])
 	names(harv) <- names(plant) <- pln
 
-	plant <- aggregate(plant, 6, fun=raster::modal, na.rm = TRUE)
+	plant <- aggregate(plant, 6, fun = raster::modal, na.rm = TRUE)
 	plant <- round(plant)
 	writeRaster(plant, "data-raw/calendar-sacks/plant_agg.tif", overwrite = TRUE)
 	
-	harv <-  aggregate(harv, 6, fun=raster::modal, na.rm = TRUE)
+	harv <-  aggregate(harv, 6, fun = raster::modal, na.rm = TRUE)
 	harv <- round(harv)
 	writeRaster(harv, "data-raw/calendar-sacks/harv_agg.tif", overwrite = TRUE)
 }
@@ -70,9 +70,6 @@ s <- sacks_aggregated()
 mean_calendar <- function() {
 
 	outf <- "data-raw/calendar-sacks/growing_season.tif"
-#	if (file.exists(outf)) return (rast(outf)) 
-	
-	## I prefer these ones as we have matching crop area data 
 	plant <- rast("data-raw/calendar-sacks/plant_agg.tif")
 	harv <- rast("data-raw/calendar-sacks/harv_agg.tif")
 
@@ -96,8 +93,8 @@ mean_calendar <- function() {
 	ss <- NULL
 	for (i in 1:nlyr(crops)) {
 		# get the days that each crop is in the field
-		x <- c(plant[[i]], harv[[i]])
-		s <- rangeFill(x, 365, circular=TRUE)
+		x <- c(plant[[i]], harv[[i]]) |> crop(ext(-180, 180, -60, 67))
+		s <- rangeFill(x, 365, circular = TRUE)
 		# multiply with crop area and sum over crops
 		sc <- s * crops[[i]]
 		if (is.null(ss)) {

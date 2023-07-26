@@ -52,7 +52,7 @@ fig_lat <- function(avar="annual", lgnd=TRUE, region="global") {
   d$x <- NULL
   
   for (i in 2:(n+1)) {
-    d[,i] = roll(d[,i], 5, fun=mean, type="around", circular=FALSE, na.rm = TRUE) 
+    d[,i] = roll(d[,i], 5, fun = mean, type="around", circular=FALSE, na.rm = TRUE) 
   }
   
   capt <- gsub("historical_", "", nms)

@@ -57,6 +57,9 @@ agg_time <- function(y, s, m, nosun=FALSE) {
 }
 
 for (i in 1:nrow(x)) {
+  print(paste0(i, " of ", nrow(x)))
   y <- x[i,1]; s <- x[i,2]; m <- x[i,3]
+  print(paste0(y, " ", s, " ", m))
+
   agg_time(y, s, m, nosun)
 } 

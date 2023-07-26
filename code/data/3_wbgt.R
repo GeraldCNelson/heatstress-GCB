@@ -20,7 +20,7 @@ nosun <- FALSE # variable to determine where solar radiation value is set to ISI
 #test data
 ssps <- "ssp585"
 years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")# -----
-x <- expand.grid(years[1:2], ssps[1], models)
+x <- expand.grid(years[1:4], ssps[1], models)
 x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 # end test data -----
 

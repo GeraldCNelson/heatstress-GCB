@@ -16,7 +16,7 @@ x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 #test data
 ssps <- "ssp585"
 years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")
-x <- expand.grid(years[1:2], ssps[1], models)
+x <- expand.grid(years[1:4], ssps[1], models)
 x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 # end test data -----
 
@@ -39,6 +39,8 @@ compute_pwc <- function(y, s, m, nosun=FALSE) {
 }
 
 for (i in 1:nrow(x)) {
+  print(paste0(i, " of ", nrow(x)))
   y = x[i,1]; s = x[i,2]; m = x[i,3]
+  print(paste0(y, " ", s, " ", m))
   compute_pwc(y, s, m, nosun)
 }

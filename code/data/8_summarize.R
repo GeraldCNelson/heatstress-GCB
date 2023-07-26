@@ -82,10 +82,11 @@ season_mean <- function(nosun=FALSE) {
 }
 
 a1 <- annual_mean()
-a2 <- annual_mean(nosun = TRUE)
-
 b1 <- hot90_mean()
-b2 <- hot90_mean(TRUE)
-
 d1 <- season_mean()
+
+# these will fail unless earlier code has been run with nosun <- TRUE
+# This needs to be done in 3_wbgt.R, 4_pwc.R, 5_agg_time.R and 6_agg_models.R
+a2 <- annual_mean(nosun = TRUE)
+b2 <- hot90_mean(TRUE)
 d2 <- season_mean(TRUE) # nosun

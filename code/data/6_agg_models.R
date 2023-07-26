@@ -1,4 +1,3 @@
-
 # aggregate over models, by time-period, ssp 
 
 library(terra)
@@ -36,5 +35,8 @@ agg_gcm <- function(y, s, nosun=FALSE) {
 }
 
 for (i in 1:nrow(x)) {
-  agg_gcm(y = x[i,1], s = x[i,2], nosun)
+  print(paste0(i, " of ", nrow(x)))
+  y = x[i,1]; s = x[i,2]
+  print(paste0(y, " ", s))
+  agg_gcm(y, s, nosun)
 } 
