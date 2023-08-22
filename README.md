@@ -22,25 +22,26 @@ The directory structure for the code is described below. The data from the dryad
 - data - processed data files
 - graphics - graphics included in the paper
 - tables - tables included in the paper
-s
+
 ## Order of operations
-The R code needs to be run in the following order
-- the code/data directory contains the fillowing files which need to be run in the order lists
- - 1a_get_weather.R - create a set of csv files with ISIMIP climate data file names to be used in 1b_get_weather.R - runs quickly
-- 1b_get_weather.R - download a set of climate data files from the ISIMIP server. Each file is about 2.5 gb. Speed of your internet connection determines how long this process takes. 
-  - 2a_daytemp.R - calculate the average temperature in daylight hours using the tasmin and tasmax data files
-  - 2b_fix_radiation.R - converts the rsds data file to average solar radiation during daylight hours
-  - 3_wbgt.R - calculate wbgt values for each combination of climate scenario and time period
-  - 4_pwc.R - calculate pwc values for each combination of climate scenario and time period
-  - 5_agg_time.R - aggregate pwc values over one of the 20 year periods - 1991-2010, 2041-2060, and 2081-2100, for individual models
-  - 6_agg_models.R - aggregate the results of 5_agg_time.R across all models to get a spatraster with 365 layers
-  - 7_get_crops.R - 
-  - 7a_SacksCropShare.R
-  - 8_summarize.R
-  - 10_a_ERS_mach_land_labor.R
-  - 10_b_FAO_cropland.R - _not used in the GCB heatstress paper but the code is included for comparison purposes
-  - 10_c_FAO_ERS_employment.R
-  - sun_nosun.R
+The R code in the _code/data_ directory contains the following files which need to be run in the order listed below.
+  
+-   1a_get_weather.R - create a set of csv files with ISIMIP climate data file names to be used in 1b_get_weather.R. Runs quickly
+-   1b_get_weather.R - download a set of climate data files from the ISIMIP server. Each file is about 2.5 gb. Speed of your internet connection determines how long this process takes. 
+-   2a_daytemp.R - calculate the average temperature in daylight hours using the tasmin and tasmax data files
+-   2b_fix_radiation.R - converts the rsds data file to average solar radiation during daylight hours
+-   3_wbgt.R - calculate wbgt values for each combination of climate scenario and time period
+-   4_pwc.R - calculate pwc values for each combination of climate scenario and time period
+-   5_agg_time.R - aggregate pwc values over one of the 20 year periods - 1991-2010, 2041-2060, and 2081-2100, for individual models
+-   6_agg_models.R - aggregate the results of 5_agg_time.R across all models to get a spatraster with 365 layers
+-   7_get_crops.R - 
+-   7a_SacksCropShare.R
+-   8_summarize.R
+-   10_a_ERS_mach_land_labor.R
+-   10_b_FAO_cropland.R - _not used in the GCB heatstress paper but the code is included for comparison purposes
+-   10_c_FAO_ERS_employment.R
+-   sun_nosun.R
+
 - the code/plots directory contains the fillowing files that produce the figures in the GCB paper
   - GCB_Figure_1_cumul.R - _create Figure 1. Cumulative distribution of early 21st century cropland Physical Work Capacity (PWC) for recent historical (1991-2010) and potential future thermal conditions_
   - GCB_Figure_2_latitude.R- _create Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent historical (1991-2010) and potential future thermal conditions_ 
