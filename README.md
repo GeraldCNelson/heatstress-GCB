@@ -30,7 +30,7 @@ The R code in the _code/data_ directory contains the following files which need 
 -   1b_get_weather.R - download a set of climate data files from the ISIMIP server. Each file is about 2.5 gb. Speed of your internet connection determines how long this process takes. 
 -   2a_daytemp.R - calculate the average temperature in daylight hours using the tasmin and tasmax data files
 -   2b_fix_radiation.R - converts the rsds data file to average solar radiation during daylight hours
--   3_wbgt.R - calculate wbgt values for each combination of climate scenario and time period
+-   3_wbgt.R - calculate wbgt values for each combination of climate scenario and time period. The code includes a switch to calculate wbgt with solar radiation values or with these set to zero to simulate complete shade. The default is nosun <- FALSE. Change to TRUE if you want the no sun wbgt values
 -   4_pwc.R - calculate pwc values for each combination of climate scenario and time period
 -   5_agg_time.R - aggregate pwc values over one of the 20 year periods - 1991-2010, 2041-2060, and 2081-2100, for individual models
 -   6_agg_models.R - aggregate the results of 5_agg_time.R across all models to get a spatraster with 365 layers

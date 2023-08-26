@@ -18,10 +18,10 @@ x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 nosun <- FALSE # variable to determine where solar radiation value is set to ISIMIP data (FALSE) or zero to simulate complete shade (TRUE)
 
 #test data
-ssps <- "ssp585"
-years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")# -----
-x <- expand.grid(years[1:4], ssps[1], models)
-x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
+# ssps <- "ssp370"
+# years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100")# -----
+# x <- expand.grid(years[1:4], ssps[1], models)
+# x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 # end test data -----
 
 compute_wbgt <- function(y, s, m, nosun=FALSE) {
@@ -39,6 +39,7 @@ compute_wbgt <- function(y, s, m, nosun=FALSE) {
 	ff <- list.files(ncfiles, pattern = paste0(m, ".*", s, ".*", y, ".*\\.nc$"), recursive = TRUE, full.names = TRUE)
 #	vars <- c("tas", "hurs", "sfcwind")	
 	vars <- c("hurs", "sfcwind")	
+#	browser()
 	ff <- lapply(paste0(vars, "_"), \(v) grep(v, ff, value=TRUE)) |> unlist() |> as.vector()	# "\" here means a function
 	if (length(ff) != 2) {
 		print("error: files missing")
@@ -77,3 +78,4 @@ compute_wbgt <- function(y, s, m, nosun=FALSE) {
 for (i in 1: nrow(x)) {
 	compute_wbgt(y = x[i,1], s = x[i,2], m = x[i,3], nosun)
 } 
+

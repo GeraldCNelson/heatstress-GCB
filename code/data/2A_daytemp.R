@@ -13,18 +13,17 @@ path_intermediate <- paste0("data-raw/ISIMIP/ISIMIPncfiles/intermediate")
 dir.create(path_intermediate, FALSE, FALSE)
 
 years <- c("1991_2000", "2001_2010", "2041_2050", "2051_2060", "2081_2090", "2091_2100")
-ssps <- c("historical", "ssp126", "ssp585")
+ssps <- c("historical", "ssp126", "ssp370", "ssp585")
 models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")
 
 x <- expand.grid(years[1:2], ssps[1], models) # do historical
 x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models)) # add other periods
 
 #test data-----
-ssps <- "ssp585"
-#years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100") # needs to be pairs of 10 year combos
-years <- c("2081_2090", "2091_2100")
-x <- expand.grid(years[1:2], ssps[1], models)
-x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
+# ssps <- "ssp585"
+# years <- c("2041_2050", "2051_2060", "2081_2090", "2091_2100") # needs to be pairs of 10 year combos
+# x <- expand.grid(years[1:2], ssps[1], models)
+# x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 # end test data-------
 
 tasdayfun <- function(y, s, m) {
