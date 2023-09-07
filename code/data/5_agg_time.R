@@ -10,7 +10,7 @@ ssps <- c("historical", "ssp126", "ssp370", "ssp585")
 x <- expand.grid(years[1], ssps[1], models)
 x <- rbind(x, expand.grid(years[-1], ssps[-1], models))
 
-nosun <- TRUE # variable to determine where solar radiation value is set to ISIMIP data (FALSE) or zero to simulate complete shade (TRUE)
+nosun <- FALSE # variable to determine where solar radiation value is set to ISIMIP data (FALSE) or zero to simulate complete shade (TRUE)
 
 #test data
 # ssps <- "ssp585"
