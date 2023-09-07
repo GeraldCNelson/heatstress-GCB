@@ -31,10 +31,10 @@ agg_time <- function(y, s, m, nosun=FALSE) {
   i <- which(y == yrs[,3])
   
   if (nosun) {
-  #  browser()
+ #   browser()
     dir.create("data/agg/pwc_agg1_ns", FALSE, TRUE)
-    fin1 <- paste0("pwc_ns/pwc_ns_", m, "_", s, "_", yrs[i,1], ".tif") 
-    fin2 <- paste0("pwc_ns/pwc_ns_", m, "_", s, "_", yrs[i,2], ".tif") 	
+    fin1 <- paste0("data/pwc_ns/pwc_ns_", m, "_", s, "_", yrs[i,1], ".tif") 
+    fin2 <- paste0("data/pwc_ns/pwc_ns_", m, "_", s, "_", yrs[i,2], ".tif") 	
     fout <- paste0("data/agg/pwc_agg1_ns/pwc_ns_", m, "_", s, "_", yrs[i,3], ".tif")	
   } else {
     dir.create("data/agg/pwc_agg1", FALSE, TRUE)
@@ -43,7 +43,7 @@ agg_time <- function(y, s, m, nosun=FALSE) {
     fout <- paste0("data/agg/pwc_agg1/pwc_", m, "_", s, "_", yrs[i,3], ".tif")		
   }
   if (file.exists(fout)) {
-    print(paste0("exists: ", fout))
+    print(paste0("exists fout: ", fout))
     return(fout)}
   print(fin1); print(fin2); print(fout); flush.console()
   if ((!file.exists(fin1)) | (!file.exists(fin2))) return("error")

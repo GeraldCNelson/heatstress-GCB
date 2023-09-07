@@ -12,7 +12,7 @@ ncfiles <- "data-raw/ISIMIP/ISIMIPncfiles/"
 years <- c("1991_2000", "2001_2010", "2041_2050", "2051_2060", "2081_2090", "2091_2100")
 models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")
 ssps <- c("historical", "ssp126", "ssp370", "ssp585")
-x <- expand.grid(years[1:4], ssps[1], models)
+x <- expand.grid(years[1], ssps[1], models)
 x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 
 nosun <- FALSE # variable to determine where solar radiation value is set to ISIMIP data (FALSE) or zero to simulate complete shade (TRUE)
