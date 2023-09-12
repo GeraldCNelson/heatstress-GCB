@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/xxxx.svg)](https://zenodo.org/badge/latestdoi/xxxxx)
 
-# "Global reductions in manual agricultural work capacity due to climate change" - R code and selected data to calculate the PWC metric for heatstress facing agricultural workers in different potential climate futures
+# "Global reductions in manual agricultural work capacity due to climate change" - R code and selected data to calculate the PWC metric for heat stress facing agricultural workers in different potential climate futures
 
 ## Description of the data and file structure
 The code and data needed to reproduce the results in Global Change Biology, "Global reductions in manual agricultural work capacity due to climate change (under review)" are available in the Dryad site (data, 79 GB) ([https://doi.org/10.5061/dryad.xxxxx](https://doi.org/10.5061/dryad.xxxxx)) and the Zenodo site (code and small data sets) ([https://doi.org/10.5281/zenodo.xxxxx](https://doi.org/10.5281/zenodo.xxxxx)).
@@ -40,7 +40,7 @@ The R code in the _code/data_ directory contains the following files which need 
 -   10_a_ERS_mach_land_labor.R
 -   10_b_FAO_cropland.R - _not used in the GCB heatstress paper but the code is included for comparison purposes
 -   10_c_FAO_ERS_employment.R
--   sun_nosun.R
+-   sun_nosun.R - create a raster of the ratio between end century SSP5-8.5 thermal environments with and without solar radiation
 
 - the code/plots directory contains the fillowing files that produce the figures in the GCB paper
   - GCB_Figure_1_cumul.R - _create Figure 1. Cumulative distribution of early 21st century cropland Physical Work Capacity (PWC) for recent historical (1991-2010) and potential future thermal conditions_
@@ -53,7 +53,7 @@ The R code in the _code/data_ directory contains the following files which need 
   - GCB_Figure_S1_aggregation_methods.R
   - GCB_Figure_x_Brazil.R
   - GCB_figure1_cumPWC_3types.R
-  
+
 - the code/tables directory contains the fillowing files that produce the figures in the GCB paper
 
   - GCB_table_1.R - _create Table 1. Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions_

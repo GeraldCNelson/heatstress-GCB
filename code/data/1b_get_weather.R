@@ -8,7 +8,6 @@ if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 variables <- c("tasmin", "tasmax", "tas", "hurs", "rsds", "sfcwind") # principal weather variables. pr left out because not used in the GCB PWC paper
 pats <- c("126", "370", "585", "historical") 
 yearChoices <- c("1991-2000", "2001-2010",  "2041-2050", "2051-2060", "2081-2090", "2091-2100")
-yearChoices <- c("2051-2060")
 # test data
 # pats <- c("585") 
 # variables <- c("tasmin", "tasmax", "rsds", "hurs", "sfcwind")
