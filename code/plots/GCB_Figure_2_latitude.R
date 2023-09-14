@@ -5,7 +5,7 @@ terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
 if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 
-path <- "data-raw/ISIMIP/pwc_agg3"
+path <- "data/agg/pwc_agg3"
 
 dir.create("figures", F, F)
 
@@ -57,6 +57,7 @@ fig_lat <- function(avar="annual", lgnd=TRUE, region="global") {
   
   capt <- gsub("historical_", "", nms)
   capt <- gsub("126", "1-2.6", toupper(capt))
+  capt <- gsub("370", "3-7.0", capt)
   capt <- gsub("585", "5-8.5", capt)
   capt <- sapply(strsplit(capt, "_"), \(i) paste(sort(i), collapse=" ("))
   i <- capt!="1991-2010" 

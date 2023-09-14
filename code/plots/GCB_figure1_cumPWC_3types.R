@@ -1,13 +1,11 @@
 #create Figure 1. Cumulative distribution of early 21st century cropland Physical Work Capacity (PWC) for recent historical (1991-2010) and potential future thermal conditions 
 
 library(terra)
-terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
 if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 
-path <- "data-raw/ISIMIP/pwc_agg3"
-
-dir.create("figures", F, F)
+path <- "data/agg/pwc_agg3"
+dir.create("plots", F, F)
 
 library(terra)
 
@@ -70,7 +68,7 @@ fig_cumul <- function(avar="annual", legend = TRUE) {
   y
 }
 
-outf <- "figures/pwc_cum_3types.png"
+outf <- "plots/pwc_cum_3types.png"
 png(outf, units="in", width = 12, height = 4, res = 300, pointsize=18)
 
 par(mfrow=c(1,3))

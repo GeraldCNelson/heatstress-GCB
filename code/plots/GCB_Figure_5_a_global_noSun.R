@@ -1,13 +1,13 @@
 #create Figure 5. Impact of eliminating radiation effect in PWC values (sun versus nosun)
-# note files in data/agg/pwc_agg3 are created in code/dat/8_summarize.R
+# note files in data/agg/pwc_agg3 are created in code/data/8_summarize.R
 
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
 if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 
-path <- "data-raw/ISIMIP/pwc_agg3"
-path_ns <- "data-raw/ISIMIP/pwc_agg3_ns"
+path <- "data/agg/pwc_agg3"
+path_ns <- "data/agg/pwc_agg3_ns"
 dir.create("figures", F, F)
 prj <- "+proj=robin"
 e <- ext(-12000000, 16038790, -6168256, 6942628)

@@ -1,10 +1,10 @@
-# aggregate over models, by time-period, ssp 
+# aggregate over models, by time-period, ssp.
+# change the variable to either TRUE or FALSE
 
 library(terra)
-terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
 if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
-nosun <- FALSE # variable to determine where solar radiation value is set to ISIMIP data (FALSE) or zero to simulate complete shade (TRUE)
+nosun <- TRUE # variable to determine where solar radiation value is set to ISIMIP data (FALSE) or zero to simulate complete shade (TRUE)
 
 years <- c("1991_2010", "2041_2060", "2081_2100")
 ssps <- c("historical", "ssp126", "ssp370", "ssp585")

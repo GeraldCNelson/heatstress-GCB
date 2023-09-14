@@ -1,4 +1,4 @@
-# produces Figure 5. Impact of eliminating radiation effect in PWC values. Data used calculated in 8_summarize.R
+# Aggregation to means of annual, growing season and hottest periods. Also includes impact of eliminating radiation effect in PWC values. # see notes at bottom about order of running the code.
 
 library(terra)
 terraOptions(verbose = TRUE)
@@ -21,11 +21,11 @@ get_diff <- function(r, outf) {
 
 annual_mean <- function(nosun=FALSE) {
   if (nosun) {
-    ff <- list.files("data/agg/pwc_agg2_ns/", pattern="tif$", full = TRUE)
+    ff <- list.files("data/agg/pwc_agg2_ns", pattern="tif$", full = TRUE)
     outf1 <- "data/agg/pwc_agg3_ns/pwc_annual_mean_ns.tif"
     outf2 <- "data/agg/pwc_agg3_ns/pwc_annual_change_ns.tif"	
   } else {
-    ff <- list.files("data/agg/pwc_agg2/", pattern="tif$", full = TRUE)
+    ff <- list.files("data/agg/pwc_agg2", pattern="tif$", full = TRUE)
     outf1 <- "data/agg/pwc_agg3/pwc_annual_mean.tif"
     outf2 <- "data/agg/pwc_agg3/pwc_annual_change.tif"
   }

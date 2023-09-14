@@ -34,13 +34,12 @@ The R code in the _code/data_ directory contains the following files which need 
 -   4_pwc.R - calculate pwc values for each combination of climate scenario and time period
 -   5_agg_time.R - aggregate pwc values over one of the 20 year periods - 1991-2010, 2041-2060, and 2081-2100, for individual models
 -   6_agg_models.R - aggregate the results of 5_agg_time.R across all models to get a spatraster with 365 layers
--   7_get_crops.R - 
--   7a_SacksCropShare.R
--   8_summarize.R
+-   7_get_crops.R - sum area of the 172 crops in the geodata library from the Mondfreda, et al. data, and generated weighted crop calendar dat based on the Sacks, et al, 2010 crop calendars in the geodata library
+-   8_summarize.R - Aggregation to means of annual, growing season and hottest periods. Also includes impact of eliminating radiation effect in PWC values. 
 -   10_a_ERS_mach_land_labor.R
--   10_b_FAO_cropland.R - _not used in the GCB heatstress paper but the code is included for comparison purposes
+-   10_b_FAO_cropland.R - not used in the GCB heatstress paper but the code is included for comparison purposes
 -   10_c_FAO_ERS_employment.R
--   sun_nosun.R - create a raster of the ratio between end century SSP5-8.5 thermal environments with and without solar radiation
+-   sun_nosun.R - create a raster of the ratio between end-century SSP5-8.5 thermal environment with and without solar radiation
 
 - the code/plots directory contains the fillowing files that produce the figures in the GCB paper
   - GCB_Figure_1_cumul.R - _create Figure 1. Cumulative distribution of early 21st century cropland Physical Work Capacity (PWC) for recent historical (1991-2010) and potential future thermal conditions_
@@ -55,7 +54,6 @@ The R code in the _code/data_ directory contains the following files which need 
   - GCB_figure1_cumPWC_3types.R
 
 - the code/tables directory contains the fillowing files that produce the figures in the GCB paper
-
   - GCB_table_1.R - _create Table 1. Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions_
   - GCB_table_1a_deltaNoSun.R
   - GCB_Table_2_labor_global_share.R - _create Table 2. Share of early century agricultural workers during the crop growing season with mean growing season PWC at or below a cutoff value of PWC by period and emission scenario._
