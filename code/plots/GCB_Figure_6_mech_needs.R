@@ -6,7 +6,6 @@ this <- system('hostname', TRUE)
 if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 
 library(data.table)
-library(terra)
 prj_rob <- "+proj=robin"
 prj_latlon <- "+proj=longlat +datum=WGS84"
 noAnt <- ext(-180,180, -60, 90)
@@ -26,7 +25,7 @@ temp[, maxHP := ERSvalue_labor * reqHP][, HPgap := maxHP - ERSvalue_machinery] #
 temp[HPgap < 0, HPgap := 0]
 temp[, HPgapPerCap := HPgap / ERSvalue_labor] #ERSvalue_labor and HPneeds_global <- sum(temp$HPgap)
 
-w <- merge(w, temp, by.x="GID_0", by.y="ISO3", all.x=F)
+w <- merge(w, temp, by.x = "GID_0", by.y = "ISO3", all.x = F)
 HPgap_sum <- sum(temp$HPgap)
 HP_sum_2020 <- sum(temp$ERSvalue_machinery)
 print(paste0("2020 total ag HP (million HP(CV)): ", round(HP_sum_2020/1000, 0), ", Added HP needed (million HP(CV)) to provide every ag worker with ", reqHP, " HP: ", round(HPgap_sum/1000, 0)))
@@ -35,12 +34,12 @@ make_fig6 <- function() {
   par(family = "Times New Roman", fig = c(0, 0.9, 0, 1) )#, fg = mycol, col = mycol, col.axis = mycol, col.lab = mycol, col.main = mycol, col.sub = mycol)
   plot(grat, col = "gray", background="azure", lty = 2, mar = c(0,0,1.5,0), labels = FALSE)
   plot(w, "HPgapPerCap", breaks = c(0, 20, 30, 40, 45, 50, 55, 60), add = TRUE, axes = FALSE)
-  plot(w, "HPgapPerCap", breaks = c(0, 20, 30, 40, 45, 50, 55, 60), axes=FALSE, legend.only = T, 
-       plg=list(cex=0.8, title.cex=0.8, title="Additional\nHP")
+  plot(w, "HPgapPerCap", breaks = c(0, 20, 30, 40, 45, 50, 55, 60), axes = FALSE, legend.only = T, 
+       plg = list(cex = 0.8, title.cex = 0.8, title="Additional\nHP")
   )
 }
 
-pngfile = paste0("figures/country_HP_needs.png")
+pngfile = paste0("plots/country_HP_needs.png")
 h = 5
 png(pngfile, units="in", width = 1.3*h, height = h, res = 300)
 

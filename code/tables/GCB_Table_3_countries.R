@@ -47,7 +47,7 @@ temp[, labor_3yr := labor_3yr] # 000 persons
 temp[, land_3yr := land_3yr] # 000 ha
 temp[, machinery_3yr := machinery_3yr] # 000 units (CV) horsepower
 
-x <- merge(zz, temp, by.x="GID_0", by.y="ISO3", all.x=TRUE)
+x <- merge(zz, temp, by.x = "GID_0", by.y = "ISO3", all.x=TRUE)
 write.csv(x, "tables/big_table.csv", row.names = FALSE)
 ctrs <- c("Brazil", "China", "France", "Nigeria", "Pakistan", "India", "United States")
 d <- x[x$Country.territory %in% ctrs,-1]

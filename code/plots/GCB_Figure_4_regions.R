@@ -86,7 +86,7 @@ r <- r/100 # convert from percent to ratio
 
 countries <- c("Brazil", "India", "Nigeria")
 
-pngfile <- paste0("figures/pwc_figure4.png")
+pngfile <- paste0("plots/pwc_figure4.png")
 #pngfile=""
 if (pngfile != "") {
 	png(pngfile, units="in", width = 5.5, height = 6, res = 300)

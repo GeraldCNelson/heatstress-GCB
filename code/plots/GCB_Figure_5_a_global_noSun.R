@@ -66,7 +66,7 @@ make_fig5 <- function(pcol = 1) {
   }
 }
 
-pngfile = paste0("figures/pwc_figure5_noSun_delta.png")
+pngfile = paste0("plots/pwc_figure5_noSun_delta.png")
 if (pngfile != "") {
   h = 6
   png(pngfile, units="in", width = 1.3*h, height = h, res = 300)

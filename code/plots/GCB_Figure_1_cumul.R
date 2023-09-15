@@ -5,9 +5,8 @@ library(meteor)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
 if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
-
-
-path <- "data-raw/ISIMIP/pwc_agg3"
+include_SSP370 <- TRUE
+path <- "data/agg/pwc_agg3"
 
 dir.create("figures", F, F)
 
@@ -24,6 +23,7 @@ fig_cumul <- function(avar="annual", lgnd=TRUE) {
   ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full = TRUE)
   
   r <- rast(ff) / cval # convert from % to ratio
+  if (!include_SSP370) r <- r[[c(1,2,3,6,7)]]
   names(r) <- gsub("^pwc_", "", names(r))
   names(r) <- gsub("; ", "", names(r))
   
@@ -47,6 +47,7 @@ fig_cumul <- function(avar="annual", lgnd=TRUE) {
   i <- grepl("ssp126_", capt)
   capt[i] <- paste(gsub("ssp126_", "", capt[i]), "(SSP1-2.6)")
   i <- grepl("ssp585_", capt)
+  capt[i] <- paste(gsub("ssp370_", "", capt[i]), "(SSP3-7.0)")
   capt[i] <- paste(gsub("ssp585_", "", capt[i]), "(SSP5-8.5)")
   
   y <- lapply(x, \(i) {
@@ -78,7 +79,8 @@ fig_cumul <- function(avar="annual", lgnd=TRUE) {
   text(42/cval, 1.1, c("(a) Annual", "(b) Growing season", "(c) Hottest period")[i], pos=4, xpd=TRUE) 
 }
 
-outf <- "figures/pwc_figure1.png"
+outf <- "plots/pwc_figure1.png"
+if (include_SSP370) outf <- "plots/pwc_figure1_w370.png" 
 png(outf, units="in", width = 12, height = 4, res = 300, pointsize=18)
 par(family = "Times New Roman")#, fg = mycol, col = mycol, col.axis = mycol, col.lab = mycol, col.main = mycol, col.sub = mycol)
 

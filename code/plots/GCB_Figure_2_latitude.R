@@ -87,7 +87,7 @@ fig_lat <- function(avar="annual", lgnd=TRUE, region="global") {
 }
 
 for (region in latRangeChoices) {
-  outf <- paste0("figures/pwc_figure2", region, ".png")
+  outf <- paste0("plots/pwc_figure2", region, ".png")
   png(outf, units="in", width = 12, height = 4, res = 300, pointsize=18)
   par(family = "Times New Roman")
   par(mfrow=c(1,3))

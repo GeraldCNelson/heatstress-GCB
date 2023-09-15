@@ -96,7 +96,7 @@ get_labor <- function(src) {
   if (src == "ERS") {emp <- ERS_employment()}
   
   w <- geodata::world(path = "data-raw/gadm")
-  w <- merge(w, emp, by.x="GID_0", by.y="ISO3", all.x=TRUE)
+  w <- merge(w, emp, by.x = "GID_0", by.y = "ISO3", all.x=TRUE)
   
   # created with "crop_data.R"
   crps <- rast("data-raw/crops/total_crop_area.tif")
