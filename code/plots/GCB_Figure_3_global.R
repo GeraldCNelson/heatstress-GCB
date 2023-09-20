@@ -3,11 +3,11 @@
 library(terra)
 cval <- 100 # used to convert from percent to ratio
 path <- "data/agg/pwc_agg3"
-dir.create("figures", F, F)
+dir.create("plots", F, F)
 prj <- "+proj=robin"
 e <- ext(-12000000, 16038790, -6168256, 6942628)
 wrld <- geodata::world(path = "data-raw")
-include_SSP370 <- TRUE
+include_SSP370 <- FALSE
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
   aggregate(6, sum, na.rm = TRUE) |> round()
@@ -60,12 +60,12 @@ make_fig3 <- function(pcol = 1) {
 	}
 }
 
-pngfile <- paste0("plots/pwc_figure3.png")
-if (include_SSP370) pngfile <- paste0("plots/pwc_figure3_w370.png")
-#pngfile = ""
-if (pngfile != "") {
+outf <- paste0("plots/Fig3_avePWCs_globalMap.png")
+if (include_SSP370) outf <- paste0("plots/Fig3_avePWCs_globalMap_w_SSP370.png")
+#outf = ""
+if (outf != "") {
 	h = 6
-	png(pngfile, units = "in", width = 1.3*h, height = h, res = 300)
+	png(outf, units = "in", width = 1.3*h, height = h, res = 300)
 }
 
 layout(matrix(c(1:7, 7, 7), 3, 3), width = c(1,1,.2))
@@ -74,5 +74,5 @@ for (i in 1:length(aggm)) {
 	make_fig3(i)
 }
 
-if (pngfile != "") dev.off()
+if (outf != "") dev.off()
 

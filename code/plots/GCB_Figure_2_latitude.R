@@ -7,9 +7,9 @@ if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 
 path <- "data/agg/pwc_agg3"
 
-dir.create("figures", F, F)
+dir.create("plots", F, F)
 
-library(terra)
+include_SSP370 <- TRUE
 
 latRangeChoices <- c("global", "tropical", "S20N35")
 ext_global <- ext(-180, 180, -60, 67)
@@ -78,7 +78,7 @@ fig_lat <- function(avar="annual", lgnd=TRUE, region="global") {
   grid(NULL, 4, col = "gray")
   
   if (lgnd) {
-    legend(minx, ylim[2], capt, lty=1:5, col = cols, cex=.8, lwd=3, bg="white", box.col = "white")
+    legend(minx, ylim[2], capt, lty=1:5, col = cols, cex=.6, lwd=3, bg="white", box.col = "white")
   } 
   i <- match(avar, c("annual", "season", "hot90"))
   text(55/cval, ylim[2], c("(a) Annual", "(b) Growing season", "(c) Hottest period")[i], pos=4, xpd=TRUE) 
@@ -87,7 +87,9 @@ fig_lat <- function(avar="annual", lgnd=TRUE, region="global") {
 }
 
 for (region in latRangeChoices) {
-  outf <- paste0("plots/pwc_figure2", region, ".png")
+  outf <- paste0("plots/Fig2_", region, ".png")
+  if (include_SSP370) outf <- paste0("plots/Fig2_", region, "_w_SSP370.png")
+  
   png(outf, units="in", width = 12, height = 4, res = 300, pointsize=18)
   par(family = "Times New Roman")
   par(mfrow=c(1,3))

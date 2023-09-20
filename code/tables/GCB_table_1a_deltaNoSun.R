@@ -6,10 +6,10 @@
 #   setwd('/Users/gcn/Google Drive/My Drive/pwc')
 # }
 
-path <- "data-raw/ISIMIP/pwc_agg3"
-path_ns <- "data-raw/ISIMIP/pwc_agg3_ns"
+path <- "data-raw/agg/pwc_agg3"
+path_ns <- "data-raw/agg/pwc_agg3_ns"
 
-dir.create("figures", F, F)
+dir.create("plots", F, F)
 
 library(terra)
 

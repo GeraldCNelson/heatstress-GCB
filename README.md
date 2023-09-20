@@ -32,8 +32,8 @@ The R code in the _code/data_ directory contains the following files which need 
 -   2b_fix_radiation.R - converts the rsds data file to average solar radiation during daylight hours
 -   3_wbgt.R - calculate wbgt values for each combination of climate scenario and time period. The code includes a switch to calculate wbgt with solar radiation values or with these set to zero to simulate complete shade. The default is nosun <- FALSE. Change to TRUE if you want the no sun wbgt values
 -   4_pwc.R - calculate pwc values for each combination of climate scenario and time period
--   5_agg_time.R - aggregate pwc values over one of the 20 year periods - 1991-2010, 2041-2060, and 2081-2100, for individual models
--   6_agg_models.R - aggregate the results of 5_agg_time.R across all models to get a spatraster with 365 layers
+-   5_agg_time.R - aggregate daily pwc values over one of the 20 year periods - 1991-2010, 2041-2060, and 2081-2100, for individual models
+-   6_agg_models.R - aggregate the results of 5_agg_time.R across all models to get a spatraster with 365 layers for each scenario.
 -   7_get_crops.R - sum area of the 172 crops in the geodata library from the Mondfreda, et al. data, and generated weighted crop calendar dat based on the Sacks, et al, 2010 crop calendars in the geodata library
 -   8_summarize.R - Aggregation to means of annual, growing season and hottest periods. Also includes impact of eliminating radiation effect in PWC values. 
 -   10_a_ERS_mach_land_labor.R

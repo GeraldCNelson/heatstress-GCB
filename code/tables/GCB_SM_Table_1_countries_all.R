@@ -7,7 +7,7 @@ if (this == "LAPTOP-IVSPBGCA") {
 }
 path <- "data-raw/ISIMIP/pwc_agg3"
 
-dir.create("figures", F, F)
+dir.create("plots", F, F)
 
 library(terra)
 library(data.table)

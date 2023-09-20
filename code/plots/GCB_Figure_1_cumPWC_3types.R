@@ -7,17 +7,18 @@ if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 path <- "data/agg/pwc_agg3"
 dir.create("plots", F, F)
 
-library(terra)
+cval <- 100
+
+include_SSP370 <- TRUE
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
   aggregate(6, sum, na.rm = TRUE) |> round()
 
 fig_cumul <- function(avar="annual", legend = TRUE) {
-  
   ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full = TRUE)
-  
-  r <- rast(ff)
-  names(r) <- gsub("^pwc_", "", names(r))
+  r <- rast(ff) / cval # convert from % to ratio
+  if (!include_SSP370) r <- r[[!grepl("ssp370", names(r))]] # remove columns with ssp370 data
+    names(r) <- gsub("^pwc_", "", names(r))
   names(r) <- gsub("; ", "", names(r))
   
   # r <- r[[names(r) != "ssp126_2081-2100"]] # drop end century ssp126
@@ -37,7 +38,15 @@ fig_cumul <- function(avar="annual", legend = TRUE) {
   
   names(x) <- names(d)[-1]
   capt <- gsub("_", ", ", names(x))
-  
+  capt <- 
+    str_replace(names(x), "historical_1991-2010", "Historical, 1991-2010") |>
+    str_replace("ssp126_2041-2060", "SSP1-2.6, 2041-2060") |>
+    str_replace("ssp126_2081-2100", "SSP1-2.6, 2081-2100") |>
+    str_replace("ssp585_2041-2060", "SSP5-8.5, 2041-2060") |>
+    str_replace("ssp585_2081-2100", "SSP5-8.5, 2081-2100") |>
+    str_replace("ssp370_2041-2060", "SSP3-7.0, 2041-2060") |> # in case 370 is used
+    str_replace("ssp370_2081-2100", "SSP3-7.0, 2081-2100")
+  #browser()
   y <- lapply(x, \(i) {
     c(i[which.min(abs(i[,2]-0.25)), 1],
       i[which.min(abs(i[,2]-0.50)), 1],
@@ -48,8 +57,8 @@ fig_cumul <- function(avar="annual", legend = TRUE) {
   
   cols <- RColorBrewer::brewer.pal(n, "Set1")
   
-  plot(x[[1]][,1], x[[1]][,2], col = cols[1], lwd=2, type="l", xlim=c(40,100), 
-       las=1, xlab="PWC (%)", ylab="Fraction of global crop land", axes=FALSE,  
+  plot(x[[1]][,1], x[[1]][,2], col = cols[1], lwd=2, type="l", xlim=c(0,1), #xlim=c(0,100)
+       las=1, xlab="PWC", ylab="Fraction of global crop land", axes=FALSE,  
        yaxs="i",  xaxs="i")
   for (i in 2:n) {
     lines(x[[i]][,1], x[[i]][,2], col = cols[i], lwd=2, lty=i)
@@ -58,9 +67,11 @@ fig_cumul <- function(avar="annual", legend = TRUE) {
   grid(NULL, 4)
   
   if (legend) {
-    legend(42, .9, capt, lty=1:5, col = cols, cex=.8, lwd=3, bg="white")
+    legend(minx+2/cval, 1, capt, lty=1:5, col = cols, cex=.6, lwd = 3, bg="white", box.col = "white")
+    
+#    legend(42, .9, capt, lty=1:5, col = cols, cex=.6, lwd=3, bg="white")
   } 
-  axis(1, xlab="PWC (%)", cex.axis=.9)
+  axis(1, xlab="PWC", cex.axis=.9)
   axis(2, at=seq(0,1,.25), las=1, cex.axis=.9, labels=legend)
   
   i <- match(avar, c("annual", "season", "hot90"))
@@ -68,7 +79,8 @@ fig_cumul <- function(avar="annual", legend = TRUE) {
   y
 }
 
-outf <- "plots/pwc_cum_3types.png"
+outf <- "plots/Fig1_pwc_cum_3types.png"
+if (include_SSP370) outf <- "plots/Fig1_pwc_cum_3types_w_SSP370.png"
 png(outf, units="in", width = 12, height = 4, res = 300, pointsize=18)
 
 par(mfrow=c(1,3))

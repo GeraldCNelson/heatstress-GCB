@@ -1,4 +1,9 @@
+# Table 1 in the GCB paper - Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions
+
 library(terra)
+library(flextable)
+library(officer)
+library(data.table)
 
 path <- "data/agg/pwc_agg3"
 dir.create("tables", F, F)
@@ -9,7 +14,7 @@ crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)
   aggregate(6, sum, na.rm = TRUE) |> round()
 
 get_cumul <- function(avar="annual", legend = TRUE, region = "global") {
-  if (region=="global") {
+  if (region == "global") {
     extRegion <- ext(-180, 180, -60, 67)
   } else if (region == "tropical") {
 	extRegion <- ext(-180, 180, -23, 23)
@@ -48,10 +53,6 @@ get_cumul <- function(avar="annual", legend = TRUE, region = "global") {
 }
 
 make_tables <- function(regions) {
-	library(flextable)
-	library(officer)
-	library(data.table)
-
 	for (region in regions) {
 	  ya <- get_cumul("annual", F, region)
 	  yb <- get_cumul("season",F, region)

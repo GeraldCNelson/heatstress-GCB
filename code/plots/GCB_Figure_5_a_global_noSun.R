@@ -8,7 +8,7 @@ if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
 
 path <- "data/agg/pwc_agg3"
 path_ns <- "data/agg/pwc_agg3_ns"
-dir.create("figures", F, F)
+dir.create("plots", F, F)
 prj <- "+proj=robin"
 e <- ext(-12000000, 16038790, -6168256, 6942628)
 wrld <- geodata::world(path = "data-raw")

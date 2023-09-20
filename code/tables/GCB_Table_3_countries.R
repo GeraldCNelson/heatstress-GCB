@@ -1,11 +1,4 @@
-
-# this <- system('hostname', TRUE)
-# if (this == "LAPTOP-IVSPBGCA") {
-#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-# } else {
-#   setwd('/Users/gcn/Google Drive/My Drive/pwc')
-# }
- path <- "data/agg/pwc_agg3"
+# GCB paper, table 3, data for selected countries
 
 library(terra)
 library(data.table)
@@ -13,6 +6,8 @@ library(flextable)
 library(officer)
 library(stringr)
 set_flextable_defaults(font.family = "Times New Roman", font.color = "#333333", border.color = "#999999", padding = 4)
+
+path <- "data/agg/pwc_agg3"
 
 crps <- rast("data-raw/crops/total_crop_area.tif") |> 
   aggregate(6, sum, na.rm = TRUE) |> crop(c(-180, 180, -60, 67)) |>  round()
@@ -78,6 +73,7 @@ d$Variable =   str_replace_all(d$Variable, "_", " ")  |>
   str_replace("season ", " ") |> 
   str_to_title()  |>
   str_replace("Ssp585", "SSP5-8.5") |>
+  str_replace("Ssp370", "SSP3-7.0") |>
   str_replace("Land", "Cropland")
 
 d <- as_grouped_data(d, groups = c("type"), columns = NULL)
@@ -104,6 +100,6 @@ t_flex <- as_flextable(d, hide_grouplabel = TRUE)  |>
            part = "body", inline = TRUE) 
 
 t_flex
-
-save_as_docx(t_flex, values = NULL, path = "tables/table3_countries.docx")
+outf <- "table3_countries.docx"
+save_as_docx(t_flex, values = NULL, path = paste0("tables/", outf))
 

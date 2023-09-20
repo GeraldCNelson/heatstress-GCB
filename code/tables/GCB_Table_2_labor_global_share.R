@@ -1,10 +1,3 @@
-# this <- system('hostname', TRUE)
-# if (this == "LAPTOP-IVSPBGCA") {
-#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-# } else {oldwd <- getwd()
-# setwd('/Users/gcn/Google Drive/My Drive/pwc')
-# }
-
 library(terra)
 library(flextable)
 library(officer)
@@ -25,7 +18,7 @@ cutoffVals <- c(50, 60, 70, 80, 90)
 
 # labor affected by r <= val
 #comb <- data.frame(sum_stressed = numeric(7))
-rm(comb)
+if (exists("comb")) unlink(comb)
 for (val in cutoffVals) {
   x <- (r <= val) * aglab
   g <- global(x, sum, na.rm=T) /1000
@@ -45,7 +38,7 @@ temp <- rownames(comb) |>
   str_replace("ssp126_2081_2100", "SSP1-2.6, 2081-2100") |>
   str_replace("ssp585_2041_2060", "SSP5-8.5, 2041-2060") |>
   str_replace("ssp585_2081_2100", "SSP5-8.5, 2081-2100") |>
-  str_replace("ssp370_2081_2100", "SSP3-7.0, 2041-2060") |> # in case 370 is used
+  str_replace("ssp370_2041_2060", "SSP3-7.0, 2041-2060") |> # in case 370 is used
   str_replace("ssp370_2081_2100", "SSP3-7.0, 2081-2100") |>
   str_replace("aglabor", "Total ag. labor") |>
   str_replace("aglabor1", "Total ag. labor") |>
@@ -56,11 +49,11 @@ colorder <- c("thermal_env", paste0("X", cutoffVals))
 comb <- comb[, colorder]
 comb_percent <- comb
 comb_percent[2:length(comb)] <- 100 * comb[2:length(comb)]/comb["aglabor","X90"]
-write.csv(comb_percent, paste0("data/tables/", "stressedLaborPercent.csv"), row.names = F)
+write.csv(comb_percent, paste0("data/tables/table_2_", "stressedLaborPercent.csv"), row.names = F)
 rm(comb_percent) # only really necessary during development
 
 # create word table -----
-t <- as.data.table(read.csv(paste0("data/tables/", "stressedLaborPercent.csv")))
+t <- as.data.table(read.csv(paste0("data/tables/table_2_", "stressedLaborPercent.csv")))
 t[,2:6] <- round(t[,2:6], 1)
 
 cheadername <- names(t)
@@ -78,7 +71,8 @@ t_flex <- flextable(t) |>
   add_footer_row(values = "Source: Labor data from USDA/ERS, PWC values from own calculations.", colwidths = c(6), top = FALSE)
 
 t_flex
-save_as_docx(t_flex, values = NULL, path = "data/tables/table2_stressedLaborCts_percent.docx")
+outf <- "table_2_stressedLaborCts_percent.docx"
+save_as_docx(t_flex, values = NULL, path = paste0("tables/", outf))
 
 
 
