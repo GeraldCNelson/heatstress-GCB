@@ -1,15 +1,14 @@
 
 this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-  setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-} else {
-  setwd('/Users/gcn/Google Drive/My Drive/pwc')
+library(terra)
+terraOptions(verbose = TRUE)
+this <- system('hostname', TRUE)
+if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8) # only used if on a Mac
 }
 path <- "data-raw/ISIMIP/pwc_agg3"
 
 dir.create("plots", F, F)
 
-library(terra)
 library(data.table)
 cval <- 100 # used to convert from percent to ratio
 crps <- rast("data-raw/crops/total_crop_area.tif") |> 

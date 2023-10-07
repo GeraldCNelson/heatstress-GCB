@@ -3,7 +3,7 @@
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
+if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
 
 dir.create("data/agg/pwc_agg3/", FALSE, FALSE)
 dir.create("data/agg/pwc_agg3_ns/", FALSE, FALSE)

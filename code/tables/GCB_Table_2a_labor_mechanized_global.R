@@ -1,11 +1,8 @@
-this <- system('hostname', TRUE)
-if (this == "LAPTOP-IVSPBGCA") {
-  setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-} else {oldwd <- getwd()
-setwd('/Users/gcn/Google Drive/My Drive/pwc')
-}
-
 library(terra)
+terraOptions(verbose = TRUE)
+this <- system('hostname', TRUE)
+if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
+
 library(flextable)
 library(officer)
 library(data.table)
@@ -14,14 +11,24 @@ path <- "compute_pwc/output"
 
 # mechanization by country
 # mech_labor_ratio is the horsepower per worker in 2020. It ranges from 3.18e-05 for South Sudan to 120 in Canada. Most countries have less than 10 hp per worker.
-m <- as.data.table(read.csv("data-raw/machines/ERSmach_land_labor.csv"))
-#max(m$mech_labor_ratio, na.rm = TRUE)
+m <- as.data.table(read.csv("data-raw/machines/ERSmach_land_labor.csv")) # created in 10_a_ERS_mach_land_labor.R
+# m includes columns for mech_land_ratio, mech_labor_ratio, and labor_land_ratio"  
+#labor - 1000 persons economically active in agriculture, 15+ yrs, male & female
+#machinery - Metric horsepower (1000 CV) of farm machinery in use (includes tractors, harvester-threshers, milking machines, water pumps)
+#land- 1000 hectares of rainfed-cropland-equivalents (rainfed cropland, irrigated cropland and permanent pasture, weighted by relative quality - 
 m <- m[year > 2019,] # get just 2020 data
-hpmax <- 70
-m[, adj := 1 - (.8 * (mech_labor_ratio) / hpmax)]
-m[adj < 0, adj := 0] # deals with Canada and Luxembourg having more hp than hpmax so no adjustment needed
+m[, c("FAO") := NULL]
+
+mlratio <- 0.5
+# keep only countries where mech/land ratio is mlratio or less 
+m_low <- m[mech_land_ratio < mlratio,]  
+m_low[, opt_mech:= (mlratio - mech_land_ratio) * ERSvalue_land]
+  
+# hpmax <- 60
+# m[, adj := 1 - (.8 * (mech_labor_ratio) / hpmax)]
+# m[adj < 0, adj := 0] # deals with Canada and Luxembourg having more hp than hpmax so no adjustment needed
 w <- geodata::world(path = "data-raw/gadm") |> crop(ext(-180, 180, -60, 90))
-w_m <- merge(w, m, by.x = "GID_0", by.y = "ISO3", all.x=TRUE)
+w_m <- merge(w, m_low, by.x = "GID_0", by.y = "ISO3", all.x=TRUE)
 
 # pwc data by pixel
 ff <- list.files(path, pattern = "ensemble_pwc_wbgt_out_season_mean.*.tif$", full = TRUE)

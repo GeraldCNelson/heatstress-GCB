@@ -1,9 +1,9 @@
-# get country level agricultural labor and machinery data
-
+# get country level agricultural labor, cropland and machinery data
+# output used in GCB_Table_2a_labor_mechanized.R
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
+if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
 
 library(readxl)
 library(data.table)
@@ -18,9 +18,11 @@ cleanup <- function(sheetname) {
     download.file(url, f)
     #   unzip(f, exdir = "data-raw/machines")
   }
-  
-  temp <- as.data.table(read_xlsx(paste0(path_machines, "AgTFPInternational2020.xlsx"), sheet = sheetname, range = "B3:F182", na = "NA")) # names, etc
-  temp <- cbind(temp, as.data.table(read_xlsx(paste0(path_machines, "AgTFPInternational2020.xlsx"), sheet = sheetname, range = "BT3:EA182", na = "NA"))) # quantity data
+#  browser()
+  p1 <- paste0(path_machines, "AgTFPInternational2020.xlsx")
+  temp1 <- as.data.table(read_excel(path = p1, sheet = sheetname, range = "B3:F182", na = "NA")) # names, etc
+  temp2 <- as.data.table(read_excel(paste0(path_machines, "AgTFPInternational2020.xlsx"), sheet = sheetname, range = "BT3:EA182", na = "NA"))
+  temp <- cbind(temp1, temp2) # quantity data
   oldNames <- as.character(1961:2020)
   newNames <- paste0("X", 1961:2020)
   setnames(temp, old = oldNames, new = newNames, skip_absent = T)
@@ -32,18 +34,23 @@ cleanup <- function(sheetname) {
 
 ersdata_machines <- cleanup(sheetname = "Machinery") # units - Farm inventories of farm machinery, measured in thousands of metric horsepower (1000 CV) in tractors, combine-threshers, and milking machines
 ersdata_labor <- cleanup(sheetname = "Labor") # units - Number of economically active adults (male & female) primarily employed in agriculture, 1000 persons
-ersdata_land <- cleanup(sheetname = "Land") # units - Total cropland (including arable land and land in permanent crops), 1000 hectares
+ersdata_land <- cleanup(sheetname = "Land") # units - Quality-adjusted agricultural area, 1000 hectares of "rainfed-equivalent cropland", 1000 hectares
+ersdata_pasture <- cleanup(sheetname = "Pasture") # units - Total area in permanent pasture, 1000 hectares
+ersdata_cropland <- cleanup(sheetname = "Cropland") # units - Total cropland (including arable land and land in permanent crops), 1000 hectares
 
-combined <- Reduce(merge, list(ersdata_machines, ersdata_land, ersdata_labor))
+combined <- Reduce(merge, list(ersdata_machines, ersdata_land, ersdata_cropland, ersdata_labor))
 combined <- combined[!is.na(ISO3)] 
 combined <- combined[!is.na(ERSvalue_labor)][!is.na(ERSvalue_land)][!is.na(ERSvalue_machinery)]
 combined[,mech_land_ratio := ERSvalue_machinery/ERSvalue_land][,mech_labor_ratio := ERSvalue_machinery/ERSvalue_labor]
+combined[,labor_land_ratio := ERSvalue_labor/ERSvalue_land]
+combined[,mech_cropland_ratio := ERSvalue_machinery/ERSvalue_cropland]
+
 write.csv(combined, "data-raw/machines/ERSmach_land_labor.csv", row.names = FALSE)
 
 #units
 #labor - 1000 persons economically active in agriculture, 15+ yrs, male & female
 #machinery - Metric horsepower (1000 CV) of farm machinery in use (includes tractors, harvester-threshers, milking machines, water pumps)
-#land- 1000 hectares of rainfed-cropland-equivalents (rainfed cropland, irrigated cropland and pasturement pasture, weighted by relative quality - see Land Weights)
+#land- 1000 hectares of rainfed-cropland-equivalents (rainfed cropland, irrigated cropland and permanent pasture, weighted by relative quality - see Land Weights)
 
 #Land Weights - available at "data-raw/machines/AgTFPInternational2020.xlsx", sheet = 'Land weights')
 # Region	Rainfed Cropland	Permanent Pasture	Irrigated Cropland	

@@ -2,7 +2,7 @@
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
+if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
 
 years <- c("1991_2010", "2041_2060", "2081_2100") # 20 year periods
 models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl") 

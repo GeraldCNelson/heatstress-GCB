@@ -1,5 +1,11 @@
 # create lists of nc files to download from ISIMIP
 
+# install packages that are not already installed
+list.of.needed.packages <- c("terra", "data.table", "rvest", "xml2")
+new.packages <- list.of.needed.packages[!(list.of.needed.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+###
+
 library(rvest)
 library(xml2)
 library(data.table)
@@ -8,10 +14,10 @@ terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
 if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8) # for Macs with Mac silicon, speeds up process
 
-pats <- c("ssp126", "ssp370", "ssp585") # all ISIMIP scenarios
+pats <- c("ssp370") # all ISIMIP scenarios
 pats_hist <- c("historical")
 models <- c("gfdl-esm4", "ipsl-cm6a-lr", "mpi-esm1-2-hr", "mri-esm2-0", "ukesm1-0-ll")
-yearChoices <- c("2041-2050", "2051-2060", "2081-2090", "2091-2100")
+yearChoices <- c("2041-2050", "2051-2060")
 yrChoices <- gsub("-","_", yearChoices)
 yearChoices_hist <- c("1991-2000", "2001-2010")
 yrChoices_hist <- c("1991_2000", "2001_2010")

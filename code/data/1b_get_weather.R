@@ -2,7 +2,7 @@
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
+if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
 
 #download the ISIMIP data used for the PWC paper
 variables <- c("tasmin", "tasmax", "tas", "hurs", "rsds", "sfcwind") # principal weather variables. pr left out because not used in the GCB PWC paper

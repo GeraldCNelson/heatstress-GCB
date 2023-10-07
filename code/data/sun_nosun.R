@@ -2,7 +2,7 @@
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (this == "MacBook-Pro-M1X.local") terraOptions(verbose = TRUE, memfrac = 0.8)
+if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
 
 
 path_base <- "data-raw/ISIMIP/pwc_agg2/"
