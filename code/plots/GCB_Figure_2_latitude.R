@@ -1,4 +1,4 @@
-# create Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent historical (1991-2010) and potential future thermal conditions 
+# create Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent past (1991-2010) and potential future thermal conditions 
 
 library(terra)
 terraOptions(verbose = TRUE)

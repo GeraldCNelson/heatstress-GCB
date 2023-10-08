@@ -42,8 +42,8 @@ The R code in the _code/data_ directory contains the following files which need 
 -   sun_nosun.R - create a raster of the ratio between end-century SSP5-8.5 thermal environment with and without solar radiation
 
 - the code/plots directory contains the fillowing files that produce the figures in the GCB paper
-  - GCB_Figure_1_cumul.R - _create Figure 1. Cumulative distribution of early 21st century cropland Physical Work Capacity (PWC) for recent historical (1991-2010) and potential future thermal conditions_
-  - GCB_Figure_2_latitude.R- _create Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent historical (1991-2010) and potential future thermal conditions_ 
+  - GCB_Figure_1_cumul.R - _create Figure 1. Cumulative distribution of early 21st century cropland Physical Work Capacity (PWC) for recent past (1991-2010) and potential future thermal conditions_
+  - GCB_Figure_2_latitude.R- _create Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent past (1991-2010) and potential future thermal conditions_ 
   - GCB_Figure_3_global.R - _create Figure 3. Average PWCs during the crop growing season and the hottest period_
   - GCB_Figure_4_regions.R - _create Figure 4. Average PWCs during the growing season for three countries_
   - GCB_Figure_5_global_delta_noSun.R - _not used in the paper_

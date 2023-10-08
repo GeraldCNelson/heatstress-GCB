@@ -19,10 +19,10 @@ m <- as.data.table(read.csv("data-raw/machines/ERSmach_land_labor.csv")) # creat
 m <- m[year > 2019,] # get just 2020 data
 m[, c("FAO") := NULL]
 
-mlratio <- 0.5
+mlratio <- 1
 # keep only countries where mech/land ratio is mlratio or less 
-m_low <- m[mech_land_ratio < mlratio,]  
-m_low[, opt_mech:= (mlratio - mech_land_ratio) * ERSvalue_land]
+m_low <- m[mech_cropland_ratio < mlratio,]  
+m_low[, opt_mech:= (mlratio - mech_cropland_ratio) * ERSvalue_land]
   
 # hpmax <- 60
 # m[, adj := 1 - (.8 * (mech_labor_ratio) / hpmax)]
@@ -58,7 +58,7 @@ for (val in cutoffVals) {
 
 library(stringr)
 temp <- c(names(x), "aglabor")
-temp <- str_replace(temp, "historical_1991_2010", "Historical, 1991-2010") |>
+temp <- str_replace(temp, "historical_1991_2010", "Recent past, 1991-2010") |>
 str_replace("ssp126_2041_2060", "SSP1-2.6, 2041-2060") |>
 str_replace("ssp126_2081_2100", "SSP1-2.6, 2081-2100") |>
 str_replace("ssp585_2041_2060", "SSP5-8.5, 2041-2060") |>

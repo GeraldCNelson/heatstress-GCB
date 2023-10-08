@@ -64,7 +64,7 @@ for (regionChoice in regionChoices) {
 }
 
 temp <- rownames(comb) |>
-str_replace("historical_1991_2010", "Historical, 1991-2010") |>
+str_replace("historical_1991_2010", "Recent past, 1991-2010") |>
 str_replace("ssp126_2041_2060", "SSP1-2.6, 2041-2060") |>
 str_replace("ssp126_2081_2100", "SSP1-2.6, 2081-2100") |>
 str_replace("ssp585_2041_2060", "SSP5-8.5, 2041-2060") |>

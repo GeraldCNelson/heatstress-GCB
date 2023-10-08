@@ -38,7 +38,7 @@ set_flextable_defaults(font.family = "Times New Roman")
 set_flextable_defaults(font.color = "#333333", border.color = "#999999", padding = 4)
 col_labels <- str_replace(names(x), "_ssp126_", " SSP1-2.6, ") |> 
   str_replace("_ssp585_", " SSP5-8.5, ") |>
-  str_replace("_historical_", " Historical, ") |>
+  str_replace("_historical_", " Recent past, ") |>
   str_replace("annual ", "") |> 
   str_replace("hot90 ", "") |> 
   str_replace("season ", "")
