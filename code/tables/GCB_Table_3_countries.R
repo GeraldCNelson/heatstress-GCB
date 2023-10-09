@@ -15,34 +15,35 @@ crps <- rast("data-raw/crops/total_crop_area.tif") |>
 w <- geodata::world(path = "data-raw", version="3.6")
 
 ff <- list.files(path, pattern = ".*_mean.tif$", full = TRUE)
-s <- sds(ff[c(1,3,2)])
-z <- lapply(s, \(r) zonal(r, w, mean, w=crps, na.rm = TRUE))
+s <- sds(ff[c(1,3,2)]) # annual, hot 90, season means
+z <- lapply(s, \(r) zonal(r, w, mean, w=crps, na.rm = TRUE)) # get country means for 3 periods, in a list
 
-zz <- do.call(cbind, z)
-names(zz) <- gsub("mean_", "", gsub("pwc_", "", paste0(rep(names(s), each=5), "_", names(zz))))
+zz <- do.call(cbind, z) # combine into 1 data frame
+#eachrep <- length()
+names(zz) <- gsub("mean_", "", gsub("pwc_", "", paste0(rep(names(s), each = 7), "_", names(zz)))) #5 for two scenarios, 7 for 3 scenarios
 zz <- cbind(values(w), zz) # annual, growing season and hot window for all countries
-#zz[,-c(1:2)] <- round(zz[,-c(1:2)], 0)
-
-zz[, 3:ncol(zz)] <- zz[, 3:ncol(zz)]/100 # convert to ratio
+zz[, 3:ncol(zz)] <- zz[, 3:ncol(zz)]/100 # convert PWC percents to ratio
 #
 #Farm machinery is measured in units of 1000 horsepower. This is divided by cropland (1000 hectares) to give the average machinery use per hectare of agricultural land.
 ## Source of the data is the first data set at https://www.ers.usda.gov/data-products/international-agricultural-productivity/. This has both machinery, land and agricultural labor individually. 
-temp <- as.data.table(read.csv("data-raw/machines/ERSmach_land_labor.csv")) # created in ERS_mach_land_labor.R, machinery, land and labor
-temp <- temp[year >2017,]
+temp <- as.data.table(read.csv("data-raw/machines/ERSmach_land_labor.csv")) # created in 10_ERS_mach_land_labor.R, machinery, land and labor
+temp <- temp[year > 2017,] # keep years 2017 to 2020
 temp <- temp [, labor_3yr := mean(ERSvalue_labor), by = "ISO3"][
-  , land_3yr := mean(ERSvalue_land), by = "ISO3"][
+  , cropland_3yr := mean(ERSvalue_cropland), by = "ISO3"][
     , machinery_3yr := mean(ERSvalue_machinery), by = "ISO3"]
-temp <- unique(temp[, c("ISO3", "Country.territory", "labor_3yr", "land_3yr", "machinery_3yr"  )])
+temp <- unique(temp[, c("ISO3", "Country.territory", "labor_3yr", "cropland_3yr", "machinery_3yr"  )])
 
-temp[, machinery_per_ag_land := machinery_3yr/land_3yr][, machinery_per_capita := machinery_3yr/labor_3yr]
-colsToRound <- c("labor_3yr", "land_3yr", "machinery_3yr")
+temp[, machinery_per_cropland := machinery_3yr/cropland_3yr][, machinery_per_agworker := machinery_3yr/labor_3yr]
+colsToRound <- c("labor_3yr", "cropland_3yr", "machinery_3yr")
 temp[, (colsToRound) := lapply(.SD, round, digits = 0), .SDcols = colsToRound]
+ratioColsToRound <- c("machinery_per_cropland", "machinery_per_agworker")
+temp[, (ratioColsToRound) := lapply(.SD, round, digits = 3), .SDcols = ratioColsToRound]
+#temp[, Country.territory := NULL]
+# temp[, labor_3yr := labor_3yr] # 000 persons
+# temp[, cropland_3yr := cropland_3yr] # 000 ha
+# temp[, machinery_3yr := machinery_3yr] # 000 units (CV) horsepower
 
-temp[, labor_3yr := labor_3yr] # 000 persons
-temp[, land_3yr := land_3yr] # 000 ha
-temp[, machinery_3yr := machinery_3yr] # 000 units (CV) horsepower
-
-x <- merge(zz, temp, by.x = "GID_0", by.y = "ISO3", all.x=TRUE)
+x <- merge(zz, temp, by.x = "GID_0", by.y = "ISO3", all.y=TRUE)
 write.csv(x, "tables/big_table.csv", row.names = FALSE)
 ctrs <- c("Brazil", "China", "France", "Nigeria", "Pakistan", "India", "United States")
 d <- x[x$Country.territory %in% ctrs,-1]
@@ -63,8 +64,8 @@ write.csv(d, "tables/subset_big_table.csv", row.names = FALSE)
 d <- read.csv("tables/subset_big_table.csv") # makes row names a separate column
 d[-1,-1] <- round(d[-1,-1], 2)
 
-d['type'] = c("PWC, hottest period", "PWC, hottest period", "PWC, hottest period",
-              "PWC, growing season", "PWC, growing season", "PWC, growing season", 
+d['type'] = c("PWC, hottest period", "PWC, hottest period", "PWC, hottest period", "PWC, hottest period", "PWC, hottest period",
+              "PWC, growing season", "PWC, growing season", "PWC, growing season", "PWC, growing season", "PWC, growing season", 
               "Other", "Other", "Other", "Other", "Other")
 names(d) <- str_replace(names(d), "ssp", "Variable") |> str_replace("United.States", "United States")
 d$Variable =   str_replace_all(d$Variable, "_", " ")  |> 
@@ -79,9 +80,10 @@ d$Variable =   str_replace_all(d$Variable, "_", " ")  |>
 d <- as_grouped_data(d, groups = c("type"), columns = NULL)
 
 t_flex <- as_flextable(d, hide_grouplabel = TRUE)  |>
-  colformat_double(i = (2:8), j = (2:8), digits=2) |> 
-  colformat_double(i = (9:12), j = (2:8), digits=0) |> 
-  colformat_double(i = (13:14), j = (2:8), digits = 2) |>
+  colformat_double(i = (2:7), j = (2:8), digits=2) |> 
+  colformat_double(i = (8:12), j = (2:8), digits=2) |> 
+  colformat_double(i = (13:16), j = (2:8), digits = 0) |>
+  colformat_double(i = (17:18), j = (2:8), digits = 2) |>
   set_header_labels(what = "") |> 
   color(part = "footer", color = "#800000") |>
   bold( bold = TRUE, part="header") |> 
