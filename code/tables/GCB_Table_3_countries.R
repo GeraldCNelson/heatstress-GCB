@@ -25,7 +25,7 @@ zz <- cbind(values(w), zz) # annual, growing season and hot window for all count
 zz[, 3:ncol(zz)] <- zz[, 3:ncol(zz)]/100 # convert PWC percents to ratio
 #
 #Farm machinery is measured in units of 1000 horsepower. This is divided by cropland (1000 hectares) to give the average machinery use per hectare of agricultural land.
-## Source of the data is the first data set at https://www.ers.usda.gov/data-products/international-agricultural-productivity/. This has both machinery, land and agricultural labor individually. 
+## Source of the data is the first data set at https://www.ers.usda.gov/data-products/international-agricultural-productivity/. This has both machinery, land and agricultural labor by country 
 temp <- as.data.table(read.csv("data-raw/machines/ERSmach_land_labor.csv")) # created in 10_ERS_mach_land_labor.R, machinery, land and labor
 temp <- temp[year > 2017,] # keep years 2017 to 2020
 temp <- temp [, labor_3yr := mean(ERSvalue_labor), by = "ISO3"][
@@ -38,23 +38,32 @@ colsToRound <- c("labor_3yr", "cropland_3yr", "machinery_3yr")
 temp[, (colsToRound) := lapply(.SD, round, digits = 0), .SDcols = colsToRound]
 ratioColsToRound <- c("machinery_per_cropland", "machinery_per_agworker")
 temp[, (ratioColsToRound) := lapply(.SD, round, digits = 3), .SDcols = ratioColsToRound]
-#temp[, Country.territory := NULL]
-# temp[, labor_3yr := labor_3yr] # 000 persons
-# temp[, cropland_3yr := cropland_3yr] # 000 ha
-# temp[, machinery_3yr := machinery_3yr] # 000 units (CV) horsepower
 
-x <- merge(zz, temp, by.x = "GID_0", by.y = "ISO3", all.y=TRUE)
+x <- merge(zz, temp, by.y = c("ISO3", "Country.territory"), by.x = c("GID_0", "NAME_0"),  all.x = TRUE)
 write.csv(x, "tables/big_table.csv", row.names = FALSE)
+
 ctrs <- c("Brazil", "China", "France", "Nigeria", "Pakistan", "India", "United States")
-d <- x[x$Country.territory %in% ctrs,-1]
-d$Country.territory <- NULL
-nms <- d[,1]
-d <- t(d[,-1]) # adds enough places after decimal so all numbers are the same
+d <- x[x$NAME_0 %in% ctrs,-1]
+#d$Country.territory <- NULL
+d[, -1] <- apply(d[, -1], 2, round, 2)
+nms <- d[,1] # should be same as ctrs
+
+colNamesToKeep <- c("NAME_0", "season_historical_1991-2010", 
+                    "season_ssp370_2041-2060", "season_ssp370_2081-2100",
+                    "season_ssp585_2041-2060", "season_ssp585_2081-2100", 
+                    "hot90_historical_1991-2010", "hot90_ssp370_2041-2060", "hot90_ssp370_2081-2100",
+                    "hot90_ssp585_2041-2060", "hot90_ssp585_2081-2100", 
+                    "labor_3yr", "cropland_3yr", "machinery_3yr", "machinery_per_cropland", "machinery_per_agworker")
+
+d <- d[, colNamesToKeep]
+
+d <- t(d[,-1]) 
 colnames(d) <- nms
-d <- d[, ctrs]
-d[6:15, ] <- d[c(11:15,6:10), ]	
-d <- d[-grep("ssp126", rownames(d)), ] # remove ssp126
-d <- d[-grep("annual", rownames(d)), ] # remove annual rows
+#d <- d[, ctrs]
+
+# d[6:15, ] <- d[c(11:15,6:10), ]	
+# d <- d[-grep("ssp126", rownames(d)), ] # remove ssp126
+# d <- d[-grep("annual", rownames(d)), ] # remove annual rows
 d <- data.frame(ssp=rownames(d), d)
 rownames(d) <- NULL
 write.csv(d, "tables/subset_big_table.csv", row.names = FALSE)
@@ -62,10 +71,11 @@ write.csv(d, "tables/subset_big_table.csv", row.names = FALSE)
 
 # directions - https://stackoverflow.com/questions/71661066/is-there-a-function-in-flextable-to-group-a-few-rows-in-a-table-together-under-a
 d <- read.csv("tables/subset_big_table.csv") # makes row names a separate column
-d[-1,-1] <- round(d[-1,-1], 2)
+d$ssp <- gsub("historical", "recent_past", d$ssp)
+#d[,-1] <- apply(d[,-1], 2, round, 2)
 
-d['type'] = c("PWC, hottest period", "PWC, hottest period", "PWC, hottest period", "PWC, hottest period", "PWC, hottest period",
-              "PWC, growing season", "PWC, growing season", "PWC, growing season", "PWC, growing season", "PWC, growing season", 
+d['type'] = c("PWC, growing season", "PWC, growing season", "PWC, growing season", "PWC, growing season", "PWC, growing season", 
+  "PWC, hottest period", "PWC, hottest period", "PWC, hottest period", "PWC, hottest period", "PWC, hottest period",
               "Other", "Other", "Other", "Other", "Other")
 names(d) <- str_replace(names(d), "ssp", "Variable") |> str_replace("United.States", "United States")
 d$Variable =   str_replace_all(d$Variable, "_", " ")  |> 
