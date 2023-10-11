@@ -1,5 +1,4 @@
-# create Figure 6. The additional HP per agricultural worker to make 60 HP available
-
+# create Figure 6. The additional HP per crop area in a country to increase the ratio to 1.0
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
@@ -18,10 +17,10 @@ temp <- as.data.table(read.csv("data-raw/machines/ERSmach_land_labor.csv")) # cr
 temp <- temp[year > 2017,]
 temp[, c("FAO", "Region", "Sub.Region") := NULL]
 
-reqHP <- 60 # two HP less than the average for the US.
-temp <- temp[, lapply(.SD, mean), by = ISO3, .SDcols = c("ERSvalue_machinery", "ERSvalue_land", "ERSvalue_labor", "mech_land_ratio", "mech_labor_ratio" )]
+reqHP <- 1 # Each country should have at least 1 hp/ha
+temp <- temp[, lapply(.SD, mean), by = ISO3, .SDcols = c("ERSvalue_machinery", "ERSvalue_land", "ERSvalue_labor", "mech_cropland_ratio", "mech_labor_ratio" )]
 
-temp[, maxHP := ERSvalue_labor * reqHP][, HPgap := maxHP - ERSvalue_machinery] #ERSvalue_labor and ERSvalue_machinery are in 1000 people and 1000 HP(CV)
+temp[, maxHP := ERSvalue_labor * reqHP][, HPgap := maxHP - ERSvalue_machinery] # ERSvalue_machinery is in 1000 HP(CV)
 temp[HPgap < 0, HPgap := 0]
 temp[, HPgapPerCap := HPgap / ERSvalue_labor] #ERSvalue_labor and HPneeds_global <- sum(temp$HPgap)
 
