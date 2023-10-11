@@ -1,13 +1,7 @@
+# Table 5 in the GCB paper - Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions
 
-# this <- system('hostname', TRUE)
-# if (this == "LAPTOP-IVSPBGCA") {
-#   setwd("G:/.shortcut-targets-by-id/1mfeEftF_LgRcxOT98CBIaBbYN4ZHkBr_/share/pwc")
-# } else {
-#   setwd('/Users/gcn/Google Drive/My Drive/pwc')
-# }
-
-path <- "data-raw/agg/pwc_agg3"
-path_ns <- "data-raw/agg/pwc_agg3_ns"
+path <- "data/agg/pwc_agg3"
+path_ns <- "data/agg/pwc_agg3_ns"
 
 dir.create("plots", F, F)
 

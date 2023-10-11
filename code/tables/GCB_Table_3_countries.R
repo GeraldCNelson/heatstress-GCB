@@ -96,7 +96,7 @@ t_flex <- as_flextable(d, hide_grouplabel = TRUE)  |>
   colformat_double(i = (17:18), j = (2:8), digits = 2) |>
   set_header_labels(what = "") |> 
   color(part = "footer", color = "#800000") |>
-  bold( bold = TRUE, part="header") |> 
+  bold( bold = TRUE, part = "header") |> 
   align(i = ~ !is.na(type), align = "center") |> 
   bold(i = ~ !is.na(type)) |>
   footnote(i = 10:14, j = 1,
