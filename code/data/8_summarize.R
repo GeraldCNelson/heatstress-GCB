@@ -71,7 +71,7 @@ season_mean <- function(nosun=FALSE) {
   }
   
   if (!file.exists(outf1)) {
-    fseason <- "data-raw/calendar-sacks/growing_season.tif"
+    fseason <- "data-raw/calendar-sacks/growing_season.tif" # created in data/7_get_crops
     s <- rast(fseason)
     s <- crop(s, ext(-180, 180, -60, 67))		
     r <- rast(lapply(ff, \(i) sum(rast(i) * s)))

@@ -72,7 +72,7 @@ mean_calendar <- function() {
 	plant <- rast("data-raw/calendar-sacks/plant_agg.tif")
 	harv <- rast("data-raw/calendar-sacks/harv_agg.tif")
 
-	pln <- sapply(strsplit(names(plant), " \\("), \(i)i[1])
+	pln <- sapply(strsplit(names(plant), " \\("), \(i)i[1]) # crop names we have data for
 	
 	# get the crops for which we have calendars
 	ff <- list.files("data-raw/crops/monfreda", pattern=".tif", full = TRUE)
