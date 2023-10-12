@@ -38,7 +38,7 @@ The R code in the _code/data_ directory contains the following files which need 
 -   8_summarize.R - Aggregation to means of annual, growing season and hottest periods. Also includes impact of eliminating radiation effect in PWC values. 
 -   10_a_ERS_mach_land_labor.R
 -   10_b_FAO_cropland.R - not used in the GCB heatstress paper but the code is included for comparison purposes
--   10_c_FAO_ERS_employment.R
+-   10_c_FAO_ERS_employment.R - creates rasterized versions of the country specific labor data from either ERS or FAO. ERS version used in the paper
 -   sun_nosun.R - create a raster of the ratio between end-century SSP5-8.5 thermal environment with and without solar radiation
 
 - the code/plots directory contains the fillowing files that produce the figures in the GCB paper

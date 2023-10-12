@@ -3,9 +3,9 @@ this <- system('hostname', TRUE)
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8) # only used if on a Mac
-}
-path <- "data-raw/ISIMIP/pwc_agg3"
+if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8) # only used if on a Mac
+
+path <- "data/agg/pwc_agg3"
 
 dir.create("plots", F, F)
 
@@ -38,6 +38,7 @@ set_flextable_defaults(font.family = "Times New Roman")
 set_flextable_defaults(font.color = "#333333", border.color = "#999999", padding = 4)
 col_labels <- str_replace(names(x), "_ssp126_", " SSP1-2.6, ") |> 
   str_replace("_ssp585_", " SSP5-8.5, ") |>
+  str_replace("_ssp370_", " SSP3-7.0, ") |>
   str_replace("_historical_", " Recent past, ") |>
   str_replace("annual ", "") |> 
   str_replace("hot90 ", "") |> 
@@ -60,7 +61,7 @@ sect_properties <- prop_section(
 )
 t_flex <- flextable(x)  |>
   set_header_labels(values = names_list) |>
-  add_header_row(colwidths = c(2, 5, 5, 5), values = c(" ", "Annual", "Growing season", "Hottest period")) |>
+  add_header_row(colwidths = c(1, 7, 7, 7), values = c(" ", "Annual", "Growing season", "Hottest period")) |>
   theme_vanilla() |> 
   color(part = "footer", color = "#666666") |>
   align(align = "center", part = "header") 

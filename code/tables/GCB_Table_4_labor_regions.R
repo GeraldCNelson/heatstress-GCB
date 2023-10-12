@@ -28,7 +28,7 @@ r <- rast(ff)/100 # convert percent to ratio
 #names(r) <- gsub(".tif", "", substr(basename(ff), 35, nchar(ff)))
 
 # ag labor data 
-aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm = TRUE) |> crop(r)
+aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm = TRUE) |> crop(r)# labor_ERS.tif created in 10_c_FAO_ERS_employment
 cutoffVals <- c(0.50, 0.60, 0.70, 0.80, 0.90)
 
 for (regionChoice in regionChoices) {

@@ -1,4 +1,4 @@
-
+# creates rasterized versions of the country specific ag labor data from FAO and ERS. GCB paper uses ERS version
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
