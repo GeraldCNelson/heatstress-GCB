@@ -108,9 +108,7 @@ get_labor <- function(src) {
   w$dens[is.na(w$dens)] <- median(w$dens, na.rm = TRUE)
   w$dens[w$GID_0 %in% c("ATA", "GRL")] <- NA
   
-  #plot(w, "dens", breaks=c(0,0.1,.5,1,2,6))
-  
-  labor <- rasterize(w, crps, "dens")
+   labor <- rasterize(w, crps, "dens")
   # just to make sure we do not loose any grid cells on the coast line
   # I do not think this is needed, but can't hurt
   labor <- focal(labor, w=5, fun = mean, na.policy="only")
