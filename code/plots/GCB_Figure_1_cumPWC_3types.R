@@ -3,7 +3,7 @@
 library(terra)
 this <- system('hostname', TRUE)
 if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
-
+library(stringr)
 path <- "data/agg/pwc_agg3"
 dir.create("plots", F, F)
 
@@ -44,7 +44,7 @@ fig_cumul <- function(avar="annual", legend = TRUE) {
     str_replace("ssp126_2081-2100", "SSP1-2.6, 2081-2100") |>
     str_replace("ssp585_2041-2060", "SSP5-8.5, 2041-2060") |>
     str_replace("ssp585_2081-2100", "SSP5-8.5, 2081-2100") |>
-    str_replace("ssp370_2041-2060", "SSP3-7.0, 2041-2060") |> # in case 370 is used
+    str_replace("ssp370_2041-2060", "SSP3-7.0, 2041-2060") |>
     str_replace("ssp370_2081-2100", "SSP3-7.0, 2081-2100")
   #browser()
   y <- lapply(x, \(i) {
@@ -65,9 +65,9 @@ fig_cumul <- function(avar="annual", legend = TRUE) {
   }
   
   grid(NULL, 4)
-  
+  minx <- 0
   if (legend) {
-    legend(minx+2/cval, 1, capt, lty=1:5, col = cols, cex=.6, lwd = 3, bg="white", box.col = "white")
+    legend(minx+2/cval, 1, capt, lty=1:5, col = cols, cex=.8, lwd = 3, bg="white", box.col = "white")
     
 #    legend(42, .9, capt, lty=1:5, col = cols, cex=.6, lwd=3, bg="white")
   } 

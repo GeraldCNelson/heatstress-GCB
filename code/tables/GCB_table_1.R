@@ -68,12 +68,12 @@ make_tables <- function(regions) {
 	  # convert csv to nice table
 	  t <- as.data.table(tab1)
 	  names(t) = gsub("_.", "", names(t))
-	  s
 	  t[[1]] <- gsub("_", ", ", t[[1]])
 	  t[[1]] <- gsub("ssp", "SSP ", t[[1]])
 	  t[[1]] <- gsub("126", "1-2.6", t[[1]])
 	  t[[1]] <- gsub("370", "3-7.0", t[[1]])
 	  t[[1]] <- gsub("585", "5-8.5", t[[1]])
+	  t[[1]] <- gsub("historical", "Recent past", t[[1]])
 	  cheadername <- names(t)
 	  cnewname <- c("Area percentile", "10", "50", "90", "10", "50", "90", "10", "50", "90")
 	  cvalues <- setNames(cnewname, cheadername)
@@ -87,8 +87,9 @@ make_tables <- function(regions) {
 		color(part = "footer", color = "#666666") |>
 		align(align = "right", part = "header") 
 	  t_flex
-	  path_out <- paste0("tables/table1_avePWC_3types_", region, ".docx")
-	  save_as_docx(t_flex, values = NULL, path = path_out)
+	  outf <- paste0("tables/table1_avePWC_3types_", region, ".docx")
+	  if (region == "tropical") outf <- paste0("tables/SM_table_2_avePWC_3types_", region, ".docx")
+	  save_as_docx(t_flex, values = NULL, path = outf)
 	  print(t_flex, preview = "docx", pr_section = sect_properties)
 	}
 }

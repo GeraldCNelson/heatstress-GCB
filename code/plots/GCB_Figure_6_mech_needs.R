@@ -2,7 +2,7 @@
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
+if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
 
 library(data.table)
 prj_rob <- "+proj=robin"
@@ -29,11 +29,12 @@ HPgap_sum <- sum(temp$HPNeeded)
 HP_gap_ratio <- HPgap_sum / sum(temp$ERSvalue_machinery)
 print(paste0("2020 total ag HP (million HP(CV)): ", round(sum(temp$ERSvalue_machinery/1000), 0), ", Added HP needed (million HP(CV)) to provide every hectare with ", reqHP, " HP: ", round(HPgap_sum/1000, 0)))
 
+mycol <- c("white", "skyblue", "blue", "green", "yellow", "orange")
 make_fig6 <- function() {
   par(family = "Times New Roman", fig = c(0, 0.9, 0, 1) )#, fg = mycol, col = mycol, col.axis = mycol, col.lab = mycol, col.main = mycol, col.sub = mycol)
   plot(grat, col = "gray", background="azure", lty = 2, mar = c(0,0,1.5,0), labels = FALSE)
-  plot(w, "HPgap", breaks = c(.1, .3,  .5, .7, .9, 1), add = TRUE, axes = FALSE, legend = F)
-  plot(w, "HPgap", breaks = c(.1, .3,  .5, .7, .9, 1), axes = FALSE, legend.only = T, 
+  plot(w, "HPgap", breaks = c(0, .1, .3,  .5, .7, .9, 1), add = TRUE, axes = FALSE, legend = F, col = mycol)
+  plot(w, "HPgap", breaks = c(0, .1, .3,  .5, .7, .9, 1), axes = FALSE, legend.only = T, col = mycol,
        plg = list(cex = 0.8, title.cex = 0.8, title="Additional\nHP/ha")
   )
 }
