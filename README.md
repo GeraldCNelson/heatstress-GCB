@@ -24,7 +24,7 @@ The directory structure for the code is described below. The data from the dryad
 - tables - tables included in the paper
 
 ## Order of operations
-The R code in the _code/data_ directory contains the following files which need to be run in the order listed below.
+The R code in the _R/code/data_ directory contains the following files which need to be run in the order listed below.
   
 -   `1a_get_weather.R` - create a set of csv files with ISIMIP climate data file names to be used in `1b_get_weather.R`.
 -   `1b_get_weather.R` - download a set of climate data files from the ISIMIP server based on the .csv files created in `1a_get_weather.R`. Each file is about 2.5 gb. For each of the three scenarios plus the recent past data files, the combined data sets are 285 GB. You will need at last terrabyte of space for all the data. The download process can take a long time. 
@@ -41,7 +41,7 @@ The R code in the _code/data_ directory contains the following files which need 
 -   `10_c_FAO_ERS_employment.R` - creates rasterized versions of the country specific labor data from either ERS or FAO. ERS version used in the paper
 -   `sun_nosun.R` - create a raster of the ratio between end-century SSP5-8.5 thermal environment with and without solar radiation
 
-- the code/plots directory contains the fillowing files that produce the figures in the GCB paper
+- The _R/code/plots_ directory contains the following files that produce figures in the GCB paper
   - `GCB_Figure_1_cumul.R` - _create Figure 1. Cumulative distribution of early 21st century cropland Physical Work Capacity (PWC) for recent past (1991-2010) and potential future thermal conditions_ and `SM_table_2_tropical.docx`
   - `GCB_Figure_2_latitude.R`- _create Figure 2. `Physical Work Capacity (PWC)` by latitude for global cropland for recent past (1991-2010) and potential future thermal conditions_ 
   - `GCB_Figure_3_global.R` - _create Figure 3. Average PWCs during the crop growing season and the hottest period_
@@ -50,6 +50,7 @@ The R code in the _code/data_ directory contains the following files which need 
   - `GCB_Figure_5_a_global_noSun.R` - _create Figure 5. Impact of eliminating radiation effect in PWC values._
   - `GCB_Figure_6_mech_needs.R` - _create Figure 6. The additional HP per agricultural worker to make 60 HP available_
   - `GCB_Figure_S1_aggregation_methods.R` _not used in GCB paper. Produces global figures using SSP1-2.6 and SSP5-8.5 data for recent past, mid-century, and end-century for annual, growing season, and hottest 90 days periods._
+ 
  
 - the code/tables directory contains the following files that produce the tables in the GCB paper
   - `GCB_table_1.R` - _create Table 1. Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions_
