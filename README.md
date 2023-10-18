@@ -1,11 +1,11 @@
 [![DOI](https://zenodo.org/badge/xxxx.svg)](https://zenodo.org/badge/latestdoi/xxxxx)
 
-# "Global reductions in manual agricultural work capacity due to climate change" - R code and selected data to calculate the PWC metric for heat stress facing agricultural workers in different potential climate futures
+# "Global reductions in manual agricultural work capacity due to climate change" - R code and selected data to calculate the PWC metric for heat stress facing agricultural workers in potential climate futures
 
 ## Description of the data and file structure
-The code and data needed to reproduce the results in Global Change Biology, "Global reductions in manual agricultural work capacity due to climate change (under review)" are available in the Dryad site (data, 79 GB) ([https://doi.org/10.5061/dryad.xxxxx](https://doi.org/10.5061/dryad.xxxxx)) and the Zenodo site (code and small data sets) ([https://doi.org/10.5281/zenodo.xxxxx](https://doi.org/10.5281/zenodo.xxxxx)).
+The code and data needed to reproduce the results in Global Change Biology, "Global reductions in manual agricultural work capacity due to climate change (under review)" are available in the Zenodo site (code to download the climate data and prepare the results in the GCB paper and small data sets) ([https://doi.org/10.5281/zenodo.xxxxx](https://doi.org/10.5281/zenodo.xxxxx)).
 
-To generate the results, the _Directory structure_ section below describes the directories needed (and should automatically be created when the zenodo files are downloaded) and what is contained in them.The _Order of operations_ section describes the order in which the R code files need to be run to generate the results.
+The _Directory structure_ section below describes the directories needed (and should automatically be created when the zenodo files are downloaded) and what is contained in them.The _Order of operations_ section describes the order in which the R code files need to be run to generate the results.
 
 ## Directory structure - to be updated
 
@@ -17,7 +17,7 @@ The directory structure for the code is described below. The data from the dryad
      - tables - files to generate tables used in the paper and the supplementary material
 
 - data-raw - where climate data files downloaded from the ISIMIP project are stored. The ISIMIP project [https://www.isimip.org] prepares daily bias-corrected 1/2 degree resolution from five earth system models (ESMs - GFDL-ESM4, UKESM1-0-LL, MPI-ESM1-2-HR, MRI-ESM2-0, and IPSL-CM6A-LR). The paper uses the ISIMIP3b data from 
-[https://doi.org/10.48364/ISIMIP.842396.1](https://doi.org/10.48364/ISIMIP.842396.1). 
+[https://doi.org/10.48364/ISIMIP.842396.1](https://doi.org/10.48364/ISIMIP.842396.1). These data sets are collectively about 2 gb. It can be useful to store them on an external drive and then use a simlink to access them.
 
 - data - processed data files
 - graphics - graphics included in the paper
@@ -26,8 +26,8 @@ The directory structure for the code is described below. The data from the dryad
 ## Order of operations
 The R code in the _code/data_ directory contains the following files which need to be run in the order listed below.
   
--   1a_get_weather.R - create a set of csv files with ISIMIP climate data file names to be used in 1b_get_weather.R. Runs quickly
--   1b_get_weather.R - download a set of climate data files from the ISIMIP server. Each file is about 2.5 gb. Speed of your internet connection determines how long this process takes. 
+-   1a_get_weather.R - create a set of csv files with ISIMIP climate data file names to be used in 1b_get_weather.R.
+-   1b_get_weather.R - download a set of climate data files from the ISIMIP server based on the .csv files created in 1a_get_weather.R. Each file is about 2.5 gb. For each of the three scenarios plus the recent past data files, the combined data sets are 285 GB. You will need at last terrabyte of space for all the data. The download process can take a long time. 
 -   2a_daytemp.R - calculate the average temperature in daylight hours using the tasmin and tasmax data files
 -   2b_fix_radiation.R - converts the rsds data file to average solar radiation during daylight hours
 -   3_wbgt.R - calculate wbgt values for each combination of climate scenario and time period. The code includes a switch to calculate wbgt with solar radiation values or with these set to zero to simulate complete shade. The default is nosun <- FALSE. Change to TRUE if you want the no sun wbgt values
