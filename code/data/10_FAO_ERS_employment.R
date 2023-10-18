@@ -2,7 +2,7 @@
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
+if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
 
 library(geodata)
 dir.create("data-raw/employment", FALSE, FALSE)
@@ -21,9 +21,7 @@ FAO_employment <- function() {
   fc <- gsub("zip$", "csv", f)
   d <- read.csv(fc, encoding = "latin1")
   
-  #RH: I would use a more recent year & *perhaps* match with FAO crop area, not with Monfreda
-  # but even when matching with Monfreda, which is consisent with the rest of the analysis, 
-  # it makes more sense to use current numbers; here using the last three years available: 2018-2020
+# here using the last three years available: 2018-2020
   d <- d[d$Sex == "Total" & d$Year > 2017, ] 
   d <- d[d$Indicator == "Employment in agriculture, forestry and fishing - ILO modelled estimates", ] 
   # number of people employed in Ag by country
@@ -39,7 +37,7 @@ FAO_employment <- function() {
   cc$NAME_FAO[cc$ISO3 == "SDN"] <- "Sudan (former)"
   # probably need to subtract South Sudan from this number. 
   
-  m <- merge(cc, x, by=1, all.x=TRUE)
+  m <- merge(cc, x, by = 1, all.x = TRUE)
   m$persons[m$ISO3 == "SDN"] <- m$persons[m$ISO3 == "SDN"] - m$persons[m$ISO3 == "SSD"]
   # French Guyana is largish country with no FAO data as it is part of France
   # assume (based on population size) that it is half that of Suriname 
@@ -96,11 +94,11 @@ get_labor <- function(src) {
   if (src == "ERS") {emp <- ERS_employment()}
   
   w <- geodata::world(path = "data-raw/gadm")
-  w <- merge(w, emp, by.x = "GID_0", by.y = "ISO3", all.x=TRUE)
+  w <- merge(w, emp, by.x = "GID_0", by.y = "ISO3", all.x = TRUE)
   
   # created with "crop_data.R"
   crps <- rast("data-raw/crops/total_crop_area.tif")
-  w$crparea <- extract(crps, w, "sum", na.rm = TRUE, ID=FALSE)
+  w$crparea <- extract(crps, w, "sum", na.rm = TRUE, ID = FALSE)
   w$dens <- w$persons / w$crparea
   w$dens[!is.finite(w$dens)] <- NA
   w$dens[w$dens > 15] <- NA # Djibouti and Hong Kong, huge outliers
@@ -111,7 +109,7 @@ get_labor <- function(src) {
    labor <- rasterize(w, crps, "dens")
   # just to make sure we do not loose any grid cells on the coast line
   # I do not think this is needed, but can't hurt
-  labor <- focal(labor, w=5, fun = mean, na.policy="only")
+  labor <- focal(labor, w=5, fun = mean, na.policy = "only")
   labor <- subst(labor, NA, median(w$dens, na.rm = TRUE))
   labor <- labor * crps
   writeRaster(labor, outf, overwrite = TRUE, names = "aglabor")
