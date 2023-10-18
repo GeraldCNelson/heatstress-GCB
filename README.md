@@ -49,11 +49,9 @@ The R code in the _code/data_ directory contains the following files which need 
   - `GCB_Figure_5_global_delta_noSun.R` - _not used in the paper_
   - `GCB_Figure_5_a_global_noSun.R` - _create Figure 5. Impact of eliminating radiation effect in PWC values._
   - `GCB_Figure_6_mech_needs.R` - _create Figure 6. The additional HP per agricultural worker to make 60 HP available_
-  - `GCB_Figure_S1_aggregation_methods.R`
-  - `GCB_Figure_x_Brazil.R`
-  - `GCB_figure1_cumPWC_3types.R`
-
-- the code/tables directory contains the fillowing files that produce the figures in the GCB paper
+  - `GCB_Figure_S1_aggregation_methods.R` _not used in GCB paper. Produces global figures using SSP1-2.6 and SSP5-8.5 data for recent past, mid-century, and end-century for annual, growing season, and hottest 90 days periods._
+ 
+- the code/tables directory contains the following files that produce the tables in the GCB paper
   - `GCB_table_1.R` - _create Table 1. Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions_
   - `GCB_Table_2_labor_global_share.R` - _create Table 2. Share of early century agricultural workers during the crop growing season with mean growing season PWC at or below a cutoff value of PWC by period and emission scenario._
   - `GCB_Table_3_countries.R` - _create Table 3. Summary of PWC results for selected countries_ 
@@ -62,7 +60,6 @@ The R code in the _code/data_ directory contains the following files which need 
   - `GCB_mech_needs.R`
   - `GCB_SM_Table_1_countries_all.R` - _create Supplementary Materials Table 1, Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions for all countries_
   - `GCB_SM_Table_3_countries_all_other.R`
-  - `GCB_table_x_cumul_3types.R`
 
 
 
