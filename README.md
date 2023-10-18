@@ -55,13 +55,12 @@ The R code in the _code/data_ directory contains the following files which need 
 
 - the code/tables directory contains the fillowing files that produce the figures in the GCB paper
   - `GCB_table_1.R` - _create Table 1. Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions_
-  - `GCB_table_1a_deltaNoSun.R`
   - `GCB_Table_2_labor_global_share.R` - _create Table 2. Share of early century agricultural workers during the crop growing season with mean growing season PWC at or below a cutoff value of PWC by period and emission scenario._
   - `GCB_Table_3_countries.R` - _create Table 3. Summary of PWC results for selected countries_ 
   - `GCB_Table_4_labor_regions.R` - _create Table 4. Early century agricultural labor experiencing growing season thermal environments for selected countries_ 
   - `GCB_table_5_delta_NoSun.R` - _create Table 5. Change in the PWC ratio from elimination of the radiation effect_
   - `GCB_mech_needs.R`
-  - `GCB_SM_Table_1_countries_all.R`
+  - `GCB_SM_Table_1_countries_all.R` - _create Supplementary Materials Table 1, Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions for all countries_
   - `GCB_SM_Table_3_countries_all_other.R`
   - `GCB_table_x_cumul_3types.R`
 
