@@ -53,7 +53,7 @@ The _R/code/plots_ directory contains the following R files that produce figures
   - `GCB_Figure_6_mech_needs.R` - create _Figure 6. The additional HP per hectare to make at least 1 HP per cropped hectare available_
   - `GCB_Figure_S1_aggregation_methods.R` _not used in GCB paper. Produces global figures using SSP1-2.6 and SSP5-8.5 data for recent past, mid-century, and end-century for annual, growing season, and hottest 90 days periods._
  
-The _R/code/tables_ directory contains the following R files that produce the tables in the GCB paper.
+The _R/code/tables_ directory contains the following R files that produce the tables in the GCB paper. These can be run in any order.
 
   - `GCB_table_1.R` - create Table 1. Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions_
   - `GCB_Table_2_labor_global_share.R` - create Table 2. Share of early century agricultural workers during the crop growing season with mean growing season PWC at or below a cutoff value of PWC by period and emission scenario_
