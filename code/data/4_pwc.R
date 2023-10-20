@@ -4,7 +4,7 @@ library(terra)
 library(meteor)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
+if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
 
 years <- c("1991_2000", "2001_2010", "2041_2050", "2051_2060", "2081_2090", "2091_2100")
 models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")

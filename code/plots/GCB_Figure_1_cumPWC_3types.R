@@ -2,7 +2,7 @@
 
 library(terra)
 this <- system('hostname', TRUE)
-if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
+if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
 library(stringr)
 path <- "data/agg/pwc_agg3"
 dir.create("plots", F, F)

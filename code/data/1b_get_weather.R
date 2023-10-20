@@ -2,10 +2,10 @@
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
+if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8)
 
 #download the ISIMIP data used for the PWC paper
-variables <- c("tasmin", "tasmax", "tas", "hurs", "rsds", "sfcwind") # principal weather variables. pr left out because not used in the GCB PWC paper
+variables <- c("tasmin", "tasmax", "hurs", "rsds", "sfcwind") # principal weather variables. pr left out because not used in the GCB PWC paper
 pats <- c("126", "370", "585", "historical") 
 yearChoices <- c("1991-2000", "2001-2010",  "2041-2050", "2051-2060", "2081-2090", "2091-2100")
 # test data
@@ -13,6 +13,7 @@ yearChoices <- c("1991-2000", "2001-2010",  "2041-2050", "2051-2060", "2081-2090
 # variables <- c("tasmin", "tasmax", "rsds", "hurs", "sfcwind")
 # yearChoices <- c( "2081_2090", "2091_2100")
 #end test data
+
 yrChoices <- gsub("-","_", yearChoices)
 
 ncfiles <- "data-raw/ISIMIP/ISIMIPncfiles/"

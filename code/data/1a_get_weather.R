@@ -6,7 +6,7 @@ library(data.table)
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (grepl("Mac", this, fixed=TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8) # for Macs with Mac silicon, speeds up process
+if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8) # for Macs with Mac silicon, speeds up process
 
 pats <- c("ssp126", "ssp370", "ssp585") # all ISIMIP scenarios
 pats_hist <- c("historical")
