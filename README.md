@@ -6,8 +6,6 @@ date: "2023-11-04"
 output: html_document
 ---
 
-[![DOI](https://zenodo.org/badge/xxxx.svg)](https://zenodo.org/badge/latestdoi/xxxxx)
-
 ## Introduction
 This page describes the code and data needed to reproduce the results in Global Change Biology, "Global reductions in manual agricultural work capacity due to climate change (under review)" are available in the Zenodo site (code to download the climate data and prepare the results in the GCB paper and small data sets). ([https://doi.org/10.5281/zenodo.xxxxx](https://doi.org/10.5281/zenodo.xxxxx)).
 
