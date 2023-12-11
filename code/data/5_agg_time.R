@@ -7,7 +7,7 @@ if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8
 years <- c("1991_2010", "2041_2060", "2081_2100") # 20 year periods
 models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl") 
 ssps <- c("historical", "ssp126", "ssp370", "ssp585")
-x <- expand.grid(years[1], ssps[1], models)
+x <- expand.grid(years[1:2], ssps[1], models)
 x <- rbind(x, expand.grid(years[-1], ssps[-1], models))
 
 nosun <- FALSE # variable to determine where solar radiation value is set to ISIMIP data (FALSE) or zero to simulate complete shade (TRUE)

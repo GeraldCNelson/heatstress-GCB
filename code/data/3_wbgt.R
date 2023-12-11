@@ -4,7 +4,7 @@ library(terra)
 library(meteor)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
-if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8) # useful for Macs because they have better memory management
+if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.9) # useful for Macs because they have better memory management
 
 path_intermediate <- "data-raw/ISIMIP/ISIMIPncfiles/intermediate/"
 ncfiles <- "data-raw/ISIMIP/ISIMIPncfiles/"
@@ -12,10 +12,10 @@ ncfiles <- "data-raw/ISIMIP/ISIMIPncfiles/"
 years <- c("1991_2000", "2001_2010", "2041_2050", "2051_2060", "2081_2090", "2091_2100")
 models <- c("ukesm", "gfdl", "mpi", "mri", "ipsl")
 ssps <- c("historical", "ssp126", "ssp370", "ssp585")
-x <- expand.grid(years[1], ssps[1], models)
+x <- expand.grid(years[1:2], ssps[1], models)
 x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 
-nosun <- FALSE # variable to determine where solar radiation value is set to ISIMIP data (FALSE) or zero to simulate complete shade (TRUE)
+nosun <- TRUE # variable to determine where solar radiation value is set to ISIMIP data (FALSE) or zero to simulate complete shade (TRUE)
 
 #test data
 # ssps <- "ssp370"

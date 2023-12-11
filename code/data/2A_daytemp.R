@@ -7,7 +7,7 @@ if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8
 
 library(meteor)
 
-e <- ext(-180, 180, -60, 90)
+#e <- ext(-180, 180, -60, 90)
 path <- paste0("data-raw/ISIMIP/ISIMIPncfiles")
 path_intermediate <- paste0("data-raw/ISIMIP/ISIMIPncfiles/intermediate")
 dir.create(path_intermediate, FALSE, FALSE)
