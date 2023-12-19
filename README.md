@@ -19,6 +19,8 @@ The directory structure for the code is described below.
   - *data* — Code to import data from the ISIMP project and process them
   - *plots* — Code to generate graphics used in the paper
   - *tables* — Code to generate tables used in the paper and the supplementary material
+  - *other* — Experimental code to investigate the impacts of using hourly data instead of daily data 
+  
 - **data-raw** — Downloaded climate files from the ISIMIP project. 
 The [ISIMIP project](https://www.isimip.org) prepares daily bias-corrected 1/2 degree resolution data from five earth system models (ESMs) - GFDL-ESM4, UKESM1-0-LL, MPI-ESM1-2-HR, MRI-ESM2-0, and IPSL-CM6A-LR). The paper uses the ISIMIP3b data from 
 [https://doi.org/10.48364/ISIMIP.842396.1](https://doi.org/10.48364/ISIMIP.842396.1). The data sets used are collectively about 2 terabytes. It can be useful to store them on an external drive and then use a symlink from the external drive to the `data-raw` directory  ([Mac](https://www.google.com/search?client=safari&rls=en&q=create+a+mac+symlink&ie=UTF-8&oe=UTF-8), [PC](https://www.google.com/search?client=safari&rls=en&q=create+a+pc+symlink&ie=UTF-8&oe=UTF-8)) to access them.
