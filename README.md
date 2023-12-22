@@ -6,11 +6,11 @@ Author: Gerald Nelson
 Date: 2023-12-22
 
 ## Introduction
-```
+
 This page describes the code and data needed to reproduce the results in Global Change Biology (GCB), "Global reductions in manual agricultural work capacity due to climate change" are available in the Zenodo site (code to download the climate data and prepare the results in the GCB paper). ([https://doi.org/10.5281/zenodo.xxxxx](https://doi.org/10.5281/zenodo.xxxxx)).
 
 The _Directory structure_ section describes the directories needed (which should automatically be created when the zenodo files are downloaded) and what is contained in them.The _Order of operations_ section describes the order in which the R code files need to be run to generate the results.
-```
+
 
 ## Directory structure
 
@@ -23,6 +23,7 @@ The directory structure for the code is described below.
   - *other* — Experimental code to investigate the impacts of using hourly data instead of daily data 
   
 - **data-raw** — Downloaded climate files from the ISIMIP project. 
+
 The [ISIMIP project](https://www.isimip.org) prepares daily bias-corrected 1/2 degree resolution data from five earth system models (ESMs) - GFDL-ESM4, UKESM1-0-LL, MPI-ESM1-2-HR, MRI-ESM2-0, and IPSL-CM6A-LR). The paper uses the ISIMIP3b data from 
 [https://doi.org/10.48364/ISIMIP.842396.1](https://doi.org/10.48364/ISIMIP.842396.1). The data sets used are collectively about 2 terabytes. It can be useful to store them on an external drive and then use a symlink from the external drive to the `data-raw` directory  ([Mac directions](https://www.google.com/search?client=safari&rls=en&q=create+a+mac+symlink&ie=UTF-8&oe=UTF-8), [PC directions](https://www.google.com/search?client=safari&rls=en&q=create+a+pc+symlink&ie=UTF-8&oe=UTF-8)) to access them.
 - **data** — processed data files
@@ -30,6 +31,7 @@ The [ISIMIP project](https://www.isimip.org) prepares daily bias-corrected 1/2 d
 - **tables** — tables included in the paper
 
 ## Order of operations
+
 The R code in the _R/code/data_ directory contains the following R files. These need to be run in the order listed below.
   
 -   `1a_get_weather.R` - create a set of `txt` files in the `data-raw/ISIMIP/filelists/` directory with ISIMIP climate data file names to be used in `1b_get_weather.R`.
