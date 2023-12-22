@@ -22,7 +22,6 @@ options(timeout = 3600)
 downloadPats <- function(pat) {
   destdir <- paste0(ncfiles, pat, "/")
   if (!dir.exists(destdir)) dir.create(destdir, recursive = FALSE) 
- # browser()
   ff <- list.files("data-raw/ISIMIP/filelists", pattern = pat, full = TRUE)
   for (f in ff) {
     print(f); flush.console()
@@ -46,6 +45,4 @@ for (pat in pats) {
   downloadPats(pat)
 }
 
-
-#ln -s /Volumes/ExtremeSSD2/ISIMIP/ISIMIPncfiles /Users/gcn/Documents/workspace/heatstress_GCB/data-raw/ISIMIP/
 

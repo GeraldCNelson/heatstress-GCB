@@ -1,4 +1,4 @@
-# sum area of the 172 crops in the geodata library from the Mondfreda, et al. data, and generated weighted crop calendar dat based on the Sacks, et al, 2010 crop calendars in the geodata library
+# sum area of the 172 crops in the geodata library from the Mondfreda, et al. data, and generate weighted crop calendar data based on the Sacks, et al, 2010 crop calendars in the geodata library
 library(terra)
 terraOptions(verbose = TRUE)
 this <- system('hostname', TRUE)
@@ -81,8 +81,6 @@ mean_calendar <- function() {
 	crops <- rast(ff[i])
 	names(crops) <- sapply(strsplit(names(crops), "_"), \(i)i[1])
 	cat(names(crops))
-#	crops <- crop(crops, c(-180,180,-60,90)) |> aggregate(6, sum, na.rm = TRUE) 
-	
 	crops <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
 	  aggregate(6, sum, na.rm = TRUE) |> round()
 	

@@ -22,7 +22,6 @@ x <- rbind(x, expand.grid(years[-c(1:2)], ssps[-1], models))
 
 compute_pwc <- function(y, s, m, nosun=FALSE) {
 	if (nosun) {
-	 # browser()
 		dir.create("data/pwc_ns", FALSE, FALSE)
 		fin <- paste0("data/wbgt_ns/wbgt_ns_", m, "_", s, "_", y, ".tif") 
 		fout <- gsub("data/wbgt_ns/wbgt_ns", "data/pwc_ns/pwc_ns", fin)	

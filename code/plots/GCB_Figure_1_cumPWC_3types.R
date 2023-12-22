@@ -15,19 +15,14 @@ crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)
   aggregate(6, sum, na.rm = TRUE) |> round()
 
 fig_cumul <- function(avar="annual", legend = TRUE) {
-  ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full = TRUE)
+  ff <- list.files(path, pattern = paste0(avar, ".*_mean.tif$"), full.names = TRUE)
   r <- rast(ff) / cval # convert from % to ratio
   if (!include_SSP370) r <- r[[!grepl("ssp370", names(r))]] # remove columns with ssp370 data
     names(r) <- gsub("^pwc_", "", names(r))
   names(r) <- gsub("; ", "", names(r))
   
-  # r <- r[[names(r) != "ssp126_2081-2100"]] # drop end century ssp126
   n <- nlyr(r)
-  
   r <- c(crps, r) |> round(1) |> mask(crps, maskvalue = 0)
-  #	r <- round(r,1)
-  #	r <- mask(r, crps, maskvalue = 0)
-  
   d <- as.data.frame(r)
   
   x <- lapply(1:n, \(i) {
@@ -46,8 +41,8 @@ fig_cumul <- function(avar="annual", legend = TRUE) {
     str_replace("ssp585_2081-2100", "SSP5-8.5, 2081-2100") |>
     str_replace("ssp370_2041-2060", "SSP3-7.0, 2041-2060") |>
     str_replace("ssp370_2081-2100", "SSP3-7.0, 2081-2100")
-  #browser()
-  y <- lapply(x, \(i) {
+
+    y <- lapply(x, \(i) {
     c(i[which.min(abs(i[,2]-0.25)), 1],
       i[which.min(abs(i[,2]-0.50)), 1],
       i[which.min(abs(i[,2]-0.75)), 1])
@@ -67,28 +62,28 @@ fig_cumul <- function(avar="annual", legend = TRUE) {
   grid(NULL, 4)
   minx <- 0
   if (legend) {
-    legend(minx+2/cval, 1, capt, lty=1:5, col = cols, cex=.8, lwd = 3, bg="white", box.col = "white")
+    legend(minx+2/cval, 1, capt, lty=1:5, col = cols, cex=.8, lwd = 3, bg = "white", box.col = "white")
     
 #    legend(42, .9, capt, lty=1:5, col = cols, cex=.6, lwd=3, bg="white")
   } 
-  axis(1, xlab="PWC", cex.axis=.9)
-  axis(2, at=seq(0,1,.25), las=1, cex.axis=.9, labels=legend)
+  axis(1, xlab="PWC", cex.axis = .9)
+  axis(2, at=seq(0,1,.25), las=1, cex.axis = .9, labels=legend)
   
   i <- match(avar, c("annual", "season", "hot90"))
-  text(42, 1, c("(a) Annual", "(b) Growing season", "(c) Hottest period")[i], pos=4, xpd=TRUE) 
+  text(42, 1, c("(a) Annual", "(b) Growing season", "(c) Hottest period")[i], pos = 4, xpd = TRUE) 
   y
 }
 
 outf <- "plots/Fig1_pwc_cum_3types.png"
 if (include_SSP370) outf <- "plots/Fig1_pwc_cum_3types_w_SSP370.png"
-png(outf, units="in", width = 12, height = 4, res = 300, pointsize=18)
+png(outf, units = "in", width = 12, height = 4, res = 300, pointsize = 18)
 
-par(mfrow=c(1,3))
-par(mar=c(4,4,1,0))
+par(mfrow = c(1,3))
+par(mar = c(4,4,1,0))
 ya <- fig_cumul("annual")
-par(mar=c(4,2,1,2))
+par(mar = c(4,2,1,2))
 yb <- fig_cumul("season", F)
-par(mar=c(4,0,1,4))
+par(mar = c(4,0,1,4))
 yc <- fig_cumul("hot90", F)
 
 dev.off()

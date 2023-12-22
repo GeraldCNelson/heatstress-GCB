@@ -25,7 +25,6 @@ nosun <- TRUE # variable to determine where solar radiation value is set to ISIM
 # end test data -----
 
 compute_wbgt <- function(y, s, m, nosun=FALSE) {
-#browser()
 	if (nosun) {
 		dir.create("data/wbgt_ns", FALSE, FALSE)
 		fout <- paste0("data/wbgt_ns/wbgt_ns_", m, "_", s, "_", y, ".tif") 	
@@ -37,9 +36,7 @@ compute_wbgt <- function(y, s, m, nosun=FALSE) {
 	print(fout); flush.console()
 	
 	ff <- list.files(ncfiles, pattern = paste0(m, ".*", s, ".*", y, ".*\\.nc$"), recursive = TRUE, full.names = TRUE)
-#	vars <- c("tas", "hurs", "sfcwind")	
 	vars <- c("hurs", "sfcwind")	
-#	browser()
 	ff <- lapply(paste0(vars, "_"), \(v) grep(v, ff, value=TRUE)) |> unlist() |> as.vector()	# "\" here means a function
 	if (length(ff) != 2) {
 		print("error: files missing")
@@ -47,7 +44,6 @@ compute_wbgt <- function(y, s, m, nosun=FALSE) {
 	}
 	m <- rast("data-raw/mask.tif") # land only mask
 	e <- ext(m)
-	#e <- ext(-180, 180, -60, 67)
 	x <- lapply(ff, \(f) {r <- rast(f); window(r) <- e; r })
 
 

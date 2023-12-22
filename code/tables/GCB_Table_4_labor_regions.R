@@ -21,11 +21,9 @@ country_Nigeria <- gadm(country = "NGA", level = 1, path = "data-raw/gadm/", res
 regionChoices <- c("country_Brazil", "country_India", "country_Nigeria")
 
 # pwc data 
-#ff <- list.files(path, pattern = "ensemble_pwc_wbgt_out_season_mean.*.tif$", full = TRUE)
 ff <- list.files(path, pattern = "pwc_season_mean.*.tif$", full = TRUE)
 
 r <- rast(ff)/100 # convert percent to ratio
-#names(r) <- gsub(".tif", "", substr(basename(ff), 35, nchar(ff)))
 
 # ag labor data 
 aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm = TRUE) |> crop(r)# labor_ERS.tif created in 10_c_FAO_ERS_employment
@@ -53,7 +51,6 @@ for (regionChoice in regionChoices) {
   tt$regionName <- regionName
   
   if (!exists("comb")) {
-    # browser()
     comb <- tt
   } else {comb <- rbind(comb, tt)
   }

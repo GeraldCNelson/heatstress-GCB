@@ -16,7 +16,6 @@ wrld <- project(wrld, prj) |> crop(e)
 
 capt <- c("1991-2010", "2041-2060 (SSP5-8.5)", "2081-2100 (SSP5-8.5)")
 if (include_SSP370) capt <- c("1991-2010", "2041-2060 (SSP5-8.5)", "2081-2100 (SSP3-7.0)", "2081-2100 (SSP5-8.5)")
-#tvars <- c("1991-2010", "2041-2060", "2081-2100")
 
 grat <- graticule(30, crs = prj) |> crop(e)
 cols <- rev(viridis::turbo(100)[15:100])

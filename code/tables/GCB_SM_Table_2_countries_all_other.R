@@ -11,23 +11,6 @@ library(officer)
 library(stringr)
 set_flextable_defaults(font.family = "Times New Roman", font.color = "#333333", border.color = "#999999", padding = 4)
 
-# crps <- rast("data-raw/crops/total_crop_area.tif") |> 
-#   aggregate(6, sum, na.rm = TRUE) |> crop(c(-180, 180, -60, 67)) |>  round()
-# 
-# w <- geodata::world(path = "data-raw", version="3.6")
-# 
-# ff <- list.files(path, pattern = ".*_mean.tif$", full = TRUE)
-# s <- sds(ff[c(1,3,2)])
-# z <- lapply(s, \(r) zonal(r, w, mean, w=crps, na.rm = TRUE))
-# 
-# 
-# zz <- do.call(cbind, z)
-# names(zz) <- gsub("mean_", "", gsub("pwc_", "", paste0(rep(names(s), each=5), "_", names(zz))))
-# zz <- cbind(values(w), zz) # annual, growing season and hot window for all countries
-# #zz[,-c(1:2)] <- round(zz[,-c(1:2)], 0)
-# 
-# zz[, 3:ncol(zz)] <- zz[, 3:ncol(zz)]/100 # convert to ratio
-#
 #Farm machinery is measured in units of 1000 horsepower. This is divided by cropland (1000 hectares) to give the average machinery use per hectare of agricultural land.
 ## Source of the data is the first data set at https://www.ers.usda.gov/data-products/international-agricultural-productivity/. This has both machinery, land and agricultural labor individually. 
 temp <- as.data.table(read.csv("data-raw/machines/ERSmach_land_labor.csv")) # created in ERS_mach_land_labor.R, machinery, land and labor
@@ -65,15 +48,6 @@ write.csv(temp, "tables/SM_table2_countries_all_other.csv", row.names = FALSE)
 
 d <- temp
 setnames(d, old = names(d), new = c("ISO3","Name", "Labor", "Cropland", "Machinery", "Machinery per cropland", "Machinery per capita"))
-
-# d$Variable =   str_replace_all(d$Variable, "_", " ")  |> 
-#   str_replace_all(" 3yr", "")  |> 
-#   str_replace_all("hot90 ", "")  |> 
-#   str_replace("season ", " ") |> 
-#   str_to_title()  |>
-#   str_replace("Ssp585", "SSP5-8.5") |>
-#   str_replace("Land", "Cropland")
-
 
 t_flex <- flextable(d) |>
   colformat_double(i = (1:176), j = (3:5), digits=0) |> 

@@ -10,8 +10,7 @@ dir.create("data-raw/employment", FALSE, FALSE)
 FAO_employment <- function() {
   #employment ------
   outf <- "data-raw/employment/clean_employment_FAO.rds"
-  # if (file.exists(outf)) return(readRDS(outf))
-  url = "https://fenixservices.fao.org/faostat/static/bulkdownloads/Employment_Indicators_Agriculture_E_All_Data_(Normalized).zip"
+   url = "https://fenixservices.fao.org/faostat/static/bulkdownloads/Employment_Indicators_Agriculture_E_All_Data_(Normalized).zip"
   f = paste0("data-raw/employment/", basename(url))
   if (!file.exists(f)) {
     dir.create(dirname(f), FALSE, TRUE)
@@ -76,12 +75,6 @@ ERS_employment <- function() {
   x <- unique(x)
   x[, persons := persons * 1000] # to get in same units as the FAO numbers
   
-  #x[ISO3 == "SDN", persons := x[ISO3 == "SSD", persons]] ERS data has separate Sudan and South Sudan
-  
-  # French Guyana is largish country with no FAO data as it is part of France. The ERS data includes values for French Guyana so no need to make assumptions below needed with the FAO data
-  # assume (based on population size) that it is half that of Suriname 
-  # m$persons[m$ISO3 == "GUF"] <- m$persons[m$ISO3 == "SUR"] / 2
-  #  m$persons[m$ISO3 == "FRA"] <- m$persons[m$ISO3 == "FRA"] - m$persons[m$ISO3 == "GUF"]
   saveRDS(d, outf)
   x
 }
@@ -107,9 +100,7 @@ get_labor <- function(src) {
   w$dens[w$GID_0 %in% c("ATA", "GRL")] <- NA
   
    labor <- rasterize(w, crps, "dens")
-  # just to make sure we do not loose any grid cells on the coast line
-  # I do not think this is needed, but can't hurt
-  labor <- focal(labor, w=5, fun = mean, na.policy = "only")
+  labor <- focal(labor, w = 5, fun = mean, na.policy = "only")
   labor <- subst(labor, NA, median(w$dens, na.rm = TRUE))
   labor <- labor * crps
   writeRaster(labor, outf, overwrite = TRUE, names = "aglabor")

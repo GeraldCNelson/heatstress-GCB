@@ -12,9 +12,6 @@ e <- ext(-12000000, 16038790, -6168256, 6942628)
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
   aggregate(6, sum, na.rm = TRUE) |> round()
 
-# crps <- rast("data-raw/crops/total_crop_area.tif")
-# crps <- aggregate(crps, 6, sum, na.rm = TRUE)
-# crps <- crop(crps, c(-180, 180, -60, 67))
 crops <- mask(crps > 100, wrld)
 wrld <- project(wrld, prj) |> crop(e)
 back <- crop(project(crops, prj), e)
@@ -38,7 +35,6 @@ supp_maps <- function(x, capt, main, rng=c(15, 100), outf) {
   }
   layout(matrix(c(1:4,4,4), 3, 2), width = c(1,.2))
   for (i in 1:3) {
-#    browser()
     plot(grat, col = "gray", background="azure", lty = 2, mar = c(0,0,0,0), labels = FALSE)
     plot(back, add = TRUE, axes = FALSE, legend = FALSE, col = "light gray")
     plot(x[[i]], add = TRUE, axes = FALSE, col = cols, legend = i==2, xpd=TRUE, range=rng, 
@@ -49,7 +45,6 @@ supp_maps <- function(x, capt, main, rng=c(15, 100), outf) {
   }
   # add legend
   plot(0, axes=FALSE, type="n")
-  #text(0.6, ifelse(grepl("\n", main), 0.6, 0.52), pos=4, xpd=TRUE, main, cex=1.4)
   
   if (outf != "") dev.off()
 }

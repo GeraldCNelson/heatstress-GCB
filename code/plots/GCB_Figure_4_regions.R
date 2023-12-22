@@ -8,7 +8,6 @@ if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8
 library(terra)
 library(geodata)
 library(extrafont)
-# extrafont::font_import()
 extrafont::loadfonts(quiet = TRUE)
 path <- "data-raw/ISIMIP/pwc_agg3"
 dir.create("plots", F, F)
@@ -51,12 +50,11 @@ make_fig4 <- function(x, country, n, rng=c(.25, 1)) {
 	x <- mask(x, rc)
 	x <- clamp(x, rng[1], rng[2], values=TRUE)
 	
-#	e <- as.vector(ext(rc))
 	subs <- paste0("(", letters[(1:3) + (n-1)*3], ")") 
 	cols <- rev(viridis::turbo(100)[15:100])
 	lege <- ext(16.5, 17.3, 0, 18)
 	
-	par(family = "Times New Roman")#, fg = mycol, col = mycol, col.axis = mycol, col.lab = mycol, col.main = mycol, col.sub = mycol)
+	par(family = "Times New Roman")
 	for (i in 1:3) {
 		mapext <- e + diff(e[1:2])/100
 		plot(wrld, col = gray(.92), ext=mapext, axes=FALSE, mar=c(.1, .1, 2, .1), backgroun="azure", border="gray", lwd=1.5, box=TRUE)

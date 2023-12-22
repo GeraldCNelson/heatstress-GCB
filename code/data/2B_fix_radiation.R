@@ -22,7 +22,6 @@ e <- ext(-180, 180, -60, 90)
 # end test data-----
 
 radfun <- function(y, s, m) {
-  #  browser()
   print(paste(y, m, s)); flush.console()
   if ((m == "") || (s == "")) {
     ff <- list.files(ncfiles, pattern = paste0("_rsds_global_.*.", y, ".nc$"), recursive = TRUE, full.names = TRUE) 
@@ -31,8 +30,7 @@ radfun <- function(y, s, m) {
   }
   
   if (length(ff) == 0) return(paste("no files"))
-  #s	print(ff)
-  
+
   print("photoperiod")
   outf <- file.path(path_intermediate, gsub("nc$", "tif", basename(ff[length(ff)])))
   print(outf)
@@ -59,7 +57,6 @@ radfun <- function(y, s, m) {
 for (y in years) {
   for (m in models) {
     for (s in ssps) {
-      #		radfun(y, "", "")
       radfun(y, s, m)
     }
   }

@@ -18,7 +18,7 @@ yrChoices_hist <- c("1991_2000", "2001_2010")
 # create the download links
 # first get the list of files from ISIMIP
 dpath <- "https://files.isimip.org/ISIMIP3b/InputData/climate/atmosphere/bias-adjusted/global/daily/"
-#destpath <- "/Users/gcn/Library/CloudStorage/GoogleDrive-nelson.gerald.c@gmail.com/.shortcut-targets-by-id/15ZyiV8W2VeyKuSCVzpP2jsLq7pzXLz4B/pwc/data-raw/ISIMIP/filelists/"
+
 destpath <- "data-raw/ISIMIP/filelists/"
 
 createlinkfiles <- function(model, pat) {

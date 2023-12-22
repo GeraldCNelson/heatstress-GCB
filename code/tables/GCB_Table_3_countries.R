@@ -19,7 +19,6 @@ s <- sds(ff[c(1,3,2)]) # annual, hot 90, season means
 z <- lapply(s, \(r) zonal(r, w, mean, w=crps, na.rm = TRUE)) # get country means for 3 periods, in a list
 
 zz <- do.call(cbind, z) # combine into 1 data frame
-#eachrep <- length()
 names(zz) <- gsub("mean_", "", gsub("pwc_", "", paste0(rep(names(s), each = 7), "_", names(zz)))) #5 for two scenarios, 7 for 3 scenarios
 zz <- cbind(values(w), zz) # annual, growing season and hot window for all countries
 zz[, 3:ncol(zz)] <- zz[, 3:ncol(zz)]/100 # convert PWC percents to ratio
@@ -44,7 +43,6 @@ write.csv(x, "tables/big_table.csv", row.names = FALSE)
 
 ctrs <- c("Brazil", "China", "France", "Nigeria", "Pakistan", "India", "United States")
 d <- x[x$NAME_0 %in% ctrs,-1]
-#d$Country.territory <- NULL
 d[, -1] <- apply(d[, -1], 2, round, 2)
 nms <- d[,1] # should be same as ctrs
 
@@ -59,11 +57,6 @@ d <- d[, colNamesToKeep]
 
 d <- t(d[,-1]) 
 colnames(d) <- nms
-#d <- d[, ctrs]
-
-# d[6:15, ] <- d[c(11:15,6:10), ]	
-# d <- d[-grep("ssp126", rownames(d)), ] # remove ssp126
-# d <- d[-grep("annual", rownames(d)), ] # remove annual rows
 d <- data.frame(ssp=rownames(d), d)
 rownames(d) <- NULL
 write.csv(d, "tables/subset_big_table.csv", row.names = FALSE)
@@ -72,7 +65,6 @@ write.csv(d, "tables/subset_big_table.csv", row.names = FALSE)
 # directions - https://stackoverflow.com/questions/71661066/is-there-a-function-in-flextable-to-group-a-few-rows-in-a-table-together-under-a
 d <- read.csv("tables/subset_big_table.csv") # makes row names a separate column
 d$ssp <- gsub("historical", "recent_past", d$ssp)
-#d[,-1] <- apply(d[,-1], 2, round, 2)
 
 d['type'] = c("PWC, growing season", "PWC, growing season", "PWC, growing season", "PWC, growing season", "PWC, growing season", 
   "PWC, hottest period", "PWC, hottest period", "PWC, hottest period", "PWC, hottest period", "PWC, hottest period",

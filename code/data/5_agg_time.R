@@ -31,7 +31,6 @@ agg_time <- function(y, s, m, nosun=FALSE) {
   i <- which(y == yrs[,3])
   
   if (nosun) {
- #   browser()
     dir.create("data/agg/pwc_agg1_ns", FALSE, TRUE)
     fin1 <- paste0("data/pwc_ns/pwc_ns_", m, "_", s, "_", yrs[i,1], ".tif") 
     fin2 <- paste0("data/pwc_ns/pwc_ns_", m, "_", s, "_", yrs[i,2], ".tif") 	

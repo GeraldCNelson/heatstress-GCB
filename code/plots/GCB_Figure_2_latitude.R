@@ -15,10 +15,6 @@ latRangeChoices <- c("global", "tropical", "S20N35")
 ext_global <- ext(-180, 180, -60, 67)
 ext_tropical <- ext(-180, 180, -23, 23)
 ext_S20N35 <- ext(-180, 180, -20, 35)
-# crps <- rast("data-raw/crops/total_crop_area.tif")
-# crps <- aggregate(crps, 6, sum, na.rm = TRUE)
-# crps <- crop(crps, c(-180, 180, -60, 67))
-# crps <- round(crps)
 
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
   aggregate(6, sum, na.rm = TRUE) |> round()
@@ -36,8 +32,6 @@ fig_lat <- function(avar="annual", lgnd=TRUE, region="global") {
   n <- nlyr(r)
   nms <- names(r)
   
-  # r <- c(crps, r)
-  #  r <- mask(r, crps, maskvalue = 0)
   r <- c(crps, r) |> round(1) |> mask(crps, maskvalue = 0)
   
   an <- anyNA(r)
