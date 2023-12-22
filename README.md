@@ -1,15 +1,16 @@
----
-title: "Global reductions in manual agricultural work capacity due to climate change"
-subtitle: "R code and selected data to generate the results for a Global Change Biology paper" 
-author: "Gerald Nelson"
-date: "2023-12-22"
-output: html_document
----
+
+# Global reductions in manual agricultural work capacity due to climate change"
+## R code and selected data to generate the results for a Global Change Biology paper 
+Author: Gerald Nelson
+
+Date: 2023-12-22
 
 ## Introduction
+```
 This page describes the code and data needed to reproduce the results in Global Change Biology (GCB), "Global reductions in manual agricultural work capacity due to climate change" are available in the Zenodo site (code to download the climate data and prepare the results in the GCB paper). ([https://doi.org/10.5281/zenodo.xxxxx](https://doi.org/10.5281/zenodo.xxxxx)).
 
 The _Directory structure_ section describes the directories needed (which should automatically be created when the zenodo files are downloaded) and what is contained in them.The _Order of operations_ section describes the order in which the R code files need to be run to generate the results.
+```
 
 ## Directory structure
 
