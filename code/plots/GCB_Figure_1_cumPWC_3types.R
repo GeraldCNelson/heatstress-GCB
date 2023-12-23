@@ -76,7 +76,7 @@ fig_cumul <- function(avar="annual", legend = TRUE) {
 
 outf <- "plots/Fig1_pwc_cum_3types.png"
 if (include_SSP370) outf <- "plots/Fig1_pwc_cum_3types_w_SSP370.png"
-png(outf, units = "in", width = 12, height = 4, res = 300, pointsize = 18)
+png(outf, units = "in", width = 12, height = 4, res = 500, pointsize = 18)
 
 par(mfrow = c(1,3))
 par(mar = c(4,4,1,0))

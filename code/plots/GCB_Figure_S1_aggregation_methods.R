@@ -31,7 +31,7 @@ supp_maps <- function(x, capt, main, rng=c(15, 100), outf) {
   lege <- ext(18000000, 19000000, -9000000, 9000000)
   
   if (outf != "") {
-    png(outf, units="in", width = 5, height = 6, res = 300)
+    png(outf, units="in", width = 5, height = 6, res = 500)
   }
   layout(matrix(c(1:4,4,4), 3, 2), width = c(1,.2))
   for (i in 1:3) {

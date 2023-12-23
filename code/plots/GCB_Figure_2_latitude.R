@@ -84,7 +84,7 @@ for (region in latRangeChoices) {
   outf <- paste0("plots/Fig2_", region, ".png")
   if (include_SSP370) outf <- paste0("plots/Fig2_", region, "_w_SSP370.png")
   
-  png(outf, units="in", width = 12, height = 4, res = 300, pointsize=18)
+  png(outf, units="in", width = 12, height = 4, res = 500, pointsize=18)
   par(family = "Times New Roman")
   par(mfrow=c(1,3))
   par(mar=c(4,4,2,0))

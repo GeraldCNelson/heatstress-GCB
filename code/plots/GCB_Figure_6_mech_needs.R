@@ -41,7 +41,7 @@ make_fig6 <- function() {
 
 pngfile = paste0("plots/Fig6_country_HP_needs.png")
 h = 5
-png(pngfile, units="in", width = 1.3*h, height = h, res = 300)
+png(pngfile, units="in", width = 1.3*h, height = h, res = 500)
 
 make_fig6()
 dev.off()

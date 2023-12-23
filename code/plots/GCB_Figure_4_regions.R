@@ -9,7 +9,7 @@ library(terra)
 library(geodata)
 library(extrafont)
 extrafont::loadfonts(quiet = TRUE)
-path <- "data-raw/ISIMIP/pwc_agg3"
+path <- "data/agg/pwc_agg3"
 dir.create("plots", F, F)
 wrld <- geodata::world(path = "data-raw")
 crps <- rast("data-raw/crops/total_crop_area.tif", win = ext(-180, 180, -60, 67)) |> 
@@ -87,7 +87,7 @@ countries <- c("Brazil", "India", "Nigeria")
 pngfile <- paste0("plots/pwc_figure4.png")
 #pngfile=""
 if (pngfile != "") {
-	png(pngfile, units="in", width = 5.5, height = 6, res = 300)
+	png(pngfile, units="in", width = 5.5, height = 6, res = 500)
 }	
 
 m = cbind(matrix(c(1:9), 3, 3), 10)

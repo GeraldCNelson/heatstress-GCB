@@ -64,7 +64,7 @@ if (include_SSP370) outf <- paste0("plots/Fig3_avePWCs_globalMap_w_SSP370.png")
 #outf = ""
 if (outf != "") {
 	h = 6
-	png(outf, units = "in", width = 1.3*h, height = h, res = 300)
+	png(outf, units = "in", width = 1.3*h, height = h, res = 500)
 }
 
 layout(matrix(c(1:7, 7, 7), 3, 3), width = c(1,1,.2))

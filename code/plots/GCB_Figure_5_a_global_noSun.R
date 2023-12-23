@@ -69,7 +69,7 @@ make_fig5 <- function(pcol = 1) {
 pngfile = paste0("plots/pwc_figure5_noSun_delta.png")
 if (pngfile != "") {
   h = 6
-  png(pngfile, units="in", width = 1.3*h, height = h, res = 300)
+  png(pngfile, units="in", width = 1.3*h, height = h, res = 500)
 }
 
 layout(matrix(c(1:7, 7, 7), 3, 3), width = c(1,1,.2))
