@@ -3,7 +3,7 @@
 path <- "data/agg/pwc_agg3"
 dir.create("results", FALSE, FALSE)
 
-#test data
+# test data
 regionChoice <- "country_Brazil"
 
 library(terra)
@@ -14,19 +14,21 @@ library(data.table)
 set_flextable_defaults(font.family = "Times New Roman", font.color = "#333333", border.color = "#999999", padding = 4)
 
 wrld <- geodata::world(path = "data-raw")
-country_Brazil <- gadm(country = "BRA", level = 0, path = "data-raw/gadm/", resolution = 2) 
+country_Brazil <- gadm(country = "BRA", level = 0, path = "data-raw/gadm/", resolution = 2)
 country_India <- gadm(country = "IND", level = 1, path = "data-raw/gadm/", resolution = 2)
 country_Nigeria <- gadm(country = "NGA", level = 1, path = "data-raw/gadm/", resolution = 2)
 
 regionChoices <- c("country_Brazil", "country_India", "country_Nigeria")
 
-# pwc data 
+# pwc data
 ff <- list.files(path, pattern = "pwc_season_mean.*.tif$", full = TRUE)
 
-r <- rast(ff)/100 # convert percent to ratio
+r <- rast(ff) / 100 # convert percent to ratio
 
-# ag labor data 
-aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm = TRUE) |> crop(r)# labor_ERS.tif created in 10_c_FAO_ERS_employment
+# ag labor data
+aglab <- rast("data-raw/labor_ERS.tif") |>
+  aggregate(6, sum, na.rm = TRUE) |>
+  crop(r) # labor_ERS.tif created in 10_c_FAO_ERS_employment
 cutoffVals <- c(0.50, 0.60, 0.70, 0.80, 0.90)
 
 for (regionChoice in regionChoices) {
@@ -49,10 +51,11 @@ for (regionChoice in regionChoices) {
     }
   }
   tt$regionName <- regionName
-  
+
   if (!exists("comb")) {
     comb <- tt
-  } else {comb <- rbind(comb, tt)
+  } else {
+    comb <- rbind(comb, tt)
   }
 }
 
@@ -65,7 +68,7 @@ write.csv(comb, paste0("tables/", "stressedLaborCts_regions", ".csv"), row.names
 
 # create word table -----
 comb <- read.csv(paste0("tables/", "stressedLaborCts_regions", ".csv"))
-names(comb) <- c("PWC percentile",  "regionName",  cutoffVals)
+names(comb) <- c("PWC percentile", "regionName", cutoffVals)
 temp <- rownames(comb) |>
   str_replace("pwc_historical_1991-2010", "Recent past, 1991-2010") |>
   str_replace("pwc_ssp126_2041-2060", "SSP1-2.6, 2041-2060") |>
@@ -78,20 +81,16 @@ temp <- rownames(comb) |>
   str_replace("aglabor1", "Total ag. labor") |>
   str_replace("aglabor2", "Total ag. labor")
 rownames(comb) <- temp
-comb[,3:7] <- round(comb[,3:7], 0)
+comb[, 3:7] <- round(comb[, 3:7], 0)
 comb <- as_grouped_data(comb, groups = c("regionName"), columns = NULL)
-t_flex <- as_flextable(comb, hide_grouplabel = TRUE)  |>
-  set_header_labels(what = "") |> 
-  add_header_row(colwidths = c(1,5), values = c("Emission scenario & period", "Workers (000)"), top = TRUE) |> 
+t_flex <- as_flextable(comb, hide_grouplabel = TRUE) |>
+  set_header_labels(what = "") |>
+  add_header_row(colwidths = c(1, 5), values = c("Emission scenario & period", "Workers (000)"), top = TRUE) |>
   color(part = "footer", color = "#800000") |>
-  bold( bold = TRUE, part = "header") |> 
-  align(i = ~ !is.na(regionName), align = "center") |> 
+  bold(bold = TRUE, part = "header") |>
+  align(i = ~ !is.na(regionName), align = "center") |>
   align(align = "center", part = "header") |>
   bold(i = ~ !is.na(regionName)) |>
   add_footer_row(values = "Source: Labor data from USDA/ERS, PWC values from own calculations.", colwidths = c(6), top = FALSE)
 t_flex
 save_as_docx(t_flex, values = NULL, path = paste0("tables/", "table4_stressedLaborCts_regions", ".docx"))
-
-
-
-

@@ -66,5 +66,5 @@ The _R/code/tables_ directory contains the following R files that produce the ta
   - `GCB_SM_Table_1_countries_all.R` - create Supplementary Materials Table 1, Physical Work Capacity (PWC) for 1991-2010 and potential future thermal conditions for all countries
   - `GCB_SM_Table_3_countries_all_other.R`
 
-Questions/Comments to [nelson.gerald.c@gmail.com](mailto:nelson.gerald.c@gmail.com)
-
+Identify code/data issues in the Issues section of this repository. Questions/Comments to [nelson.gerald.c@gmail.com](mailto:nelson.gerald.c@gmail.com)
+Issue

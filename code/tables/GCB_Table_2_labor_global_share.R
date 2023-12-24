@@ -8,21 +8,23 @@ set_flextable_defaults(font.family = "Times New Roman", font.color = "#333333", 
 path <- "data/agg/pwc_agg3"
 dir.create("data/tables", FALSE, FALSE)
 
-# pwc data 
+# pwc data
 ff <- list.files(path, pattern = "pwc_season_mean", full = TRUE)
 r <- rast(ff)
-#names(r) <- gsub(".tif", "", substr(basename(ff), 35, nchar(ff)))
+# names(r) <- gsub(".tif", "", substr(basename(ff), 35, nchar(ff)))
 
-aglab <- rast("data-raw/labor_ERS.tif") |> aggregate(6, sum, na.rm = TRUE) |> crop(r)
+aglab <- rast("data-raw/labor_ERS.tif") |>
+  aggregate(6, sum, na.rm = TRUE) |>
+  crop(r)
 cutoffVals <- c(50, 60, 70, 80, 90)
 
 # labor affected by r <= val
-#comb <- data.frame(sum_stressed = numeric(7))
+# comb <- data.frame(sum_stressed = numeric(7))
 if (exists("comb")) unlink(comb)
 for (val in cutoffVals) {
   x <- (r <= val) * aglab
-  g <- global(x, sum, na.rm=T) /1000
-  tot <- global(aglab, sum) /1000
+  g <- global(x, sum, na.rm = T) / 1000
+  tot <- global(aglab, sum) / 1000
   g <- rbind(g, tot)
   if (!exists("comb")) {
     comb <- g
@@ -48,24 +50,25 @@ names(comb) <- c(paste0("X", cutoffVals), "thermal_env")
 colorder <- c("thermal_env", paste0("X", cutoffVals))
 comb <- comb[, colorder]
 comb_percent <- comb
-comb_percent[2:length(comb)] <- 100 * comb[2:length(comb)]/comb["aglabor","X90"]
+comb_percent[2:length(comb)] <- 100 * comb[2:length(comb)] / comb["aglabor", "X90"]
 write.csv(comb_percent, paste0("data/tables/table_2_", "stressedLaborPercent.csv"), row.names = F)
 rm(comb_percent) # only really necessary during development
 
 # create word table -----
 t <- as.data.table(read.csv(paste0("data/tables/table_2_", "stressedLaborPercent.csv")))
-t[,2:6] <- round(t[,2:6], 1)
+t[, 2:6] <- round(t[, 2:6], 1)
 
 cheadername <- names(t)
-cnewname <- c(" ", paste0("≤ ", cutoffVals/100)) # space needed in the name for the first column
+cnewname <- c(" ", paste0("≤ ", cutoffVals / 100)) # space needed in the name for the first column
 cvalues <- setNames(cnewname, cheadername)
 
-t_flex <- flextable(t) |> 
+t_flex <- flextable(t) |>
   set_header_labels(values = cvalues) |>
-  add_header_row(colwidths = c(1,5),
-                 values = c("Emission scenario & period", "Workers (%)"), top = TRUE) |> 
-  
-  theme_vanilla() |> 
+  add_header_row(
+    colwidths = c(1, 5),
+    values = c("Emission scenario & period", "Workers (%)"), top = TRUE
+  ) |>
+  theme_vanilla() |>
   color(part = "footer", color = "#666666") |>
   align(align = "center", part = "header") |>
   add_footer_row(values = "Source: Labor data from USDA/ERS, PWC values from own calculations.", colwidths = c(6), top = FALSE)
@@ -73,6 +76,3 @@ t_flex <- flextable(t) |>
 t_flex
 outf <- "table_2_stressedLaborCts_percent.docx"
 save_as_docx(t_flex, values = NULL, path = paste0("tables/", outf))
-
-
-
