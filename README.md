@@ -1,13 +1,11 @@
 
-# Global reductions in manual agricultural work capacity due to climate change"
-## R code and selected data to generate the results for a Global Change Biology paper 
-Author: Gerald Nelson
-
-Date: 2023-12-22
+# R code and data to generate results for the Global Change Biology paper 
+# "Global reductions in manual agricultural work capacity due to climate change"
+Author: Gerald C. Nelson
 
 ## Introduction
 
-This page describes the code and data needed to reproduce the results in Global Change Biology (GCB), "Global reductions in manual agricultural work capacity due to climate change" are available in the Zenodo site (code to download the climate data and prepare the results in the GCB paper). ([https://doi.org/10.5281/zenodo.xxxxx](https://doi.org/10.5281/zenodo.xxxxx)).
+This page describes the code and data needed to reproduce the results in the Global Change Biology paper, "Global reductions in manual agricultural work capacity due to climate change", available at the Zenodo site  ([https://doi.org/10.5281/zenodo.xxxxx](https://doi.org/10.5281/zenodo.xxxxx)).
 
 The _Directory structure_ section describes the directories needed (which should automatically be created when the zenodo files are downloaded) and what is contained in them.The _Order of operations_ section describes the order in which the R code files need to be run to generate the results.
 
@@ -34,7 +32,7 @@ The [ISIMIP project](https://www.isimip.org) prepares daily bias-corrected 1/2 d
 
 The R code in the _R/code/data_ directory contains the following R files. These need to be run in the order listed below.
   
--   `1a_get_weather.R` - create a set of `txt` files in the `data-raw/ISIMIP/filelists/` directory with ISIMIP climate data file names to be used in `1b_get_weather.R`.
+-   `1a_get_weather.R` - create a set of `txt` files in the `data-raw/ISIMIP/filelists/` directory with ISIMIP climate data file names to be used in `1b_get_weather.R`. Installed needed packages that are not already installed.
 -   `1b_get_weather.R` - download a set of climate data files from the ISIMIP server based on the `.txt` files created in `1a_get_weather.R`. Each file is about 2.5 GB. For each of the three scenarios plus the recent past data files, the combined data sets require 285 GB. You will need at last terabyte of space for all the data. The download process can take a long time. 
 -   `2a_daytemp.R` - calculate the average temperature in daylight hours using the `tasmin` and `tasmax` data files
 -   `2b_fix_radiation.R` - converts the `rsds` data file to average solar radiation during daylight hours.

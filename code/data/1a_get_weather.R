@@ -8,6 +8,12 @@ terraOptions(verbose = TRUE)
 this <- system("hostname", TRUE)
 if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8) # for Macs with Mac silicon, speeds up process
 
+# install packages that are not already installed
+list.of.needed.packages <- c("terra", "data.table", "rvest", "xml2", "geodata", "meteor", "stringr", "extrafont", "officer", "flextable")
+new.packages <- list.of.needed.packages[!(list.of.needed.packages %in% installed.packages()[, "Package"])]
+if (length(new.packages)) install.packages(new.packages)
+###
+
 pats <- c("ssp126", "ssp370", "ssp585") # all ISIMIP scenarios
 pats_hist <- c("historical")
 models <- c("gfdl-esm4", "ipsl-cm6a-lr", "mpi-esm1-2-hr", "mri-esm2-0", "ukesm1-0-ll")
