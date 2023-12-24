@@ -52,8 +52,7 @@ The _R/code/plots_ directory contains the following R files that produce figures
   - `GCB_Figure_2_latitude.R`- create _Figure 2. Physical Work Capacity (PWC) by latitude for global cropland for recent past (1991-2010) and potential future thermal conditions_ 
   - `GCB_Figure_3_global.R` - create _Figure 3. Average PWCs during the crop growing season and the hottest period_
   - `GCB_Figure_4_regions.R` - create _Figure 4. Average PWCs during the growing season for three countries_
-  - `GCB_Figure_5_global_delta_noSun.R` - _not used in the paper_
-  - `GCB_Figure_5_a_global_noSun.R` - create _Figure 5. Impact of eliminating radiation effect in PWC values._
+  - `GCB_Figure_5_global_noSun.R` - create _Figure 5. Impact of eliminating radiation effect in PWC values._
   - `GCB_Figure_6_mech_needs.R` - create _Figure 6. The additional HP per hectare to make at least 1 HP per cropped hectare available_
   - `GCB_Figure_S1_aggregation_methods.R` _not used in GCB paper. Produces global figures using SSP1-2.6 and SSP5-8.5 data for recent past, mid-century, and end-century for annual, growing season, and hottest 90 days periods._
  
