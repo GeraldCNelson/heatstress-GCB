@@ -8,6 +8,8 @@ if (grepl("Mac", this, fixed = TRUE)) terraOptions(verbose = TRUE, memfrac = 0.8
 dir.create("data/agg/pwc_agg3/", FALSE, FALSE)
 dir.create("data/agg/pwc_agg3_ns/", FALSE, FALSE)
 
+nosun <- FALSE # set to TRUE run this code with incident radiation data input set to zero
+
 get_names <- function(ff) {
   nms <- gsub("\\.tif$", "", basename(ff))
   gsub("1_2", "1-2", nms)

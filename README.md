@@ -36,12 +36,12 @@ The R code in the _R/code/data_ directory contains the following R files. These 
 -   `1b_get_weather.R` - download a set of climate data files from the ISIMIP server based on the `.txt` files created in `1a_get_weather.R`. Each file is about 2.5 GB. For each of the three scenarios plus the recent past data files, the combined data sets require 285 GB. You will need at last terabyte of space for all the data. The download process can take a long time. 
 -   `2a_daytemp.R` - calculate the average temperature in daylight hours using the `tasmin` and `tasmax` data files
 -   `2b_fix_radiation.R` - converts the `rsds` data file to average solar radiation during daylight hours.
--   `3_wbgt.R` - calculate `wbgt` values for each combination of climate scenario and time period. The code includes a switch to calculate `wbgt` with solar radiation values or without to simulate complete shade. The default is `nosun <- FALSE`. Change to `TRUE` if to create the no sun `wbgt` values.
+-   `3_wbgt.R` - calculate `wbgt` values for each combination of climate scenario and time period. The code includes a switch to calculate `wbgt` with solar radiation values or without to simulate complete shade. The default is `nosun <- FALSE`. Change to `TRUE` to create the `wbgt` values with solar radiation set to zero.
 -   `4_pwc.R` - calculate PWC values for each combination of climate scenario and time period.
 -   `5_agg_time.R` - aggregate daily PWC values over one of the 20 year periods - 1991-2010, 2041-2060, and 2081-2100, for individual models
 -   `6_agg_models.R` - aggregate the results of `5_agg_time.R` across all models to get a `spatraster` with 365 layers for each scenario.
 -   `7_get_crops.R` - sum area of the 172 crops in the `geodata` library from the [Monfreda, et al.](https://doi.org/10.1029/2007GB002947) data, and generated weighted crop calendar data based on the Sacks, et al, 2010 crop calendars in the `geodata` library
--   `8_summarize.R` - Aggregate to daily means of annual, growing season and hottest periods. Also includes impact of eliminating radiation effect in PWC values. 
+-   `8_summarize.R` - Aggregate to daily means of annual, growing season and hottest periods. Set `nosun <- TRUE` to calculate the impact of eliminating the radiation effect in PWC values. 
 -   `10_FAO_ERS_employment.R` - create rasterized versions of the country-specific labor data from either ERS or FAO. ERS version used in the paper.
 
 The _R/code/plots_ directory contains the following R files that produce figures in the GCB paper. These can be run in any order.
