@@ -1,5 +1,5 @@
 
-# R code and data to generate results for the Global Change Biology paper 
+## R code and data to generate results for the Global Change Biology paper 
 # "Global reductions in manual agricultural work capacity due to climate change"
 Author: Gerald C. Nelson
 
@@ -20,7 +20,7 @@ The directory structure for the code is described below.
   - *tables* — Code to generate tables used in the paper and the supplementary material
   - *other* — Experimental code to investigate the impacts of using hourly data instead of daily data 
   
-- **data-raw** — Downloaded climate files from the ISIMIP project. 
+- **data-raw** — Downloaded climate files from the ISIMIP project and other data imported from open sources. 
 
 The [ISIMIP project](https://www.isimip.org) prepares daily bias-corrected 1/2 degree resolution data from five earth system models (ESMs) - GFDL-ESM4, UKESM1-0-LL, MPI-ESM1-2-HR, MRI-ESM2-0, and IPSL-CM6A-LR). The paper uses the ISIMIP3b data from 
 [https://doi.org/10.48364/ISIMIP.842396.1](https://doi.org/10.48364/ISIMIP.842396.1). The data sets used are collectively about 2 terabytes. It can be useful to store them on an external drive and then use a symlink from the external drive to the `data-raw` directory  ([Mac directions](https://www.google.com/search?client=safari&rls=en&q=create+a+mac+symlink&ie=UTF-8&oe=UTF-8), [PC directions](https://www.google.com/search?client=safari&rls=en&q=create+a+pc+symlink&ie=UTF-8&oe=UTF-8)) to access them.
@@ -66,6 +66,13 @@ The _R/code/tables_ directory contains the following R files that produce the ta
 
 ## Data availability
 All data used in this paper are downloaded in the code from open source data sites or with the R `geodata` package.
+
+The main sources are 
+
+- Climate data from the ISIMIP project [https://www.isimip.org] that are daily bias-corrected and 1/2 degree resolution from five earth system models (ESMs - GFDL-ESM4, UKESM1-0-LL, MPI-ESM1-2-HR, MRI-ESM2-0, and IPSL-CM6A-LR). This paper uses the ISIMIP3b data from 
+[https://doi.org/10.48364/ISIMIP.842396.1](https://doi.org/10.48364/ISIMIP.842396.1).
+- Area of the 172 crops in the `geodata` library described in [Monfreda, et al.](https://doi.org/10.1029/2007GB002947) data and an area -weighted crop calendar data based on the Sacks, et al, 2010 crop calendars in the `geodata` library.
+- Country-level data on agricultural labor and machinery, downloaded from the USDA/ERS website [Fuglie, Jelliffe, and Morgan](https://www.ers.usda.gov/webdocs/DataFiles/51270/AgTFPInternational2020_long.xlsx?v=8337).
 
 Identify code/data issues in the Issues section of this repository. Questions/Comments to [nelson.gerald.c@gmail.com](mailto:nelson.gerald.c@gmail.com)
 
