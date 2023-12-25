@@ -5,7 +5,7 @@ Author: Gerald C. Nelson
 
 ## Introduction
 
-This page describes the code and data needed to reproduce the results in the Global Change Biology paper, "Global reductions in manual agricultural work capacity due to climate change", available at the Zenodo site  ([https://doi.org/10.5281/zenodo.xxxxx](https://doi.org/10.5281/zenodo.xxxxx)).
+This page describes the code and data needed to reproduce the results in the Global Change Biology paper, "Global reductions in manual agricultural work capacity due to climate change", available at the Zenodo site  ([![DOI](https://zenodo.org/badge/664373839.svg)](https://zenodo.org/doi/10.5281/zenodo.10429708)).
 
 The _Directory structure_ section describes the directories needed (which should automatically be created when the zenodo files are downloaded) and what is contained in them.The _Order of operations_ section describes the order in which the R code files need to be run to generate the results.
 
